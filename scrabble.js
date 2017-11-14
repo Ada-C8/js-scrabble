@@ -16,7 +16,7 @@ const Scrabble = {
       total += letterPoints[word[i]];
     } // end for loop
 
-    if(word.length >= 7){
+    if(word.length === 7){
       total += 50;
     }
 

@@ -21,12 +21,12 @@ describe('score', function() {
   //   }).toThrow();
   // });
 
-  // it ('handles all upper- and lower-case letters', function() {
-  //   expect(Scrabble.score('dog')).toBe(5);
-  //   expect(Scrabble.score('DOG')).toBe(5);
-  //   expect(Scrabble.score('DoG')).toBe(5);
-  // });
-  //
+  it ('handles all upper- and lower-case letters', function() {
+    expect(Scrabble.score('dog')).toBe(5);
+    expect(Scrabble.score('DOG')).toBe(5);
+    expect(Scrabble.score('DoG')).toBe(5);
+  });
+
   // it ('does not allow words > 7 letters', function() {
   //   expect(function() { Scrabble.score('abcdefgh'); }).toThrow();
   // });
