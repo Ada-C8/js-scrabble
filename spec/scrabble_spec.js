@@ -1,3 +1,4 @@
+/*eslint-disable*/
 const Scrabble = require('../scrabble');
 
 describe('score', function() {
@@ -11,27 +12,27 @@ describe('score', function() {
     expect(Scrabble.score('pig')).toBe(6);
   });
 
-  xit ('adds 50 points for a 7-letter word', function() {
+  it ('adds 50 points for a 7-letter word', function() {
     expect(Scrabble.score('academy')).toBe(65);
   });
 
-  xit ('throws on bad characters', function() {
+  it ('throws on bad characters', function() {
     expect(function () {
       Scrabble.score('char^');
     }).toThrow();
   });
 
-  xit ('handles all upper- and lower-case letters', function() {
+  it ('handles all upper- and lower-case letters', function() {
     expect(Scrabble.score('dog')).toBe(5);
     expect(Scrabble.score('DOG')).toBe(5);
     expect(Scrabble.score('DoG')).toBe(5);
   });
 
-  xit ('does not allow words > 7 letters', function() {
+  it ('does not allow words > 7 letters', function() {
     expect(function() { Scrabble.score('abcdefgh'); }).toThrow();
   });
 
-  xit ('does not allow empty words', function() {
+  it ('does not allow empty words', function() {
     expect(function() { Scrabble.score(''); }).toThrow();
   });
 });
