@@ -29,6 +29,12 @@ const Scrabble = {
   },
 
   highestScoreFrom: function highestScoreFrom(words) {
+    if (words.length === 0) {
+      throw new Error('Input cannot be empty');
+    } else if (words.length === 1) {
+      return words[0];
+    }
+
     let highestWord = words[0];
     let bestScore = 0;
     let currentScore = 0;
@@ -37,6 +43,13 @@ const Scrabble = {
       if (currentScore > bestScore) {
         highestWord = word;
         bestScore = currentScore;
+      } else if (currentScore === bestScore) {
+        if (highestWord.length != 7) {
+          if (word.length === 7 || word.length < highestWord.length) {
+            highestWord = word;
+            bestScore = currentScore;
+          }
+        }
       }
     }
     return highestWord;
