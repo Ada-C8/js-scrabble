@@ -28,10 +28,11 @@ const LETTER_VALUES = {
   y: 4,
   z: 10
 };
-function UserException(message) {
+const UserException = function UserException(message) {
   this.message = message;
   this.name = 'UserException';
-}
+};
+
 const Scrabble = {
   score: function(word) {
     if (word.length > 7 || word.length < 1) {
@@ -60,15 +61,28 @@ const Scrabble = {
       return arrayOfWords.toString();
     }
 
+    let highestWord = arrayOfWords[0];
+
     for (let word of arrayOfWords) {
-      let scores = this.score(word);
-      console.log(scores);
-      // scores.max();
+      let highScore = Scrabble.score(highestWord);
+      let newWord = Scrabble.score(word);
+
+      if (highScore < newWord) {
+        highestWord = word;
+      } else if (highScore === newWord) {
+        if (word.length === 7) {
+          highestWord = word;
+        } else if (highestWord.length === 7) {
+        } else if (word.length < highestWord.length) {
+          highestWord = word;
+        }
+      }
     }
+    return highestWord;
   },
 };
 
-
+// if ((word.length == 7) && (max_word.length != 7)) || ((word.length < max_word.length) && (max_word.length != 7))
 Scrabble.Player = class {
   // TODO: implement the Player class
 };
