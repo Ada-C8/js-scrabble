@@ -28,47 +28,41 @@ const LETTER_VALUES = {
   y: 4,
   z: 10
 };
-
-
+function UserException(message) {
+   this.message = message;
+   this.name = 'UserException';
+}
 const Scrabble = {
-
-  score: function(word) {
+  score(error, result) {
     // TODO: check length > 0 and < 7
-    word = word.toLowerCase();
-    let score = 0;
-    // turn word into an array of characters
-    word = word.split("");
-    // forEach loop
-    word.forEach(function(char) {
+    let score = 0, word = result.word, letter = word.toLowerCase().split("");
+    letter.forEach(function(char) {
       if (!(char in LETTER_VALUES)) {
-        throw char 'is not a character'
+        throw new UserException(`${char} is an invalid character`);
       }
       score += LETTER_VALUES[char];
     }
-
-    if (word.length == 7) {
-      score += 50;
-    }
-
-    return score;
   );
+  if (word.length == 7) {
+    score += 50;
+  }
+  console.log(score);
+  return score;
+},
 
-
-  // my old ruby way:
-  // score = 0
-  // word.chars.each do |char|
-  //   score += LETTER_VALUES[char.downcase]
-  // end
-  // score += 50 if word.length == 7
-  // return score
-
-}
+// my old ruby way:
+// score = 0
+// word.chars.each do |char|
+//   score += LETTER_VALUES[char.downcase]
+// end
+// score += 50 if word.length == 7
+// return score
 
 // TODO: add the highestScoreFrom method
-
 };
+
 prompt.start();
-prompt.get('word', Scrabble.score)
+prompt.get(['word'], Scrabble.score)
 
 
 // wave 2:
