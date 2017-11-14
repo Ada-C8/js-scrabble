@@ -82,16 +82,51 @@ const Scrabble = {
   },
 };
 
-// if ((word.length == 7) && (max_word.length != 7)) || ((word.length < max_word.length) && (max_word.length != 7))
+
 Scrabble.Player = class {
-  // TODO: implement the Player class
+  constructor(name) {
+    if (name.length === 0) {
+      throw new UserException(`Please enter a name!`);
+    }
+    this.name = name;
+    this.currentScore = 0;
+    this.plays = [];
+
+  }
+
+  play(word) {
+    if (this.hasWon()) {
+      // wont allow to play a word if already won (higher than 100 points)
+      return false;
+    }
+
+    let wordLetters = word.split("");
+    wordLetters.forEach(function(char) {
+      if (!(char in LETTER_VALUES)) {
+        throw new UserException(`Come on, play a word!`);
+      }
+    });
+    this.plays.push(word);
+    this.currentScore += Scrabble.score(word);
+    return true;
+  }
+
+  hasWon() {
+    return this.currentScore >= 100;
+  }
+
+  totalScore() {
+    return this.currentScore;
+  }
+
+
 };
 
 prompt.start();
 prompt.get(['word'], function(error, result){
   let score = Scrabble.score(result.word);
   console.log(score);
-})
+});
 
 module.exports = Scrabble;
 // where to store the letter value
