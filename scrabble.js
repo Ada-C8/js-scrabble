@@ -3,16 +3,24 @@ const letterPoints = {
 };
 
 
-let total = 0;
-
-
 const Scrabble = {
   score: function(word) {
+
+
+    let total = 0;
+
+
+    word = word.toUpperCase();
 
     for(let i = 0; i < word.length; i++){
       total += letterPoints[word[i]];
     } // end for loop
-        return total;
+
+    if(word.length >= 7){
+      total += 50;
+    }
+
+    return total;
 
   } //end function word
 
