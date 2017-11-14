@@ -2,24 +2,34 @@
 
 const Scrabble = {
   score: function(word) {
-    const scoreWord = word.toLowerCase().split('');
-    console.log(scoreWord);
-
     const SCORECHART = {
       a: 1, b: 3, c: 3, d: 2, e: 1, f: 4, g: 2, h: 4, i: 1, j: 8,
       k: 5, l: 1, m: 3, n: 1, o: 1, p: 3, q: 10, r: 1, s: 1, t: 1,
       u: 1, v: 4, w: 4, x: 8, y: 4, z: 10,
     };
 
-    let score = 0;
-    scoreWord.forEach(function (letter) {
-      // compare to SCORECHART
-      // add to score variable
-    });
-    // return score variable
-  }
+    let scoreWord = word;
 
-  // TODO: add the highestScoreFrom method
+    if (typeof word === 'string' && word.length > 0) {
+      scoreWord = word.toLowerCase();
+    }
+    else {
+      throw 'Not a valid word';
+    }
+
+    let score = 0;
+
+    for (i = 0; i < scoreWord.length; i++) {
+      let letter = scoreWord[i]
+      score += parseInt(SCORECHART[letter]);
+    }
+
+    return score;
+  },
+
+  highestScoreFrom: function(array) {
+    return array;
+  }
 
 };
 
@@ -29,4 +39,5 @@ Scrabble.Player = class {
 
 module.exports = Scrabble;
 
-Scrabble.score('WORD');
+console.log(Scrabble.score('WORD'));
+console.log(Scrabble.highestScoreFrom(['WORD']));
