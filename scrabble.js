@@ -29,46 +29,55 @@ const LETTER_VALUES = {
   z: 10
 };
 function UserException(message) {
-   this.message = message;
-   this.name = 'UserException';
+  this.message = message;
+  this.name = 'UserException';
 }
 const Scrabble = {
-  score(error, result) {
-    // TODO: check length > 0 and < 7
-    let score = 0, word = result.word, letter = word.toLowerCase().split("");
+  score: function(word) {
+    if (word.length > 7 || word.length < 1) {
+      throw new UserException(`Invalid word, must be at least 1 character and less than 7 characters.`);
+    }
+
+    let score = 0;
+    let letter = word.toLowerCase().split("");
     letter.forEach(function(char) {
       if (!(char in LETTER_VALUES)) {
         throw new UserException(`${char} is an invalid character`);
       }
       score += LETTER_VALUES[char];
+    });
+    if (word.length == 7) {
+      score += 50;
     }
-  );
-  if (word.length == 7) {
-    score += 50;
-  }
-  console.log(score);
-  return score;
-},
+    return score;
+  },
 
-// my old ruby way:
-// score = 0
-// word.chars.each do |char|
-//   score += LETTER_VALUES[char.downcase]
-// end
-// score += 50 if word.length == 7
-// return score
+  highestScoreFrom: function(arrayOfWords) {
+    if (arrayOfWords.length === 0) {
+      throw new UserException(`Uh-oh! No words!`);
+    }
+    if (arrayOfWords.length === 1) {
+      return arrayOfWords.toString();
+    }
 
-// TODO: add the highestScoreFrom method
+    for (let word of arrayOfWords) {
+      let scores = this.score(word);
+      console.log(scores);
+      // scores.max();
+    }
+  },
 };
 
-prompt.start();
-prompt.get(['word'], Scrabble.score)
 
-
-// wave 2:
 Scrabble.Player = class {
   // TODO: implement the Player class
 };
+
+prompt.start();
+prompt.get(['word'], function(error, result){
+  let score = Scrabble.score(result.word);
+  console.log(score);
+})
 
 module.exports = Scrabble;
 // where to store the letter value
