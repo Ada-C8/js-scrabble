@@ -86,6 +86,13 @@ Scrabble.Player = class {
     this.plays = [];
   }
 
+  play(item) {
+    if (this.hasWon()) {
+      return false
+    }
+    this.plays.push(item);
+  }
+
 };
 
 module.exports = Scrabble;
