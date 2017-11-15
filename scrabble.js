@@ -35,14 +35,14 @@ const LetterValues = {
 
 const Scrabble = {
   score(word) {
-    // switch (word) {
-    //   case word.length > 7:
-    //     throw new UserException('Cannot play words longer than 7 letters.');
-    //     break;
-    //   case
-    //   default:
-    //
-    // }
+    if (word.length > 7) {
+      throw new UserException('Cannot play words longer than 7 letters.');
+    } else if (word.length === 0) {
+      throw new UserException('Please play a word.');
+    } else if ((/[^a-zA-Z]+/).test(word)) {
+      throw new UserException('Cannot play non-alphabetical characters.');
+    }
+
     let total = 0;
     for (let i = 0; i < word.length; i += 1) {
       total += LetterValues[`${word[i].toUpperCase()}`];
