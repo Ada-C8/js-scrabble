@@ -64,7 +64,26 @@ const Scrabble = {
 };
 
 Scrabble.Player = class {
-  // TODO: implement the Player class
+  constructor(name) {
+    this.name = name;
+    this.plays = [];
+
+    if (!name) {
+      throw 'You must enter a player\'s name'
+    };
+  }
+  play(word) {
+    if (!word || typeof word !== 'string'){
+      throw 'Please enter a valid word.'
+    };
+
+    this.plays.push(word);
+    return this.plays
+  }
+  // totalScore: function() {}
+  // hasWon: function() {}
+  // highestScoringWord: function() {}
+  // highestWordScore: function() {}
 };
 
 module.exports = Scrabble;
