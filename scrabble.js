@@ -58,12 +58,6 @@ const Scrabble = {
     if (word.length === 7){
       score += 50;
     }
-
-    if (highScore.score < score){
-      highScore.word = word.join("");
-      highScore.score = score;
-    }
-    return score
   },
 
   // TODO: add the highestScoreFrom method
@@ -88,7 +82,7 @@ const Scrabble = {
       }
     })
 
-    if 
+    if
     return highScorer.word;
   }
 
