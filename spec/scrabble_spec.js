@@ -1,5 +1,7 @@
 const Scrabble = require('../scrabble');
 
+// To skip test, write x infront of a describe or a it block
+
 describe('score', function() {
   it ('is defined', function() {
     expect(Scrabble.score).toBeDefined();
@@ -32,7 +34,8 @@ describe('score', function() {
   });
 
   it ('does not allow empty words', function() {
-    expect(function() { Scrabble.score(''); }).toThrow();
+    expect(function() { /* This content bellow is what we want to execute */
+      Scrabble.score(''); }).toThrow();
   });
 });
 
@@ -97,7 +100,7 @@ describe('highestScoreFrom', function() {
   });
 });
 
-describe('Player', function() {
+xdescribe('Player', function() {
   it ('is defined', function() {
     expect(Scrabble.Player).toBeDefined();
   });
@@ -114,7 +117,7 @@ describe('Player', function() {
     });
   });
 
-  describe ('play', function() {
+  xdescribe ('play', function() {
     it ('Records the played word', function() {
       let word = 'dog';
       let player = new Scrabble.Player('test player');
@@ -148,7 +151,7 @@ describe('Player', function() {
     });
   });
 
-  describe ('totalScore', function() {
+  xdescribe ('totalScore', function() {
     it ('Is zero if the player has not played anything', function() {
       let player = new Scrabble.Player('test player');
       expect(player.totalScore()).toBe(0);
@@ -166,7 +169,7 @@ describe('Player', function() {
     });
   });
 
-  describe('hasWon', function() {
+  xdescribe('hasWon', function() {
     it('returns false when score < 100', function() {
       let player = new Scrabble.Player('test player');
       expect(player.totalScore()).toBe(0);
@@ -196,7 +199,7 @@ describe('Player', function() {
     });
   });
 
-  describe('highestScoringWord', function() {
+  xdescribe('highestScoringWord', function() {
     // Tie-breaking logic is already described in the tests
     // for highestWordFrom, so we will not repeat it here.
     it('returns the highest scoring word played', function() {
@@ -212,7 +215,7 @@ describe('Player', function() {
     });
   });
 
-  describe('highestWordScore', function() {
+  xdescribe('highestWordScore', function() {
     it('returns the score of the highest scoring word played', function() {
       let player = new Scrabble.Player('test player');
       player.play('cat');
