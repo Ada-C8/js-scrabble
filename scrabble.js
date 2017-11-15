@@ -129,7 +129,7 @@ Scrabble.Player = class {
   }
 
   hasWon() {
-    if (this.totalScore() > 100) {
+    if (this.totalScore() >= 100) {
       return true;
     } else {
       return false;
