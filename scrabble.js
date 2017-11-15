@@ -137,7 +137,7 @@ const Scrabble = {
     // // method which returns true if the player has over 100 points, otherwise returns false
     hasWon() {
 
-      if (this.totalScore() > 100) {
+      if (this.totalScore() >= 100) {
         return true;
       } else {
         return false;
