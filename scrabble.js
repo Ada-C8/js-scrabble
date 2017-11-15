@@ -116,12 +116,12 @@ Scrabble.Player = class {
     return Scrabble.highestScoreFrom(this.plays)
   }; // highestScoringWord
 
+highestWordScore() {
+  return Scrabble.score(this.highestScoringWord());
+}
 
 
 
 }; // end of Scrabble
 
 module.exports = Scrabble;
-
-// const result = Scrabble.score('hello');
-// console.log(result);

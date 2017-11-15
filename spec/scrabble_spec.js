@@ -143,8 +143,6 @@ describe('Player', function() {
       let player = new Scrabble.Player('test player');
       expect(player.play('zzzzzzz')).toBeTruthy(); // +120 pts
       expect(player.plays.length).toBe(1);
-      console.log(`hasWon is ${player.hasWon()}`)
-      console.log(`players total score is ${player.totalScore()}`);
       expect(player.hasWon()).toBeTruthy();
 
       expect(player.play('dog')).toBe(false);
@@ -221,12 +219,15 @@ describe('Player', function() {
       let player = new Scrabble.Player('test player');
       player.play('cat');
       player.play('zzzz');
+
       expect(player.highestWordScore()).toBe(40);
     });
+
 
     it('throws an error if no words have been played', function() {
       let player = new Scrabble.Player('test player');
       expect(() => { player.highestWordScore() }).toThrow();
+
     });
   });
 });
