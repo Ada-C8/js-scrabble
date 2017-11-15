@@ -1,7 +1,8 @@
 /*eslint-disable*/
 const Scrabble = {
+  //possible refactor: use REGEXP
   validate: function(word) {
-    if (typeof word !== 'string' || word.length > 7 || world.length < 1) {
+    if (typeof word !== 'string' || word.length > 7 || word.length < 1) {
       throw 'Error! You must enter a word that is 1-7 letters long'
     }
   },
@@ -9,9 +10,6 @@ const Scrabble = {
   score: function(word) {
     Scrabble.validate(word);
     word = word.toLowerCase().split("")
-    if (word.length > 7 || word.length < 1){
-      throw 'Invalid word! Word must be 1-7 letters long'
-    }
 
     const POINTS = {
       a: 1,
@@ -57,7 +55,6 @@ const Scrabble = {
     return score;
   },
 
-  // TODO: add the highestScoreFrom method
   highestScoreFrom: function(words){
     if (words.length === 0) {
       throw 'There are no words to score.';
@@ -88,11 +85,11 @@ const Scrabble = {
         return highScorer.word[i]
       } else if (highScorer.word[i].length < shortestLengthWord.length) {
           shortestLengthWord = highScorer.word[i];
-        }
       }
-      return shortestLengthWord;
     }
+    return shortestLengthWord;
   }
+}
 
 Scrabble.Player = class {
   constructor(name){
@@ -140,37 +137,40 @@ Scrabble.Player = class {
   highestWordScore(){
     return Scrabble.score(this.highestScoringWord())
   }
-};
+}
 
-Scrabble.Tielbag = class {
-  let bag = {
-    a: 9,
-    b: 2,
-    c: 2,
-    d: 4,
-    e: 12,
-    f: 2,
-    g: 3,
-    h: 2,
-    i: 9,
-    j: 1,
-    k: 1,
-    l: 4,
-    m: 2,
-    n: 6,
-    o: 8,
-    p: 2,
-    q: 1,
-    r: 6,
-    s: 4,
-    t: 6,
-    u: 4,
-    v: 2,
-    w: 2,
-    x: 1,
-    y: 2,
-    z: 1
+Scrabble.Tilebag = class {
+  constructor() {
+    this.bag = {
+      a: 9,
+      b: 2,
+      c: 2,
+      d: 4,
+      e: 12,
+      f: 2,
+      g: 3,
+      h: 2,
+      i: 9,
+      j: 1,
+      k: 1,
+      l: 4,
+      m: 2,
+      n: 6,
+      o: 8,
+      p: 2,
+      q: 1,
+      r: 6,
+      s: 4,
+      t: 6,
+      u: 4,
+      v: 2,
+      w: 2,
+      x: 1,
+      y: 2,
+      z: 1
+    }
   }
+
 
 }
 
