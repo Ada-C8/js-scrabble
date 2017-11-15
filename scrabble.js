@@ -58,15 +58,21 @@ const Scrabble = {
     let maxScore = 0;
     let maxWord;
     words.forEach( function (word) {
-      let wordScore = Scrabble.score(word);
+      const wordScore = Scrabble.score(word);
       if (wordScore > maxScore) {
-        maxScore = wordScore
+        maxScore = wordScore;
         maxWord = word;
-      } // if
+      } else if (wordScore === maxScore && word.length === 7) {
+        console.log('do i get here?')
+        maxScore = wordScore;
+        maxWord = word;
+      } else if (wordScore === maxScore && word.length !== 7 && word.length < maxWord.length) {
+        maxScore = wordScore;
+        maxWord = word;
+      }// if else if
     }); // forEach
     return maxWord
   }, // highestWordFrom
-
 };
 
 Scrabble.Player = class {
