@@ -3,47 +3,54 @@ function Exception(message) {
   this.name = 'Exception';
 }
 
-
-
 const Scrabble = {
-  score(word) {
-    const scoreShart = {
-      A: 1,
-      B: 3,
-      C: 3,
-      D: 2,
-      E: 1,
-      F: 4,
-      G: 2,
-      H: 4,
-      I: 1,
-      J: 8,
-      K: 5,
-      L: 1,
-      M: 3,
-      N: 1,
-      O: 1,
-      P: 3,
-      Q: 10,
-      R: 1,
-      S: 1,
-      T: 1,
-      U: 1,
-      V: 4,
-      W: 4,
-      X: 8,
-      Y: 4,
-      Z: 10
-    };
-    let score = 0;
+  scoreShart:  {
+    A: 1,
+    B: 3,
+    C: 3,
+    D: 2,
+    E: 1,
+    F: 4,
+    G: 2,
+    H: 4,
+    I: 1,
+    J: 8,
+    K: 5,
+    L: 1,
+    M: 3,
+    N: 1,
+    O: 1,
+    P: 3,
+    Q: 10,
+    R: 1,
+    S: 1,
+    T: 1,
+    U: 1,
+    V: 4,
+    W: 4,
+    X: 8,
+    Y: 4,
+    Z: 10
+  },
+  validWord(word) {
     word = word.toUpperCase();
     for (let letter of word) {
-      if (scoreShart.hasOwnProperty(letter)) {
-        score += scoreShart[letter];
-      }else{
+      if (!Scrabble.scoreShart.hasOwnProperty(letter)) {
         throw new Exception('InvalidInput');
       }
     }
+    return true;
+  },
+
+  score(word) {
+    let score = 0;
+    if (Scrabble.validWord(word)){
+      word = word.toUpperCase();
+      for (let letter of word) {
+        score += Scrabble.scoreShart[letter];
+      }
+    }
+
     if (word.length ===7){
       score+= 50;
     } else if (word.length > 7) {
@@ -56,10 +63,7 @@ const Scrabble = {
 
 
   highestScoreFrom(arrayOfWords) {
-    // chnage later
-    // if (arrayOfWords === []){
-    //   return 'No words yet'
-    // }
+
     let all_scores = [];
     for(let word of arrayOfWords) {
       all_scores.push(Scrabble.score(word));
@@ -96,10 +100,12 @@ const Scrabble = {
 
 // Scrabble.payer is
 Scrabble.Player = class {
-  // TODO: implement the Player class
   constructor(name){
+    if (!name ) {
+      throw new Exception('Player should have a name');
+    }
     this.name = name;
-    this.plays = ['aa', 'e'];
+    this.plays = [];
   }
 
   totalScore(){
@@ -111,7 +117,7 @@ Scrabble.Player = class {
   }
 
   hasWon(){
-    if(this.totalScore() > 100){
+    if(this.totalScore() >= 100){
       return true;
     }else{
       return false;
@@ -119,11 +125,13 @@ Scrabble.Player = class {
   }
 
   play(word){
-    if(this.hasWon()) {
-      return false;
-    } else {
-      this.plays.push(word)
-      // return this.plays;
+    if(Scrabble.validWord(word)){
+      if(this.hasWon()) {
+        return false;
+      } else {
+        this.plays.push(word)
+        return this.plays;
+      }
     }
   }
 
@@ -140,12 +148,3 @@ Scrabble.Player = class {
 }; //close player class
 
 module.exports = Scrabble;
-
-// console.log(Scrabble.highestScoreFrom([ 'aaaaaaa', 'qqqq' ]));
-const laura = new Scrabble.Player('laura')
-
-laura.play('camino');
-laura.play('zzzzz');
-laura.play('hola');
-
-console.log(laura.highestWordScore());
