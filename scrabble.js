@@ -1,4 +1,4 @@
-// /* eslint-disable */
+/* eslint-disable */
 const Scrabble = {
   score: function score(word) {
     // TODO: implement score
@@ -78,6 +78,14 @@ const Scrabble = {
 
 Scrabble.Player = class {
   // TODO: implement the Player class
+  constructor(name){
+    if (name === undefined || name.length === 0){
+      throw new Error('Must pass in a string with at least one letter as a name for Player');
+    }
+    this.name = name;
+    this.plays = [];
+  }
+
 };
 
 module.exports = Scrabble;

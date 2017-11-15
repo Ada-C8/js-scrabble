@@ -99,19 +99,19 @@ describe('highestScoreFrom', function() {
   });
 });
 
-xdescribe('Player', function() {
-  xit ('is defined', function() {
+describe('Player', function() {
+  it ('is defined', function() {
     expect(Scrabble.Player).toBeDefined();
   });
 
   describe('Constructor', function() {
-    xit ('Creates a new player', function() {
+    it ('Creates a new player', function() {
       let name = 'test name';
       let player = new Scrabble.Player(name);
       expect(player.name).toBe(name);
     });
 
-    xit ('Requires a name', function() {
+    it ('Requires a name', function() {
       expect(function() { new Scrabble.Player(); }).toThrow();
     });
   });
