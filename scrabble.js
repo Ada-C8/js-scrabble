@@ -83,8 +83,8 @@ Scrabble.Player = class {
       // wont allow to play a word if already won (higher than 100 points)
       return false;
     }
-    let wordLetters = word.split("");
-    wordLetters.forEach(function(char) {
+    let letter = word.toLowerCase().split("");
+    letter.forEach(function(char) {
       checkValidity(char);
     });
     this.plays.push(word);
