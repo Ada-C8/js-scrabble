@@ -28,21 +28,28 @@ const scoreChart = {
 };
 
 // Generate an object of Scrabble with each played word
+
 const Scrabble = {
   score: function(word) {
+
     // Check the input of the word first exception is thrown here
     let checkedWord = checkInput(word);
     let checkedLength = checkLength(checkedWord);
+
+    // Score the word iterating over each letter
     score = 0;
     for (let letter of checkedWord) {
       score += scoreChart[letter];
     }
+
+    // Add 50 points if the word is 7 letters long
     if (word.length === 7) {
       score += 50;
     }
     return score;
   },
 
+  // Takes the highest scored word from all the words played by a single player
   highestScoreFrom: function(arrayOfWords) {
     if (!(Array.isArray(arrayOfWords)) || arrayOfWords.length === 0) {
       throw new UserException('You have not played any words yet!');
@@ -51,6 +58,8 @@ const Scrabble = {
     } else {
       highestScore = 0;
       highestScoredWord = null;
+
+      // Iterate over each word to get
       for (let word of arrayOfWords) {
         let wordScore = this.score(word);
         if (wordScore > highestScore) {
@@ -80,16 +89,14 @@ Scrabble.Player = class {
     this.name = name;
     this.plays = [];
   }
-  // totalScore(): method which sums up and returns the score of the players words
-  // hasWon(): method which returns true if the player has over 100 points, otherwise returns false
-  // highestScoringWord(): method which returns the highest scoring word the user has played
-  // highestWordScore(): method which returns the highestScoringWord score
+
   play(word) {
     if (this.hasWon()) {
-      return;
+      return false;
     } else {
       let checkedWord = checkInput(word);
       this.plays.push(checkedWord);
+      return true;
     }
   }
 
@@ -124,7 +131,9 @@ Scrabble.Player = class {
 
   // Scores the highest word of all the words play for all players
   highestWordScore() {
-
+    let highestWordForPlayer = this.highestScoringWord();
+    let score = Scrabble.score(highestWordForPlayer);
+    return score;
   }
 };
 

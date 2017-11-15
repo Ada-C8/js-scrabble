@@ -120,9 +120,7 @@ describe('Player', function() {
       let player = new Scrabble.Player('test player');
       expect(player.plays.length).toBe(0);
 
-      // TODO: Check this
-      player.play(word);
-      // expect(player.play(word)).toBeTruthy();
+      expect(player.play(word)).toBeTruthy();
 
       expect(player.plays.length).toBe(1);
       expect(player.plays[0]).toBe('DOG');
