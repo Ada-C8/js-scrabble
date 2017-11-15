@@ -46,50 +46,42 @@ const Scrabble = {
       return words[0];
     } else if(words.length >= 2) {
 
-      let max = words[0];
+      let highScore = Scrabble.score(words[0]);
+      let scoreHash = {};
+      let highestScoringWord = "";
 
       words.forEach(function (word) {
-        if (word.length === 7){
-          max = word;
-        } //if
-        return max
-      }); //forEach
-      //find score of each word, use as key with array of all words with that score;
+        let wordScore = Scrabble.score(word);
+        if (scoreHash[wordScore] === undefined) {
+          scoreHash[wordScore] = [word];
+        } else {
+          scoreHash[wordScore].push(word);
+        }
+        if (wordScore > highScore) {
+          highScore = wordScore;
+        }
+      });
 
-      // let score_hash = {};
+      let highestScoringWords = scoreHash[highScore];
+      console.log("highest array: " + highestScoringWords);
 
-        // words.forEach(function (word) {
-        //   score_hash[Scrabble.score(word)] = [].push(word);
-        //   if (Scrabble.score(word) > Scrabble.score(max) {
-        //     max = word;
-        //   });
-        //   return max
-        // });
-        // words.forEach(function (word) {
-        //   score_hash[word] = Scrabble.score(word);
-        // })
-        let highestScoringWords = [];
+      if (highestScoringWords.length === 1) {
+        highestScoringWord = highestScoringWords[0];
+        // return highestScoringWords[0];
+      } else {
+        highestScoringWords.forEach(function (word) {
+          if (word.length === 7) {
+            console.log("seven lettesr? " + word + word.length);
+            highestScoringWord = word;
+          } //if word length
+        }); //array iteration 
+      } //else for array length
 
-        words.forEach(function (word) {
-          if (Scrabble.score(word) > Scrabble.score(max)) {
-            max = word;
-          }
-
-        }); //forEach
-          return max
-        // words.forEach(function (word) {
-        //   if (Scrabble.score(word) === max) {
-        //     highestScoringWords.push(word);
-        //   } //if
-        //   return highestScoringWords;
-        // }); //forEach
-
-        // if(highestScoringWords.length === 1) {
-        //   return highestScoringWords[0];
-        // }
+      return highestScoringWord;
     } //else if
-    // return highestScoringWords[0];
-  }
+
+
+  } //end highestscorefrom
 }; //end const Scrabble
 
 Scrabble.Player = class {
@@ -97,3 +89,47 @@ Scrabble.Player = class {
 };
 
 module.exports = Scrabble;
+
+// highestScoreFrom: function(words) {
+//
+//   if(words.length === 0) {
+//     throw new UserException("Array is Empty");
+//   } else if (typeof words != 'object') {
+//     throw new UserException("You must enter an array");
+//   } //exceptions
+//
+//   if(words.length === 1) {
+//     return words[0];
+//   } else if(words.length >= 2) {
+//
+//     let max = words[0];
+//
+//     words.forEach(function (word) {
+//       if (word.length === 7){
+//         max = word;
+//       } //if
+//       return max
+//     }); //forEach
+//
+//     words.forEach(function (word) {
+//       if (Scrabble.score(word) > Scrabble.score(max)) {
+//         max = word;
+//       } //if
+//
+//     }); //forEach
+//     return max
+
+
+
+// let score_hash = {};
+
+// words.forEach(function (word) {
+//   score_hash[Scrabble.score(word)] = [].push(word);
+//   if (Scrabble.score(word) > Scrabble.score(max) {
+//     max = word;
+//   });
+//   return max
+// });
+// words.forEach(function (word) {
+//   score_hash[word] = Scrabble.score(word);
+// })
