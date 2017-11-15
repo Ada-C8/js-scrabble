@@ -128,7 +128,7 @@ describe('Player', function() {
       expect(player.plays[0]).toBe(word);
     });
 
-    xit ('Requires a real word', function() {
+    it ('Requires a real word', function() {
       let player = new Scrabble.Player('test player');
       expect(player.plays.length).toBe(0);
 

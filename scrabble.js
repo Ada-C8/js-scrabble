@@ -86,14 +86,14 @@ Scrabble.Player = class {
     this.plays = [];
   }
 
-  play(item) {
-    if (item === undefined || item.length === 0){
+  play(word) {
+    if (word === undefined || word.length === 0){
       throw new Error('Must pass in a valid word to play');
     }
-    if (this.hasWon()) {
+    if (this.hasWon() || Scrabble.score(word) === undefined) {
       return false
     }
-    this.plays.push(item);
+    this.plays.push(word);
     return true;
   }
 
