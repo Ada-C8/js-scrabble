@@ -36,7 +36,7 @@ describe('score', function() {
   });
 });
 
-describe('highestScoreFrom', function() {
+xdescribe('highestScoreFrom', function() {
   it ('is defined', function() {
     expect(Scrabble.highestScoreFrom).toBeDefined();
   });
@@ -97,7 +97,7 @@ describe('highestScoreFrom', function() {
   });
 });
 
-describe('Player', function() {
+xdescribe('Player', function() {
   it ('is defined', function() {
     expect(Scrabble.Player).toBeDefined();
   });
