@@ -15,30 +15,35 @@ const Scrabble = {
     let total = 0;
     let playedWord = word.toUpperCase();
 
-    for (i=0; i < playedWord.length; i++) {
-      letter = playedWord[i];
-
-      if (letter === null) {
-        total = 0;
-      }
-
-      total += tiles[letter];
-
+    if (playedWord.length > 7) {
+      throw new UserException('Illegal play')
     }
-    if (word.length === 7 && total > 0) {
-      total += 50;
-    }
-    return total;
-  },
 
-  //  Question:  Is forEach less efficient that forloop word.toUpperCase().split('').forEach(function(letter) {
-  //     total = tiles[letter] + total;
-  //   });
-  //   if (word.length == 7 && total > 0) {
+
+  //   for (i=0; i < playedWord.length; i++) {
+  //     letter = playedWord[i];
+  //
+  //     if (letter === null) {
+  //       total = 0;
+  //     }
+  //
+  //     total += tiles[letter];
+  //
+  //   }
+  //   if ( word.length === 7 && total > 0 ) {
   //     total += 50;
   //   }
   //   return total;
   // },
+
+ word.toUpperCase().split('').forEach(function(letter) {
+      total = tiles[letter] + total;
+    });
+    if (word.length == 7 && total > 0) {
+      total += 50;
+    }
+    return total;
+  },
 
   // TODO: add the highestScoreFrom method
   highestScoreFrom: function(arrayOfWords) {
@@ -46,10 +51,14 @@ const Scrabble = {
     let highestScoreWord = '';
 
     arrayOfWords.forEach(function(wrd) {
-      if ( Scrabble.score(wrd) > max ) {
-        max = Scrabble.score(wrd);
+      let wordScore  = Scrabble.score(wrd)
+      let wordLength = wrd.length
+      if ( wordScore > max ) {
+        max = wordScore;
         highestScoreWord = wrd;
-      } else if (( Scrabble.score(wrd) === max ) && (wrd.length < highestScoreWord.length)) {
+      } else if (( wordScore === max ) && ( wordLength === 7 )) {
+        highestScoreWord = wrd;
+      } else if (( wordScore === max ) && ( wordLength < highestScoreWord.length )) {
         highestScoreWord = wrd;
       }
     });

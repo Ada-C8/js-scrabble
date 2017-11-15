@@ -27,10 +27,10 @@ describe('score', function() {
     expect(Scrabble.score('DoG')).toBe(5);
   });
 
-//   it ('does not allow words > 7 letters', function() {
-//     expect(function() { Scrabble.score('abcdefgh'); }).toThrow();
-//   });
-//
+  it ('does not allow words > 7 letters', function() {
+    expect(function() { Scrabble.score('abcdefgh'); }).toThrow();
+  });
+
 //   it ('does not allow empty words', function() {
 //     expect(function() { Scrabble.score(''); }).toThrow();
 //   });
@@ -60,6 +60,7 @@ describe('highestScoreFrom', function() {
     expect(Scrabble.highestScoreFrom(['pig', 'dog'])).toBe('pig');
   });
 
+// not passing
   // it ('if tied, prefer a word with 7 letters', function() {
   //   const loser = 'zzzzzz';
   //   const winner = 'iiiiddd';
