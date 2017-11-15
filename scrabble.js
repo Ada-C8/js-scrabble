@@ -34,6 +34,28 @@ const Scrabble = {
 
   }, //end function word
 
+  tieBreak: function(a, b) {
+    console.log(`I'm in teh function and a is ${a} and b is ${b}`);
+    console.log(a.length);
+    if(a.length === 7){
+      console.log(`${a} is seven letters`);
+      let winner = a;
+      return winner;
+    } else if(b.length === 7){
+      let winner = b;
+      return winner;
+    } else if(a.length > b.length) {
+      console.log(`${b} is shorter than ${a}`);
+      let winner = b;
+      return winner;
+    }
+    // else {
+    //   console.log(`b is ${b}`);
+    //   let winner = b;
+    //   return winner;
+    // }
+  }, //end tiebreak function
+
   highestScoreFrom: function(words) {
 
     if(words.length === 0) {
@@ -46,48 +68,24 @@ const Scrabble = {
       return words[0];
     } else if(words.length >= 2) {
 
-      let highScore = Scrabble.score(words[0]);
-      let scoreHash = {};
       let highestScoringWord = "";
+      let highestScore = 0;
 
       words.forEach(function (word) {
-        let wordScore = Scrabble.score(word);
-        if (scoreHash[wordScore] === undefined) {
-          scoreHash[wordScore] = [word];
-        } else {
-          scoreHash[wordScore].push(word);
-        } //else for hash creation
-        if (wordScore > highScore) {
-          highScore = wordScore;
-        } // if for finding high score
-      }); //end of first for.each
 
-
-      let highestScoringWords = scoreHash[highScore];
-      let minLength = highestScoringWords[0].length;
-
-
-      if (highestScoringWords.length === 1) {
-        highestScoringWord = highestScoringWords[0];
-      } else {
-        highestScoringWord = highestScoringWords[0];
-        highestScoringWords.forEach(function (word) {
-
-          if (word.length === 7) {
-            highestScoringWord = word;
-            minLength = 0;
-            // return highestScoringWord;
-          } else {
-            if(word.length < minLength) {
-              minLength = word.length;
-              highestScoringWord = word;
-            } //else if for finding minimum
-          }// end else -- words that aren't seven letters
-        }); //end highest scoring word function
-      } //end else for multiple high scoring words
+        if(Scrabble.score(word) > highestScore){
+          highestScoringWord = word;
+          highestScore = Scrabble.score(word);
+        }//if
+        else if (Scrabble.score(word) === highestScore) {
+          console.log("in the else if, sending words to tie break");
+          console.log(`highestScoring is ${highestScoringWord} and it is being compared to ${word}`);
+          highestScoringWord = Scrabble.tieBreak(highestScoringWord, word);
+          console.log(`hsw is now ${highestScoringWord}`);
+        } //else if
+      });//end foreach function
       return highestScoringWord;
     } //else if array has 2 or more words
-    // return highestScoringWord;
   } //end highestscorefrom
 }; //end const Scrabble
 
@@ -128,22 +126,40 @@ module.exports = Scrabble;
 
 
 
-
-
-// const loser = 'zzzzzz';
-// const winner = 'iiiiddd';
 //
-// // console.log("Comparing dog and pig");
-// // console.log(Scrabble.highestScoreFrom(['dog', 'pig']));
-// // console.log("*********************");
-// // console.log("starting iwth pig")
-// // console.log(Scrabble.highestScoreFrom(['pig', 'dog']));
-// // console.log(Scrabble.highestScoreFrom([loser, winner]));
-// // console.log("Comparing winner and loser");
-// // console.log(Scrabble.highestScoreFrom([winner, loser]));
-// console.log("schekcing i, dog, cat");
-// console.log(Scrabble.highestScoreFrom(['i', 'dog', 'cd', 'cat']));
+// //
+const loser = 'zzzzzz';
+const winner = 'iiiiddd';
 
+// console.log("Comparing dog and pig");
+// console.log("pig should win ")
+// console.log(Scrabble.highestScoreFrom(['dog', 'pig']));
+// console.log("*********************\n");
+// console.log("starting with pig, pig should win.")
+// console.log(Scrabble.highestScoreFrom(['pig', 'dog']));
+//
+console.log("Comparing winner and loser");
+console.log("iiiiddd should win -- seven letters ")
+console.log(Scrabble.highestScoreFrom([loser, winner]));
+
+console.log(Scrabble.highestScoreFrom([winner, loser]));
+
+// console.log("***************************************")
+// console.log("schekcing i, dog, cat -- cd should win");
+// console.log(Scrabble.highestScoreFrom(['i', 'dog', 'cd', 'cat']));
+//
+// console.log("Comparing dog and cat, dog should win");
+// console.log(Scrabble.highestScoreFrom(['dog', 'cat']));
+// console.log("***********************");
+// console.log("Comparing cat and dog, cat should win");
+// console.log(Scrabble.highestScoreFrom(['cat', 'dog']));
+// console.log("***********************");
+  // Test the functionality
+//   expect(Scrabble.highestScoreFrom(['dog', 'dog'])).toBe('dog');
+//   expect(Scrabble.highestScoreFrom(['dog', 'cat'])).toBe('dog');
+//   expect(Scrabble.highestScoreFrom(['cat', 'dog'])).toBe('cat');
+//   expect(Scrabble.highestScoreFrom(['i', 'dog', 'cat'])).toBe('dog');
+// });
 
 
 ///
