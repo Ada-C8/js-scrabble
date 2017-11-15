@@ -59,12 +59,12 @@ const Scrabble = {
     let highestWord = wordsArray[0];
     const highestScore = this.score(highestWord);
     for (let i = 0; i < wordsArray.length; i += 1) {
-      const scoredWord = wordsArray[i];
-      const getScore = this.score(scoredWord);
-      const wordLength = scoredWord.length;
+      const playedWord = wordsArray[i];
+      const getScore = this.score(playedWord);
+      const wordLength = playedWord.length;
 
       if ((getScore > highestScore) || (getScore === highestScore && wordLength === 7)) {
-        highestWord = scoredWord;
+        highestWord = playedWord;
       }
     }
     return highestWord;

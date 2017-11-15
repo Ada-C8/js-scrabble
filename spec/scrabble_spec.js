@@ -72,16 +72,16 @@ describe('highestScoreFrom', function() {
     expect(Scrabble.highestScoreFrom([loser, winner])).toBe(winner);
     expect(Scrabble.highestScoreFrom([winner, loser])).toBe(winner);
   });
-//
-//   it ('if tied and no word has 7 letters, prefers the word with fewer letters', function() {
-//     // Check score assumptions
-//     expect(Scrabble.score('dog')).toBe(5);
-//     expect(Scrabble.score('goat')).toBe(5);
-//
-//     // Test functionality
-//     expect(Scrabble.highestScoreFrom(['dog', 'goat'])).toBe('dog');
-//     expect(Scrabble.highestScoreFrom(['goat', 'dog'])).toBe('dog');
-//   });
+
+  it ('if tied and no word has 7 letters, prefers the word with fewer letters', function() {
+    // Check score assumptions
+    expect(Scrabble.score('dog')).toBe(5);
+    expect(Scrabble.score('goat')).toBe(5);
+
+    // Test functionality
+    expect(Scrabble.highestScoreFrom(['dog', 'goat'])).toBe('dog');
+    expect(Scrabble.highestScoreFrom(['goat', 'dog'])).toBe('dog');
+  });
 //
 //   it ('returns the first word of a tie with same letter count', function() {
 //     // Check score assumptions
