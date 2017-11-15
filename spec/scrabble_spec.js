@@ -59,19 +59,19 @@ describe('highestScoreFrom', function() {
     expect(Scrabble.highestScoreFrom(['dog', 'pig'])).toBe('pig');
     expect(Scrabble.highestScoreFrom(['pig', 'dog'])).toBe('pig');
   });
-//
-//   it ('if tied, prefer a word with 7 letters', function() {
-//     const loser = 'zzzzzz';
-//     const winner = 'iiiiddd';
-//
-//     // Check score assumptions
-//     expect(Scrabble.score(loser)).toBe(60);
-//     expect(Scrabble.score(winner)).toBe(60);
-//
-//     // Test functionality
-//     expect(Scrabble.highestScoreFrom([loser, winner])).toBe(winner);
-//     expect(Scrabble.highestScoreFrom([winner, loser])).toBe(winner);
-//   });
+
+  it ('if tied, prefer a word with 7 letters', function() {
+    const loser = 'zzzzzz';
+    const winner = 'iiiiddd';
+
+    // Check score assumptions
+    expect(Scrabble.score(loser)).toBe(60);
+    expect(Scrabble.score(winner)).toBe(60);
+
+    // Test functionality
+    expect(Scrabble.highestScoreFrom([loser, winner])).toBe(winner);
+    expect(Scrabble.highestScoreFrom([winner, loser])).toBe(winner);
+  });
 //
 //   it ('if tied and no word has 7 letters, prefers the word with fewer letters', function() {
 //     // Check score assumptions
