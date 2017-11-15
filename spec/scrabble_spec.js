@@ -31,11 +31,11 @@ describe('score', function() {
     expect(function() { Scrabble.score('abcdefgh'); }).toThrow();
   });
 
-//   it ('does not allow empty words', function() {
-//     expect(function() { Scrabble.score(''); }).toThrow();
-//   });
-// });
-//
+  it ('does not allow empty words', function() {
+    expect(function() { Scrabble.score(''); }).toThrow();
+  });
+});
+
 describe('highestScoreFrom', function() {
   it ('is defined', function() {
     expect(Scrabble.highestScoreFrom).toBeDefined();
@@ -226,4 +226,4 @@ describe('highestScoreFrom', function() {
 //       expect(() => { player.highestWordScore() }).toThrow();
 //     });
 //   });
-});
+// });

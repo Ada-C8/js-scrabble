@@ -19,6 +19,9 @@ const Scrabble = {
       throw new UserException('Illegal play')
     }
 
+    if (playedWord === '') {
+      throw new UserException('Illegal play')
+    }
 
   //   for (i=0; i < playedWord.length; i++) {
   //     letter = playedWord[i];
