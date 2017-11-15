@@ -2,10 +2,10 @@
 const Scrabble = {
 
   // score: function(word) {
-    score(word) {
-      const lowerWord = word.toLowerCase();
+  score(word) {
+    const lowerWord = word.toLowerCase();
 
-      if (typeof word.length === 0 || word.length > 7 || /^[a-zA-Z]+$/.test(word) === false ) {
+    if (typeof word.length === 0 || word.length > 7 || /^[a-zA-Z]+$/.test(word) === false ) {
       throw { name: 'NotWordError', message: 'word must include only letters' };
     }
 
@@ -52,8 +52,8 @@ const Scrabble = {
 
   highestScoreFrom(words) {
     if (Array.isArray(words) === false || words.length === 0) {
-    throw { name: 'NoWordsError', message: 'must input array of words to determine highest scoring word' };
-  }
+      throw { name: 'NoWordsError', message: 'must input array of words to determine highest scoring word' };
+    }
 
     let winner = words[0];
     for (let word of words) {
@@ -82,9 +82,9 @@ Scrabble.Player = class {
 
   totalScore() {
     let totalScore = 0;
-      for (let word of this.plays) {
+    for (let word of this.plays) {
       totalScore += Scrabble.score(word);
-      }
+    }
     return totalScore;
   }
 
@@ -117,16 +117,59 @@ Scrabble.Player = class {
   }
 };
 
+Scrabble.Tilebag = class {
+  constructor() {
+    this.tilebag = [];
+
+    const letterFrequency = {
+      a: 9,
+      b: 2,
+      c: 2,
+      d: 4,
+      e: 12,
+      f: 2,
+      g: 3,
+      h: 2,
+      i: 9,
+      j: 1,
+      k: 1,
+      l: 4,
+      m: 2,
+      n: 6,
+      o: 8,
+      p: 2,
+      q: 1,
+      r: 6,
+      s: 4,
+      t: 6,
+      u: 4,
+      v: 2,
+      w: 2,
+      x: 1,
+      y: 2,
+      z: 1,
+    };
+
+    for (let letter in letterFrequency) {
+      for (let i = 0; i < letterFrequency[letter]; i++) {
+        this.tilebag.push(letter);
+      }
+    }
+  }
+};
+
 module.exports = Scrabble;
 
-let sally = new Scrabble.Player('Sally');
-console.log(sally.name);
-console.log(sally.plays);
-
-sally.play('dog');
-console.log(sally.plays);
-console.log(sally.plays[0]);
-console.log(sally.plays.length);
-sally.play('zzzz');
-console.log(sally.highestScoringWord());
-console.log(sally.highestWordScore());
+let newTilebag = new Scrabble.Tilebag();
+console.log(newTilebag);
+// let sally = new Scrabble.Player('Sally');
+// console.log(sally.name);
+// console.log(sally.plays);
+//
+// sally.play('dog');
+// console.log(sally.plays);
+// console.log(sally.plays[0]);
+// console.log(sally.plays.length);
+// sally.play('zzzz');
+// console.log(sally.highestScoringWord());
+// console.log(sally.highestWordScore());
