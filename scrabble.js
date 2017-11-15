@@ -31,17 +31,35 @@ const Scrabble = {
   },
 
   highestScoreFrom: function(arrayOfWords) {
+    let firstWord = arrayOfWords[0];
+    let secondWord = arrayOfWords[1];
+
     if (arrayOfWords.length === 0 || !Array.isArray(arrayOfWords)) {
       throw 'No words have been played.';
     } else if (arrayOfWords.length === 1) {
-      return arrayOfWords[0];
+      return firstWord;
     };
 
-    if (arrayOfWords[0] > arrayOfWords[1]) {
-      return arrayOfWords[0];
-    } else if (arrayOfWords[0] < arrayOfWords[1]) {
-      return arrayOfWords[1];
-    };
+    let firstWordScore = this.score(firstWord);
+    let secondWordScore = this.score(secondWord);
+
+    if (firstWordScore > secondWordScore) {
+      return firstWord;
+    } else if (firstWordScore < secondWordScore) {
+      return secondWord;
+    } else if (firstWordScore === secondWordScore) {
+      if (firstWord.length === 7 ) {
+        return firstWord;
+      } else if (secondWord.length == 7) {
+        return secondWord;
+      } else if (firstWord.length < secondWord.length) {
+        return firstWord;
+      } else if (secondWord.length < firstWord.length) {
+        return secondWord;
+      } else if (firstWord.length === secondWord.length) {
+        return firstWord;
+      };
+    }
   }
 };
 
