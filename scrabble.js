@@ -40,19 +40,25 @@ const Scrabble = {
     };
 
     const totalScore = function totalScore(array) {
+
       let total = 0;
       array.forEach((char) => {
-        total = total + letterValues[char]
+        total += letterValues[char];
       });
+
+      if (array.length == 7) {
+        total += 50;
+      }
+
       return total;
     }
+    
     const uppercaseWord = word.toUpperCase();
 
     const characters = splitChars(uppercaseWord);
 
     return totalScore(characters);
   }
-
 };
 
 Scrabble.Player = class {
