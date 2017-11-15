@@ -97,12 +97,12 @@ describe('highestScoreFrom', function() {
   });
 });
 
-xdescribe('Player', function() {
+describe('Player', function() {
   it ('is defined', function() {
     expect(Scrabble.Player).toBeDefined();
   });
 
-  xdescribe('Constructor', function() {
+  describe('Constructor', function() {
     it('Creates a new player', function() {
       let name = 'test name';
       let player = new Scrabble.Player(name);
@@ -114,7 +114,7 @@ xdescribe('Player', function() {
     });
   });
 
-  xdescribe ('play', function() {
+  describe ('play', function() {
     it ('Records the played word', function() {
       let word = 'dog';
       let player = new Scrabble.Player('test player');
@@ -126,7 +126,7 @@ xdescribe('Player', function() {
       expect(player.plays[0]).toBe(word);
     });
 
-    it ('Requires a real word', function() {
+    xit ('Requires a real word', function() {
       let player = new Scrabble.Player('test player');
       expect(player.plays.length).toBe(0);
 
@@ -137,7 +137,7 @@ xdescribe('Player', function() {
       expect(player.plays.length).toBe(0);
     });
 
-    it ('Returns false and does not update plays if the player has already won', function() {
+    xit ('Returns false and does not update plays if the player has already won', function() {
       let player = new Scrabble.Player('test player');
       expect(player.play('zzzzzzz')).toBeTruthy(); // +120 pts
       expect(player.plays.length).toBe(1);

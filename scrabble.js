@@ -83,17 +83,46 @@ const Scrabble = {
         }
     }
     return winningWord;
+  },
+
+  Player: class Player {
+    constructor(name) {
+      this.name = name;
+      this.plays = [];
+      if (!(/^[a-zA-Z\s]*$/.test(name)) || name === "" || name === undefined) {
+        throw 'No player name was provided';
+      }
+    }
+
+    play(word) {
+      if (null == word || word === "" || /[^a-zA-Z]/.test(word) || word.length > 7) {
+        throw 'not a valid word';
+      }
+      // if (hasWon()) {
+      //   return false
+      // } else {
+        this.plays.push(word);
+        return true
+      // }
+    }
+
   }
 };
 
-
+// plays: property which returns an Array of the words played by the player
+// play(word): method which adds the input word to the plays Array
+// Returns false if player has already won
+// totalScore(): method which sums up and returns the score of the players words
+// hasWon(): method which returns true if the player has over 100 points, otherwise returns false
+// highestScoringWord(): method which returns the highest scoring word the user has played
+// highestWordScore(): method which returns the highestScoringWord score
 
 //TESTING letterValue
 //let a = Scrabble.letterValue('I');
 //console.log(a);
 
 //TESTING score
-let answer = Scrabble.score('Hello');
+//let answer = Scrabble.score('Hello');
 //console.log(answer);
 
 //TESTING highestScoreFrom
