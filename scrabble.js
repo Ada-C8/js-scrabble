@@ -1,3 +1,7 @@
+const requiredParams = function requiredParams(param) {
+  throw new Error(`Required param ${param}`)
+};
+
 const Scrabble = {
   VALUES: {
     A: 1, B: 3, C: 3, D: 2, E: 1, F: 4, G: 2, H: 4, I: 1, J: 8, K: 5,
@@ -12,16 +16,16 @@ const Scrabble = {
     if (Scrabble.wordCheck.test(word)) {
       throw new Error('Input contains invalid characters');
     }
-    word = word.toUpperCase();
 
-    if (word.length === 7) {
+    if (!word || word.length === 0) {
+      throw new Error('Input cannot be empty');
+    } else if (word.length === 7) {
       wordScore += 50;
     } else if (word.length > 7) {
       throw new Error('Input is too long - cannot exceed 7 letters');
-    } else if (word.length === 0) {
-      throw new Error('Input cannot be empty');
     }
 
+    word = word.toUpperCase();
     for (let letter of word) {
       wordScore += Scrabble.VALUES[letter];
     }
@@ -54,14 +58,28 @@ const Scrabble = {
     }
     return highestWord;
   }
-  // TODO: add the highestScoreFrom method
-
 };
 
 Scrabble.Player = class {
-  // TODO: implement the Player class
+  constructor(name = requiredParams('name')){
+    this.name = name;
+    this.plays = [];
+    this._totalScore = 0;
+  }
+
+  totalScore() {
+    return this._totalScore;
+  }
+
+  play(word) {
+    let score = Scrabble.score(word);
+    if (word) {
+      this.plays.push(word);
+      this._totalScore += score;
+      return this.plays;
+    }
+    return false;
+  }
 };
 
 module.exports = Scrabble;
-
-console.log(Scrabble.score('dog'));
