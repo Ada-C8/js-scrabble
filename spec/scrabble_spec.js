@@ -118,7 +118,9 @@ describe('Player', function() {
     it ('Records the played word', function() {
       let word = 'dog';
       let player = new Scrabble.Player('test player');
+
       expect(player.plays.length).toBe(0);
+
 
       expect(player.play(word)).toBeTruthy();
 
@@ -141,6 +143,8 @@ describe('Player', function() {
       let player = new Scrabble.Player('test player');
       expect(player.play('zzzzzzz')).toBeTruthy(); // +120 pts
       expect(player.plays.length).toBe(1);
+      console.log(`hasWon is ${player.hasWon()}`)
+      console.log(`players total score is ${player.totalScore()}`);
       expect(player.hasWon()).toBeTruthy();
 
       expect(player.play('dog')).toBe(false);

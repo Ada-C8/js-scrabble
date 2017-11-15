@@ -74,29 +74,48 @@ const Scrabble = {
 
 Scrabble.Player = class {
   constructor(name) {
+    // throw an error if a name is not provided
     if (name === undefined) {
       throw new UserException('You must provide a name for a player');
     }
     this.name = name;
     this.plays = [];
-    this.totalScore = 0;
-  };
+    // this.totalScore = 0;
+  }; // Constructor
 
   plays() {
     return this.plays;
+  }; // plays
+
+  totalScore() {
+    let playerScore = this.plays.reduce((sum, value) => sum + Scrabble.score(value), 0);
+    return playerScore
   };
+
+  hasWon() {
+    if (this.totalScore() >= 100) {
+      return true;
+    } else {
+      return false;
+    }
+  }; // hasWon
 
   play(word) {
+    if (!(word.match(/^[a-zA-Z]+$/))) {
+      throw new UserException('Invalid word');
+    }
+    if (this.hasWon()) {
+      return false
+    } else {
+      this.plays.push(word);
+      return true;
+    }
+  }; // play(word)
 
 
-  }
-
-  hasWon(){
-    this.totalScore >= 100 ? true : false;
-  };
 
 
-};
+}; // end of Scrabble
 
 module.exports = Scrabble;
 
