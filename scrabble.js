@@ -45,17 +45,50 @@ const Scrabble = {
     if(words.length === 1) {
       return words[0];
     } else if(words.length >= 2) {
+
       let max = words[0];
 
-      let maxarray = [];
-
       words.forEach(function (word) {
-        if (Scrabble.score(word) > Scrabble.score(max)) {
+        if (word.length === 7){
           max = word;
         } //if
+        return max
       }); //forEach
-      return max
+      //find score of each word, use as key with array of all words with that score;
+
+      // let score_hash = {};
+
+        // words.forEach(function (word) {
+        //   score_hash[Scrabble.score(word)] = [].push(word);
+        //   if (Scrabble.score(word) > Scrabble.score(max) {
+        //     max = word;
+        //   });
+        //   return max
+        // });
+        // words.forEach(function (word) {
+        //   score_hash[word] = Scrabble.score(word);
+        // })
+        let highestScoringWords = [];
+
+        words.forEach(function (word) {
+          if (Scrabble.score(word) > Scrabble.score(max)) {
+            max = word;
+          }
+
+        }); //forEach
+          return max
+        // words.forEach(function (word) {
+        //   if (Scrabble.score(word) === max) {
+        //     highestScoringWords.push(word);
+        //   } //if
+        //   return highestScoringWords;
+        // }); //forEach
+
+        // if(highestScoringWords.length === 1) {
+        //   return highestScoringWords[0];
+        // }
     } //else if
+    // return highestScoringWords[0];
   }
 }; //end const Scrabble
 
