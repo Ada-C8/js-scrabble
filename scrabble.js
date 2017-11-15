@@ -46,15 +46,13 @@ const Scrabble = {
     Note that there is a bonus (50 points) for using all seven letters. If the top score is tied between multiple words and one used all seven letters, choose the one with seven letters over the one with fewer tiles.
     If the there are multiple words that are the same score and same length, pick the first one in supplied list.
   */
-
-
-
   highestScoreFrom: function highestWordFrom(words) {
     // throw an expection if there if passed an empty array
     if (words.length < 1) {
       throw new UserException('You cannot score an empty array');
     }
 
+    // find the highest scoring word
     let maxScore = 0;
     let maxWord;
     words.forEach( function (word) {
@@ -63,10 +61,9 @@ const Scrabble = {
         maxScore = wordScore;
         maxWord = word;
       } else if (wordScore === maxScore && word.length === 7) {
-        console.log('do i get here?')
         maxScore = wordScore;
         maxWord = word;
-      } else if (wordScore === maxScore && word.length !== 7 && word.length < maxWord.length) {
+      } else if (wordScore === maxScore && maxWord.length !== 7 && word.length < maxWord.length) {
         maxScore = wordScore;
         maxWord = word;
       }// if else if
