@@ -109,6 +109,7 @@ Scrabble.Player = class {
     this.plays.forEach((word) => {
       sum += Scrabble.score(word);
     });
+    return sum;
   }
 
 };
