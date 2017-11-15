@@ -4,7 +4,7 @@ const Scrabble = {
     validateWord(word);
     const wordArray = word.toLowerCase().split('');
     wordArray.forEach((letter) => {
-      Object.keys(scoreChart).map((key) => {
+      Object.keys(scoreChart).forEach((key) => {
         if (scoreChart[key].includes(letter)) {score += parseInt(key)}
       });
     });
@@ -30,7 +30,6 @@ const Scrabble = {
     });
     return highestScoringWord;
   },
-
   Player: class Player {
     constructor(name) {
       validateExistence(name);
@@ -95,6 +94,5 @@ const scoreChart = {
   8: ['j', 'x'],
   10: ['q', 'z'],
 };
-
 
 module.exports = Scrabble;
