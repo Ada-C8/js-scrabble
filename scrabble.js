@@ -55,6 +55,8 @@ const Scrabble = {
         else if (Scrabble.score(word) === Scrabble.score(highestScoreWord)) {
           if (word.length === 7 && word.length > highestScoreWord.length) {
             highestScoreWord = word;
+          } else if (highestScoreWord.length < 7 && word.length < highestScoreWord.length) {
+            highestScoreWord = word;
           }
         }
       }
