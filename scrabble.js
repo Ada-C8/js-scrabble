@@ -23,10 +23,49 @@ const Scrabble = {
       return totalScore;
     }
     throw new ArgumentException('Invalid input. Only alphabetical characters allowed');
+  },
+
+  highestScoreFrom: function(array) {
+    if (array.length === 0) {
+      throw new ArgumentException('List of words can\'t be blank');
+    }
+
+    let highestWords = [];
+    let highestScore = 0;
+    for (let word of array) {
+      let score = this.score(word);
+      if (score === highestScore) {
+        highestWords.push(word);
+      } else if (score > highestScore) {
+        highestScore = score;
+        highestWords = [];
+        highestWords.push(word);
+      }
+    }
+    if (highestWords.length === 1) {
+      return highestWords[0];
+    }
+
+    // longWords = highestWords.filter(function(word) {
+    //   return word.length === 7;
+    // })
+
+    longWords = highestWords.filter(word => word.length === 7);
+
+    if (longWords.length > 0) {
+      return longWords[0];
+    }
+
+    // shortWords = highestWords.sort(function(a, b) {
+    //   return a.length - b.length;
+    // })
+
+    shortWords = highestWords.sort((a, b) => a.length - b.length);
+
+    if (shortWords.length > 0) {
+      return shortWords[0];
+    }
   }
-
-  // TODO: add the highestScoreFrom method
-
 }
 
 Scrabble.Player = class {

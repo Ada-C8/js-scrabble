@@ -36,66 +36,66 @@ describe('score', function() {
   });
 });
 
-// describe('highestScoreFrom', function() {
-//   it ('is defined', function() {
-//     expect(Scrabble.highestScoreFrom).toBeDefined();
-//   });
-//
-//   it ('throws if no words were passed', function() {
-//     expect(function() { Scrabble.highestScoreFrom([]); }).toThrow();
-//     expect(function() { Scrabble.highestScoreFrom('not array'); }).toThrow();
-//   });
-//
-//   it ('returns the only word in a length-1 array', function() {
-//     expect(Scrabble.highestScoreFrom(['dog'])).toBe('dog');
-//   });
-//
-//   it ('returns the highest word if there are two words', function() {
-//     // Check score assumptions
-//     expect(Scrabble.score('dog')).toBe(5);
-//     expect(Scrabble.score('pig')).toBe(6);
-//
-//     // Test the functionality
-//     expect(Scrabble.highestScoreFrom(['dog', 'pig'])).toBe('pig');
-//     expect(Scrabble.highestScoreFrom(['pig', 'dog'])).toBe('pig');
-//   });
-//
-//   it ('if tied, prefer a word with 7 letters', function() {
-//     const loser = 'zzzzzz';
-//     const winner = 'iiiiddd';
-//
-//     // Check score assumptions
-//     expect(Scrabble.score(loser)).toBe(60);
-//     expect(Scrabble.score(winner)).toBe(60);
-//
-//     // Test functionality
-//     expect(Scrabble.highestScoreFrom([loser, winner])).toBe(winner);
-//     expect(Scrabble.highestScoreFrom([winner, loser])).toBe(winner);
-//   });
-//
-//   it ('if tied and no word has 7 letters, prefers the word with fewer letters', function() {
-//     // Check score assumptions
-//     expect(Scrabble.score('dog')).toBe(5);
-//     expect(Scrabble.score('goat')).toBe(5);
-//
-//     // Test functionality
-//     expect(Scrabble.highestScoreFrom(['dog', 'goat'])).toBe('dog');
-//     expect(Scrabble.highestScoreFrom(['goat', 'dog'])).toBe('dog');
-//   });
-//
-//   it ('returns the first word of a tie with same letter count', function() {
-//     // Check score assumptions
-//     expect(Scrabble.score('i')).toBe(1);
-//     expect(Scrabble.score('dog')).toBe(5);
-//     expect(Scrabble.score('cat')).toBe(5);
-//
-//     // Test the functionality
-//     expect(Scrabble.highestScoreFrom(['dog', 'dog'])).toBe('dog');
-//     expect(Scrabble.highestScoreFrom(['dog', 'cat'])).toBe('dog');
-//     expect(Scrabble.highestScoreFrom(['cat', 'dog'])).toBe('cat');
-//     expect(Scrabble.highestScoreFrom(['i', 'dog', 'cat'])).toBe('dog');
-//   });
-// });
+describe('highestScoreFrom', function() {
+  it ('is defined', function() {
+    expect(Scrabble.highestScoreFrom).toBeDefined();
+  });
+
+  it ('throws if no words were passed', function() {
+    expect(function() { Scrabble.highestScoreFrom([]); }).toThrow();
+    expect(function() { Scrabble.highestScoreFrom('not array'); }).toThrow();
+  });
+
+  it ('returns the only word in a length-1 array', function() {
+    expect(Scrabble.highestScoreFrom(['dog'])).toBe('dog');
+  });
+
+  it ('returns the highest word if there are two words', function() {
+    // Check score assumptions
+    expect(Scrabble.score('dog')).toBe(5);
+    expect(Scrabble.score('pig')).toBe(6);
+
+    // Test the functionality
+    expect(Scrabble.highestScoreFrom(['dog', 'pig'])).toBe('pig');
+    expect(Scrabble.highestScoreFrom(['pig', 'dog'])).toBe('pig');
+  });
+
+  it ('if tied, prefer a word with 7 letters', function() {
+    const loser = 'zzzzzz';
+    const winner = 'iiiiddd';
+
+    // Check score assumptions
+    expect(Scrabble.score(loser)).toBe(60);
+    expect(Scrabble.score(winner)).toBe(60);
+
+    // Test functionality
+    expect(Scrabble.highestScoreFrom([loser, winner])).toBe(winner);
+    expect(Scrabble.highestScoreFrom([winner, loser])).toBe(winner);
+  });
+
+  it ('if tied and no word has 7 letters, prefers the word with fewer letters', function() {
+    // Check score assumptions
+    expect(Scrabble.score('dog')).toBe(5);
+    expect(Scrabble.score('goat')).toBe(5);
+
+    // Test functionality
+    expect(Scrabble.highestScoreFrom(['dog', 'goat'])).toBe('dog');
+    expect(Scrabble.highestScoreFrom(['goat', 'dog'])).toBe('dog');
+  });
+
+  it ('returns the first word of a tie with same letter count', function() {
+    // Check score assumptions
+    expect(Scrabble.score('i')).toBe(1);
+    expect(Scrabble.score('dog')).toBe(5);
+    expect(Scrabble.score('cat')).toBe(5);
+
+    // Test the functionality
+    expect(Scrabble.highestScoreFrom(['dog', 'dog'])).toBe('dog');
+    expect(Scrabble.highestScoreFrom(['dog', 'cat'])).toBe('dog');
+    expect(Scrabble.highestScoreFrom(['cat', 'dog'])).toBe('cat');
+    expect(Scrabble.highestScoreFrom(['i', 'dog', 'cat'])).toBe('dog');
+  });
+});
 //
 // describe('Player', function() {
 //   it ('is defined', function() {
