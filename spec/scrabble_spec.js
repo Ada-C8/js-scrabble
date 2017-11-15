@@ -35,31 +35,31 @@ describe('score', function() {
     expect(function() { Scrabble.score(''); }).toThrow();
   });
 });
-//
-// describe('highestScoreFrom', function() {
-//   it ('is defined', function() {
-//     expect(Scrabble.highestScoreFrom).toBeDefined();
-//   });
-//
-//   it ('throws if no words were passed', function() {
-//     expect(function() { Scrabble.highestScoreFrom([]); }).toThrow();
-//     expect(function() { Scrabble.highestScoreFrom('not array'); }).toThrow();
-//   });
-//
-//   it ('returns the only word in a length-1 array', function() {
-//     expect(Scrabble.highestScoreFrom(['dog'])).toBe('dog');
-//   });
-//
-//   it ('returns the highest word if there are two words', function() {
-//     // Check score assumptions
-//     expect(Scrabble.score('dog')).toBe(5);
-//     expect(Scrabble.score('pig')).toBe(6);
-//
-//     // Test the functionality
-//     expect(Scrabble.highestScoreFrom(['dog', 'pig'])).toBe('pig');
-//     expect(Scrabble.highestScoreFrom(['pig', 'dog'])).toBe('pig');
-//   });
-//
+
+describe('highestScoreFrom', function() {
+  it ('is defined', function() {
+    expect(Scrabble.highestScoreFrom).toBeDefined();
+  });
+
+  it ('throws if no words were passed', function() {
+    expect(function() { Scrabble.highestScoreFrom([]); }).toThrow();
+    expect(function() { Scrabble.highestScoreFrom('not array'); }).toThrow();
+  });
+
+  it ('returns the only word in a length-1 array', function() {
+    expect(Scrabble.highestScoreFrom(['dog'])).toBe('dog');
+  });
+
+  it ('returns the highest word if there are two words', function() {
+    // Check score assumptions
+    expect(Scrabble.score('dog')).toBe(5);
+    expect(Scrabble.score('pig')).toBe(6);
+
+    // Test the functionality
+    expect(Scrabble.highestScoreFrom(['dog', 'pig'])).toBe('pig');
+    expect(Scrabble.highestScoreFrom(['pig', 'dog'])).toBe('pig');
+  });
+
 //   it ('if tied, prefer a word with 7 letters', function() {
 //     const loser = 'zzzzzz';
 //     const winner = 'iiiiddd';
@@ -225,4 +225,4 @@ describe('score', function() {
 //       expect(() => { player.highestWordScore() }).toThrow();
 //     });
 //   });
-// });
+});

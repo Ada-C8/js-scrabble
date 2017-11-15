@@ -31,11 +31,18 @@ const Scrabble = {
   },
 
   highestScoreFrom: function(arrayOfWords) {
-    for (word in arrayOfWords) {
-    }
-  }
-  // TODO: add the highestScoreFrom method
+    if (arrayOfWords.length === 0 || !Array.isArray(arrayOfWords)) {
+      throw 'No words have been played.';
+    } else if (arrayOfWords.length === 1) {
+      return arrayOfWords[0];
+    };
 
+    if (arrayOfWords[0] > arrayOfWords[1]) {
+      return arrayOfWords[0];
+    } else if (arrayOfWords[0] < arrayOfWords[1]) {
+      return arrayOfWords[1];
+    };
+  }
 };
 
 Scrabble.Player = class {
