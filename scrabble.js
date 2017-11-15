@@ -45,6 +45,7 @@ const Scrabble = {
     if(words.length === 1) {
       return words[0];
     } else if(words.length >= 2) {
+
       let highScore = Scrabble.score(words[0]);
       let scoreHash = {};
       let highestScoringWord = "";
@@ -75,6 +76,7 @@ const Scrabble = {
           if (word.length === 7) {
             highestScoringWord = word;
             minLength = 0;
+            // return highestScoringWord;
           } else {
             if(word.length < minLength) {
               minLength = word.length;
