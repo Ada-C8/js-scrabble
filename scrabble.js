@@ -25,21 +25,12 @@ const Scrabble = {
       score += 50
     } else if (letters.length > 7) {
       throw('Maximum 7 letters are allowed!');
-    // } else if (letters.length < 1) {
-    //   throw('No word entered');
     }
 
     letters.forEach(function(letter) {
-      // if (/^[a-zA-Z]+$/.test) {
       score += scoringHash[letter];
-    // } else {
-      // throw('Word must contain only letters A-Z')
-    // }
   })
 
-  // if (score === 0) {
-  //   throw('Cannot score - no word entered');
-  // }
   return score;
 },
 
@@ -70,7 +61,6 @@ Scrabble.Player = class {
   constructor(name) {
     this.name = name;
     this.plays = [];
-    // this.totalScore = 0;
 
     if (name === undefined) {
       throw('Player must have a name');
@@ -82,7 +72,6 @@ Scrabble.Player = class {
       return false;
     } else {
     let wordScore = Scrabble.score(word);
-    // this.totalScore += wordScore;
     this.plays.push(word);
     return true;
     }
@@ -121,29 +110,3 @@ Scrabble.Player = class {
 };
 
 module.exports = Scrabble;
-
-
-// console.log(Scrabble.score('cat'));
-//
-// newPlayer = new Scrabble.Player('Jeff')
-//
-// newPlayer.play('zzzzzzz')
-//
-// console.log(newPlayer.plays)
-//
-// let emptyArray = [''];
-// let oneArray = ['doggie'];
-//
-// let emptyArrayScore
-//
-// let emptyWord = ''
-//
-// console.log(`HighestScoreFrom Empty array: ${Scrabble.highestScoreFrom(emptyArray)}`);
-// console.log(`HighestScoreFrom Empty array: ${Scrabble.highestScoreFrom(emptyArray).length}`);
-// console.log(`HighestScoreFrom One array: ${Scrabble.highestScoreFrom(oneArray)}`);
-//
-// // console.log(`Empty Word Score: ${Scrabble.score(emptyWord)}`);
-//
-// console.log(`Player with one word total score: ${newPlayer.totalScore()}`);
-//
-// console.log(newPlayer.hasWon());
