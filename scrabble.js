@@ -40,18 +40,13 @@ const Scrabble = {
     else {
       let highestWords = this.highestScores(wordArray);
 
-      if (highestWords.length === 1) {
-        return highestWords[0];
-      }
-      else {
-        return this.tiebreaker(highestWords);
-      }
+      return highestWords.length === 1 ? highestWords[0] : this.tiebreaker(highestWords);
     }
   },
 
   highestScores: function(wordArray) {
-    let wordScores = wordArray.map(function(word) {
-      return Scrabble.score(word);
+    let wordScores = wordArray.map((word) => {
+      return this.score(word);
     });
 
     const highestScore = Math.max(...wordScores);
@@ -74,7 +69,7 @@ const Scrabble = {
         highestWord = highestWords[i];
         break;
       }
-      else if (highestWords[i].length < lengthCompare){
+      else if (highestWords[i].length < lengthCompare) {
         highestWord = highestWords[i];
         lengthCompare = highestWords[i].length;
       }
@@ -85,9 +80,50 @@ const Scrabble = {
 };
 
 Scrabble.Player = class {
-  // TODO: implement the Player class
+  constructor(name = null) {
+    if (name === null) {
+      throw new Error('Please enter a name');
+    }
+    this.name = name;
+    this.plays = [];
+    this.score = 0;
+  }
+
+  play(word) {
+    if (this.hasWon()) {
+      return false;
+    }
+
+    word.toLowerCase();
+    if (word.length > 8) {
+      throw new Error('You cannot play a word longer than 7 letters');
+    }
+    else if (this.plays.includes(word)) {
+      throw new Error('You have alreayd played this word');
+    }
+    else {
+      this.plays.push(word);
+      this.score += Scrabble.score(word);
+    }
+    return true;
+  }
+
+  hasWon() {
+    return this.score >= 100;
+  }
+
+  totalScore() {
+    return this.score;
+  }
+
+  highestScoringWord() {
+    return Scrabble.highestScoreFrom(this.plays);
+  }
+
+  highestWordScore() {
+    return Scrabble.score(Scrabble.highestScoreFrom(this.plays));
+  }
+
 };
 
 module.exports = Scrabble;
-
-console.log(Scrabble.highestScoreFrom(['WORD', 'Banana', 'Elf']));
