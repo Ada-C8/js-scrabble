@@ -30,11 +30,11 @@ describe('score', function() {
   it ('does not allow words > 7 letters', function() {
     expect(function() { Scrabble.score('abcdefgh'); }).toThrow();
   });
-//
-//   it ('does not allow empty words', function() {
-//     expect(function() { Scrabble.score(''); }).toThrow();
-//   });
-// });
+
+  it ('does not allow empty words', function() {
+    expect(function() { Scrabble.score(''); }).toThrow();
+  });
+});
 //
 // describe('highestScoreFrom', function() {
 //   it ('is defined', function() {
@@ -225,4 +225,4 @@ describe('score', function() {
 //       expect(() => { player.highestWordScore() }).toThrow();
 //     });
 //   });
-});
+// });

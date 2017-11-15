@@ -37,7 +37,7 @@ const ErrorMsg = function ErrorMsg(value) {
 
 const Scrabble = {
   score(word) {
-    if ((/^[a-zA-Z]+$/.test(word) === false) || (word.length > 7)) {
+    if ((/^[a-zA-Z]+$/.test(word) === false) || (word.length > 7) || (word === '')) {
       throw new ErrorMsg(word);
     }
 
