@@ -96,14 +96,14 @@ Scrabble.Player = class {
       return total;
     };
   }
-  //
-  // hasWon() {
-  //   if (this.totalScore() > 100) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   };
-  // }
+
+  hasWon() {
+    if (this.totalScore() >= 100) {
+      return true;
+    } else {
+      return false;
+    };
+  }
   // highestScoringWord: function() {}
   // highestWordScore: function() {}
 };
