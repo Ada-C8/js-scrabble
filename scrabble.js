@@ -9,26 +9,32 @@ const Scrabble = {
     };
 
     let scoreWord = word;
+    const ALPHA = /^[a-z0-9]+$/i;
 
-    if (typeof word === 'string' && word.length > 0) {
+    if (typeof word === 'string' && word.length > 0 && word.length < 8) {
       scoreWord = word.toLowerCase();
-    }
-    else {
-      throw 'Not a valid word';
+    } else {
+      throw new Error('Not a valid word');
     }
 
     let score = 0;
+    if (scoreWord.length === 7) {
+      score = 50;
+    }
 
     for (i = 0; i < scoreWord.length; i++) {
       let letter = scoreWord[i]
-      score += parseInt(SCORECHART[letter]);
+      if (letter.match(ALPHA)) {
+        score += parseInt(SCORECHART[letter]);
+      } else {
+        throw new Error('Characters only');
+      }
     }
-
     return score;
   },
 
   highestScoreFrom: function(array) {
-    return array;
+
   }
 
 };
@@ -40,4 +46,4 @@ Scrabble.Player = class {
 module.exports = Scrabble;
 
 console.log(Scrabble.score('WORD'));
-console.log(Scrabble.highestScoreFrom(['WORD']));
+console.log(Scrabble.highestScoreFrom(['WORD', 'Banana', 'Elf']));
