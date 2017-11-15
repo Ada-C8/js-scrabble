@@ -9,15 +9,19 @@ const Scrabble = {
     if (format.test(word)) {
       let score = 0;
       let letters = word.toUpperCase().split('');
+
       for(let letter of letters) {
         if (scores[letter] > 0) {
           score += scores[letter];
         }
       }
+
       if (word.length == 7) {
         score += 50;
       }
+
       return score;
+
     } else {
       throw 'Cannot play that word!';
     }
@@ -25,7 +29,6 @@ const Scrabble = {
 
   // TODO: add the highestScoreFrom method
   highestScoreFrom: function(words) {
-
     if (words.constructor === Array && words.length > 0) {
       let highest_score = 0;
       let highest_words = [];
@@ -57,7 +60,6 @@ const Scrabble = {
       throw 'No words have been played!';
     }
   }
-
 };
 
 Scrabble.Player = class {
