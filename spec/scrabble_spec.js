@@ -148,81 +148,81 @@ describe('Player', function() {
     });
   });
 
-  describe ('totalScore', function() {
-    it ('Is zero if the player has not played anything', function() {
-      let player = new Scrabble.Player('test player');
-      expect(player.totalScore()).toBe(0);
-    });
-
-    it ('Is updated by play', function() {
-      let player = new Scrabble.Player('test player');
-      expect(player.totalScore()).toBe(0);
-      player.play('dog');
-      expect(player.totalScore()).toBe(5);
-      player.play('cat');
-      expect(player.totalScore()).toBe(10);
-      player.play('goat');
-      expect(player.totalScore()).toBe(15);
-    });
-  });
-
-  describe('hasWon', function() {
-    it('returns false when score < 100', function() {
-      let player = new Scrabble.Player('test player');
-      expect(player.totalScore()).toBe(0);
-      expect(player.hasWon()).toBe(false);
-
-      player.play('zzzzz'); // Score += 50
-      expect(player.totalScore()).toBe(50);
-      expect(player.hasWon()).toBe(false);
-
-      player.play('zzzzji'); // Score += 49
-      expect(player.totalScore()).toBe(99);
-      expect(player.hasWon()).toBe(false);
-    });
-
-    it('returns true when score == 100', function() {
-      let player = new Scrabble.Player('test player');
-      player.play('zzzzbbf'); // Score += 100
-      expect(player.totalScore()).toBe(100);
-      expect(player.hasWon()).toBe(true);
-    });
-
-    it('returns true when score > 100', function() {
-      let player = new Scrabble.Player('test player');
-      player.play('zzzzzzz'); // Score += 120
-      expect(player.totalScore()).toBe(120);
-      expect(player.hasWon()).toBe(true);
-    });
-  });
-
-  describe('highestScoringWord', function() {
-    // Tie-breaking logic is already described in the tests
-    // for highestWordFrom, so we will not repeat it here.
-    it('returns the highest scoring word played', function() {
-      let player = new Scrabble.Player('test player');
-      player.play('cat');
-      player.play('zzzz');
-      expect(player.highestScoringWord()).toBe('zzzz');
-    });
-
-    it('throws an error if no words have been played', function() {
-      let player = new Scrabble.Player('test player');
-      expect(() => { player.highestScoringWord() }).toThrow();
-    });
-  });
-
-  describe('highestWordScore', function() {
-    it('returns the score of the highest scoring word played', function() {
-      let player = new Scrabble.Player('test player');
-      player.play('cat');
-      player.play('zzzz');
-      expect(player.highestWordScore()).toBe(40);
-    });
-
-    it('throws an error if no words have been played', function() {
-      let player = new Scrabble.Player('test player');
-      expect(() => { player.highestWordScore() }).toThrow();
-    });
-  });
+//   describe ('totalScore', function() {
+//     it ('Is zero if the player has not played anything', function() {
+//       let player = new Scrabble.Player('test player');
+//       expect(player.totalScore()).toBe(0);
+//     });
+//
+//     it ('Is updated by play', function() {
+//       let player = new Scrabble.Player('test player');
+//       expect(player.totalScore()).toBe(0);
+//       player.play('dog');
+//       expect(player.totalScore()).toBe(5);
+//       player.play('cat');
+//       expect(player.totalScore()).toBe(10);
+//       player.play('goat');
+//       expect(player.totalScore()).toBe(15);
+//     });
+//   });
+//
+//   describe('hasWon', function() {
+//     it('returns false when score < 100', function() {
+//       let player = new Scrabble.Player('test player');
+//       expect(player.totalScore()).toBe(0);
+//       expect(player.hasWon()).toBe(false);
+//
+//       player.play('zzzzz'); // Score += 50
+//       expect(player.totalScore()).toBe(50);
+//       expect(player.hasWon()).toBe(false);
+//
+//       player.play('zzzzji'); // Score += 49
+//       expect(player.totalScore()).toBe(99);
+//       expect(player.hasWon()).toBe(false);
+//     });
+//
+//     it('returns true when score == 100', function() {
+//       let player = new Scrabble.Player('test player');
+//       player.play('zzzzbbf'); // Score += 100
+//       expect(player.totalScore()).toBe(100);
+//       expect(player.hasWon()).toBe(true);
+//     });
+//
+//     it('returns true when score > 100', function() {
+//       let player = new Scrabble.Player('test player');
+//       player.play('zzzzzzz'); // Score += 120
+//       expect(player.totalScore()).toBe(120);
+//       expect(player.hasWon()).toBe(true);
+//     });
+//   });
+//
+//   describe('highestScoringWord', function() {
+//     // Tie-breaking logic is already described in the tests
+//     // for highestWordFrom, so we will not repeat it here.
+//     it('returns the highest scoring word played', function() {
+//       let player = new Scrabble.Player('test player');
+//       player.play('cat');
+//       player.play('zzzz');
+//       expect(player.highestScoringWord()).toBe('zzzz');
+//     });
+//
+//     it('throws an error if no words have been played', function() {
+//       let player = new Scrabble.Player('test player');
+//       expect(() => { player.highestScoringWord() }).toThrow();
+//     });
+//   });
+//
+//   describe('highestWordScore', function() {
+//     it('returns the score of the highest scoring word played', function() {
+//       let player = new Scrabble.Player('test player');
+//       player.play('cat');
+//       player.play('zzzz');
+//       expect(player.highestWordScore()).toBe(40);
+//     });
+//
+//     it('throws an error if no words have been played', function() {
+//       let player = new Scrabble.Player('test player');
+//       expect(() => { player.highestWordScore() }).toThrow();
+//     });
+//   });
 });
