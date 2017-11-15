@@ -1,6 +1,6 @@
-function UserException(message) {
-   this.message = message;
-   this.name = 'UserException';
+function GameException(message) {
+  this.message = message;
+  this.name = 'GameException';
 }
 
 const LetterValues = {
@@ -36,11 +36,11 @@ const LetterValues = {
 const Scrabble = {
   score(word) {
     if (word.length > 7) {
-      throw new UserException('Cannot play words longer than 7 letters.');
+      throw new GameException('Cannot play words longer than 7 letters.');
     } else if (word.length === 0) {
-      throw new UserException('Please play a word.');
+      throw new GameException('Please play a word.');
     } else if ((/[^a-zA-Z]+/).test(word)) {
-      throw new UserException('Cannot play non-alphabetical characters.');
+      throw new GameException('Cannot play non-alphabetical characters.');
     }
 
     let total = 0;
@@ -52,8 +52,22 @@ const Scrabble = {
     }
     return total;
   },
-
-  // TODO: add the highestScoreFrom method
+  highestScoreFrom(arrayOfWords) {
+    if (arrayOfWords.length === 0) {
+      throw new GameException('There are no words to compare.');
+    }
+    let highest = arrayOfWords[0];
+    for (let i = 1; i < arrayOfWords.length; i += 1) {
+      if (this.score(highest) < this.score(arrayOfWords[i])) {
+        highest = arrayOfWords[i];
+      } else if (this.score(highest) === this.score(arrayOfWords[i]) && highest.length !== 7) {
+        if (arrayOfWords[i].length < highest.length || (arrayOfWords[i].length === 7)) {
+          highest = arrayOfWords[i];
+        }
+      }
+    }
+    return highest;
+  },
 
 };
 
