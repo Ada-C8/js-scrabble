@@ -9,6 +9,12 @@ const UserException = function UserException(message) {
   this.name = 'UserException';
 };
 
+const checkValidity = function checkValidity(char) {
+  if (!(char in LETTER_VALUES)) {
+    throw new UserException(`${char} is an invalid character`);
+  }
+};
+
 const Scrabble = {
   score: function(word) {
     if (word.length > 7 || word.length < 1) {
@@ -16,12 +22,9 @@ const Scrabble = {
     }
 
     let score = 0;
-    // const checkWordValidity = function() { }
     let letter = word.toLowerCase().split("");
     letter.forEach(function(char) {
-      if (!(char in LETTER_VALUES)) {
-        throw new UserException(`${char} is an invalid character`);
-      }
+      checkValidity(char);
       score += LETTER_VALUES[char];
     });
     if (word.length == 7) {
@@ -82,9 +85,7 @@ Scrabble.Player = class {
     }
     let wordLetters = word.split("");
     wordLetters.forEach(function(char) {
-      if (!(char in LETTER_VALUES)) {
-        throw new UserException(`Come on, play a word!`);
-      }
+      checkValidity(char);
     });
     this.plays.push(word);
     this.playingScore += Scrabble.score(word);
