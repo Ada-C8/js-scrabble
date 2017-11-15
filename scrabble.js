@@ -45,11 +45,13 @@ const Scrabble = {
     if(words.length === 1) {
       return words[0];
     } else if(words.length >= 2) {
-      let max = Scrabble.score(words[0]);
+      let max = words[0];
+
+      let maxarray = [];
 
       words.forEach(function (word) {
-        if (Scrabble.score(word) > max){
-          max = Scrabble.score(word);
+        if (Scrabble.score(word) > Scrabble.score(max)) {
+          max = word;
         } //if
       }); //forEach
       return max
