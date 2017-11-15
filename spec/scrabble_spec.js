@@ -50,15 +50,15 @@ describe('highestScoreFrom', function() {
     expect(Scrabble.highestScoreFrom(['dog'])).toBe('dog');
   });
 
-//   it ('returns the highest word if there are two words', function() {
-//     // Check score assumptions
-//     expect(Scrabble.score('dog')).toBe(5);
-//     expect(Scrabble.score('pig')).toBe(6);
-//
-//     // Test the functionality
-//     expect(Scrabble.highestScoreFrom(['dog', 'pig'])).toBe('pig');
-//     expect(Scrabble.highestScoreFrom(['pig', 'dog'])).toBe('pig');
-//   });
+  it ('returns the highest word if there are two words', function() {
+    // Check score assumptions
+    expect(Scrabble.score('dog')).toBe(5);
+    expect(Scrabble.score('pig')).toBe(6);
+
+    // Test the functionality
+    expect(Scrabble.highestScoreFrom(['dog', 'pig'])).toBe('pig');
+    expect(Scrabble.highestScoreFrom(['pig', 'dog'])).toBe('pig');
+  });
 //
 //   it ('if tied, prefer a word with 7 letters', function() {
 //     const loser = 'zzzzzz';

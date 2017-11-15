@@ -55,11 +55,20 @@ const Scrabble = {
     if ((wordsArray.length === 0) || (Array.isArray(wordsArray) === false)) {
       throw new ErrorMsg(wordsArray);
     }
+
+    let highestWord = wordsArray[0];
+    const highestScore = this.score(highestWord);
+    for (let i = 0; i < wordsArray.length; i += 1) {
+      const scoredWord = wordsArray[i];
+      const getScore = this.score(scoredWord);
+
+      if (getScore > highestScore) {
+        highestWord = scoredWord;
+      }
+    }
+    return highestWord;
   },
 }; // end of object Scrabble
-
-// TODO: add the highestScoreFrom method
-
 
 Scrabble.Player = class {
   // TODO: implement the Player class
