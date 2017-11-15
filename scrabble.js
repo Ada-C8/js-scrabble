@@ -69,7 +69,7 @@ const Scrabble = {
       return wordsWithSevenLetters[0];
     }// none of the words have 7 letters
     // sort maintains the order of the string if the first word was the shortest for example
-    wordsWithHighestScore = wordsWithHighestScore.sort((a, b) {
+    wordsWithHighestScore = wordsWithHighestScore.sort(function(a, b) {
       return a.length - b.length;
     });
     return wordsWithHighestScore[0];
