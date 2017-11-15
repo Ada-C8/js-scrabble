@@ -1,29 +1,53 @@
 const Scrabble = {
   score(word) {
     const CHART = {
-      A: 1, E: 1, I: 1, O: 1, U: 1, L: 1, N: 1, R: 1, S: 1, T: 1, D: 2, G: 2, B: 3, C: 3, M: 3,
-      P: 3, F: 4, H: 4, V: 4, W: 4, Y: 4, K: 5, J: 8, X: 8, Q: 10, Z: 10
-    }
+      A: 1,
+      E: 1,
+      I: 1,
+      O: 1,
+      U: 1,
+      L: 1,
+      N: 1,
+      R: 1,
+      S: 1,
+      T: 1,
+      D: 2,
+      G: 2,
+      B: 3,
+      C: 3,
+      M: 3,
+      P: 3,
+      F: 4,
+      H: 4,
+      V: 4,
+      W: 4,
+      Y: 4,
+      K: 5,
+      J: 8,
+      X: 8,
+      Q: 10,
+      Z: 10,
+    };
     let score = 0;
     if (word.length > 7) {
-      throw 'Too long!';
+      throw new Error('Too long!');
     } else if (word.length === 7) {
       score = 50;
     } else if (word.length === 0) {
-      throw 'Too short!';
+      throw new Error('Too short!');
     } else if (!word.match(/^[a-zA-Z]+$/)) {
-      throw 'Bad character';
+      throw new Error('Bad character');
     }
 
     for (let letter = 0; letter < word.length; letter += 1) {
-      let checkLetter = word.charAt(letter).toUpperCase();
+      const checkLetter = word.charAt(letter).toUpperCase();
       score += CHART[checkLetter];
     }
     return score;
   },
   highestScoreFrom(arrayOfWords) {
     if (arrayOfWords.length === 0) {
-      throw 'no words';
+      throw new Error('no words');
     }
     let maxWord = ["",0];
     arrayOfWords.forEach( function (word) {
@@ -46,7 +70,7 @@ const Scrabble = {
 Scrabble.Player = class {
   constructor(name) {
     if (name === undefined) {
-      throw 'No Name';
+      throw new Error('No name');
     } else {
       this.name = name;
     }
@@ -54,7 +78,7 @@ Scrabble.Player = class {
   }
   play(word) {
     if (word === undefined || (typeof word !== 'string')) {
-      throw 'no word';
+      throw new Error('No word');
     } else if (this.hasWon()) {
       return false;
     } else {
