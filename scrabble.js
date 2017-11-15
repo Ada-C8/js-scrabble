@@ -28,6 +28,7 @@ const Scrabble = {
     Q: 10,
     Z: 10
   },
+
   score: function(word) {
     // TODO: implement score
 
@@ -55,8 +56,6 @@ const Scrabble = {
 
       // console.log(`this is the word = ${word}`);
 
-
-
       // console.log(`this is the keys ${keysArray.includes(letter)}`);
       if (keysArray.includes(letter)) {
         // console.log(localScoring[letter]);
@@ -69,12 +68,22 @@ const Scrabble = {
     }
 
     return total
-  } // end score fnx
+  }, // end score fnx
 
   // TODO: add the highestScoreFrom method
 
+  highestScoreFrom: function(wordArray) {
+
+    console.log();
+    if (wordArray.length === 0 || Array.isArray(wordArray) === false) {
+      throw new Error('no words to score')
+    } //end error
+
+    return wordArray[0]
+  } // end highestScoreFrom
+
 }; // end Scrabble
-Scrabble.score('aaa');
+Scrabble.highestScoreFrom(["aaa"]);
 Scrabble.Player = class {
   // TODO: implement the Player class
 };
