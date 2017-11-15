@@ -148,23 +148,23 @@ describe('Player', function() {
     });
   });
 
-//   describe ('totalScore', function() {
-//     it ('Is zero if the player has not played anything', function() {
-//       let player = new Scrabble.Player('test player');
-//       expect(player.totalScore()).toBe(0);
-//     });
-//
-//     it ('Is updated by play', function() {
-//       let player = new Scrabble.Player('test player');
-//       expect(player.totalScore()).toBe(0);
-//       player.play('dog');
-//       expect(player.totalScore()).toBe(5);
-//       player.play('cat');
-//       expect(player.totalScore()).toBe(10);
-//       player.play('goat');
-//       expect(player.totalScore()).toBe(15);
-//     });
-//   });
+  describe ('totalScore', function() {
+    it ('Is zero if the player has not played anything', function() {
+      let player = new Scrabble.Player('test player');
+      expect(player.totalScore()).toBe(0);
+    });
+
+    it ('Is updated by play', function() {
+      let player = new Scrabble.Player('test player');
+      expect(player.totalScore()).toBe(0);
+      player.play('dog');
+      expect(player.totalScore()).toBe(5);
+      player.play('cat');
+      expect(player.totalScore()).toBe(10);
+      player.play('goat');
+      expect(player.totalScore()).toBe(15);
+    });
+  });
 //
 //   describe('hasWon', function() {
 //     it('returns false when score < 100', function() {
