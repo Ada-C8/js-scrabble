@@ -50,7 +50,7 @@ const Scrabble = {
         max = Scrabble.score(wrd);
         highestScoreWord = wrd;
       } else if (( Scrabble.score(wrd) === max ) && (wrd.length < highestScoreWord.length)) {
-        highestScoreWord = word;
+        highestScoreWord = wrd;
       }
     });
     return highestScoreWord;
