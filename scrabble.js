@@ -28,8 +28,8 @@ const letterScores = {
 };
 
 const ErrorMsg = function ErrorMsg(value) {
-  this.word = value;
-  this.message = 'not a valid word played';
+  this.value = value;
+  this.message = 'is not valid';
   this.toString = function () {
     return this.value + this.message;
   };
@@ -53,8 +53,10 @@ const Scrabble = {
     return wordScore;
   },
 
-  highestScoreFrom(array) {
-
+  highestScoreFrom(wordArray) {
+    if ((wordArray.length === 0) || (wordArray.isArray() === false)) {
+      throw new ErrorMsg(wordArray);
+    }
   },
 }; // end of object Scrabble
 

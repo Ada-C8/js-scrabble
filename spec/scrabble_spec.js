@@ -41,11 +41,11 @@ describe('highestScoreFrom', function() {
     expect(Scrabble.highestScoreFrom).toBeDefined();
   });
 
-//   it ('throws if no words were passed', function() {
-//     expect(function() { Scrabble.highestScoreFrom([]); }).toThrow();
-//     expect(function() { Scrabble.highestScoreFrom('not array'); }).toThrow();
-//   });
-//
+  it ('throws if no words were passed', function() {
+    expect(function() { Scrabble.highestScoreFrom([]); }).toThrow();
+    expect(function() { Scrabble.highestScoreFrom('not array'); }).toThrow();
+  });
+
 //   it ('returns the only word in a length-1 array', function() {
 //     expect(Scrabble.highestScoreFrom(['dog'])).toBe('dog');
 //   });
