@@ -97,12 +97,12 @@ describe('highestScoreFrom', function() {
   });
 });
 
-describe('Player', function() {
+xdescribe('Player', function() {
   it ('is defined', function() {
     expect(Scrabble.Player).toBeDefined();
   });
 
-  describe('Constructor', function() {
+  xdescribe('Constructor', function() {
     it('Creates a new player', function() {
       let name = 'test name';
       let player = new Scrabble.Player(name);
@@ -114,7 +114,7 @@ describe('Player', function() {
     });
   });
 
-  describe ('play', function() {
+  xdescribe ('play', function() {
     it ('Records the played word', function() {
       let word = 'dog';
       let player = new Scrabble.Player('test player');
