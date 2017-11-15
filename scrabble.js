@@ -35,6 +35,9 @@ const Scrabble = {
       let result = letterScores[letter];
       wordScore += result;
     });
+    if (word.length === 7) {
+      return (wordScore + 50);
+    }
     return wordScore;
   },
 };

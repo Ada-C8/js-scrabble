@@ -10,10 +10,10 @@ describe('score', function() {
     expect(Scrabble.score('cat')).toBe(5);
     expect(Scrabble.score('pig')).toBe(6);
   });
-//
-//   it ('adds 50 points for a 7-letter word', function() {
-//     expect(Scrabble.score('academy')).toBe(65);
-//   });
+
+  it ('adds 50 points for a 7-letter word', function() {
+    expect(Scrabble.score('academy')).toBe(65);
+  });
 //
 //   it ('throws on bad characters', function() {
 //     expect(function () {
