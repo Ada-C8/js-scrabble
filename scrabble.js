@@ -1,18 +1,3 @@
-const Scrabble = {
-  score: function(word) {
-
-    let regex = /^[a-zA-Z]+$/;
-
-    if (!regex.test(word)) {
-      throw new Error('Bad characters');
-    }
-
-    if (word.length > 7) {
-      throw new Error('Word has to be between 1 and 7 characters long');
-    }
-
-    let lowercaseWord = word.toLowerCase();
-    let score = 0;
 
     const scrabbleLetters = {
       a: 1,
@@ -42,6 +27,23 @@ const Scrabble = {
       y: 4,
       z: 10,
     };
+
+const Scrabble = {
+  score: function(word) {
+
+    let regex = /^[a-zA-Z]+$/;
+
+    if (!regex.test(word)) {
+      throw new Error('Bad characters');
+    }
+
+    if (word.length > 7) {
+      throw new Error('Word has to be between 1 and 7 characters long');
+    }
+
+    let lowercaseWord = word.toLowerCase();
+    let score = 0;
+
 
     for (let i = 0; i < lowercaseWord.length; i++) {
       score += scrabbleLetters[lowercaseWord[i]];
@@ -134,6 +136,7 @@ const Scrabble = {
 
       return total;
     }
+
     // // method which returns true if the player has over 100 points, otherwise returns false
     hasWon() {
 
@@ -142,27 +145,30 @@ const Scrabble = {
       } else {
         return false;
       }
-
     }
+
     // method which returns the highest scoring word the user has played
     highestScoringWord() {
+      let example = Scrabble.highestScoreFrom(this.plays);
+      return example;
     }
+
     // method which returns the highestScoringWord score
     highestWordScore() {
+      let highestWord = this.highestScoringWord();
+      return Scrabble.score(highestWord);
     }
   };
 
-  let player = new Scrabble.Player('test player');
-  player.play('dog');
-  player.play('kid');
-  player.play('zzzzz');
+  // let player = new Scrabble.Player('test player');
+  // player.play('dog');
+  // player.play('kid');
+  // player.play('zzzzz');
+  //
+  // player.play('cat');
+  // player.play('zzzz');
+  // console.log(player.highestScoringWord());
+  // console.log(player.highestWordScore());
 
-
-  console.log('this.playArray == ' + player.playArray);
-  console.log('this.plays' + player.plays);
-
-  console.log('player total score is ' + player.totalScore());
-  // console.log('player.plays.length' + player.plays.length);
-  // // console.log(player.plays());
 
   module.exports = Scrabble;
