@@ -27,20 +27,32 @@ const letterScores = {
   z: 10,
 };
 
-const Scrabble = {
+const ErrorMsg = function ErrorMsg(value) {
+  this.word = value;
+  this.message = 'not a valid word played';
+  this.toString = function () {
+    return this.value + this.message;
+  };
+};
 
+const Scrabble = {
   score(word) {
+    if (/^[a-zA-Z]+$/.test(word) === false) {
+      throw new ErrorMsg(word);
+    }
+
     let wordScore = 0;
     word.toLowerCase().split('').forEach(function(letter) {
       let result = letterScores[letter];
       wordScore += result;
     });
+
     if (word.length === 7) {
       return (wordScore + 50);
     }
     return wordScore;
   },
-};
+}; // end of object Scrabble
 
 // TODO: add the highestScoreFrom method
 
