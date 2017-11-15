@@ -227,3 +227,56 @@ describe('Player', function() {
     });
   });
 });
+describe('TileBag', function() {
+  it ('is defined', function() {
+    expect(Scrabble.TileBag).toBeDefined();
+  });
+
+  describe('Constructor', function() {
+    it('Creates a new tilebag', function() {
+      let tilebag = new Scrabble.TileBag();
+      expect(tilebag.TILES.length).toBe(98);
+    });
+  });
+
+  describe ('drawTiles', function() {
+    it ('returns an array of tiles', function() {
+      let tilebag = new Scrabble.TileBag();
+      expect(tilebag.drawTiles()).toBeDefined();
+      expect(tilebag.drawTiles(10).length).toBe(10);
+      expect(tilebag.TILES.length).toBe(98-10);
+    });
+    it ('wont draw more than tilebag tiles', function() {
+      let tilebag = new Scrabble.TileBag();
+      expect(tilebag.drawTiles(96).length).toBe(96);
+      expect(tilebag.drawTiles(96).length).toBe(2);
+      expect(tilebag.TILES.length).toBe(0);
+    });
+  });
+});
+describe('Dictionary', function() {
+  it ('is defined', function() {
+    expect(Scrabble.Dictionary).toBeDefined();
+  });
+
+  describe('Constructor', function() {
+    it('Creates a new Dictionary', function() {
+      let dic = new Scrabble.Dictionary();
+      expect(Array.isArray(dic.dictionary)).toBe(true);
+      expect(dic.dictionary.length).toBeGreaterThan(10);
+    });
+  });
+
+  describe ('findInDictionary', function() {
+    it ('returns true if in dictionary', function() {
+      let dic = new Scrabble.Dictionary();
+      expect(dic.findInDictionary()).toBeDefined();
+      expect(dic.findInDictionary('coffee')).toBeTruthy();
+    });
+    it ('wont draw more than tilebag tiles', function() {
+      let dic = new Scrabble.Dictionary();
+      expect(dic.findInDictionary()).toBeDefined();
+      expect(dic.findInDictionary('coffee')).toBeTruthy();
+    });
+  });
+});

@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const Scrabble = {
   score(word) {
     const CHART = {
@@ -110,6 +112,7 @@ Scrabble.TileBag = class {
       Q: 1,
       X: 1,
       Z: 1,
+      C: 2,
       B: 2,
       F: 2,
       H: 2,
@@ -132,9 +135,9 @@ Scrabble.TileBag = class {
       E: 12,
     };
     this.TILES = [];
-    tilesToFill.forEach((letter) => {
-      for (let i = 0; i < tilesToFill[letter]; i += 1) {
-        this.TILES.push(letter);
+    Object.entries(tilesToFill).forEach((letter) => {
+      for (let i = 0; i < letter[1]; i += 1) {
+        this.TILES.push(letter[0]);
       }
     });
   }
@@ -145,9 +148,26 @@ Scrabble.TileBag = class {
       toFill = this.TILES.length;
     }
     for (let i = 0; i < toFill; i += 1) {
-      tiles.push(this.TILES[Math.floor(Math.random() * this.TILES.length)]);
+      const tile = this.TILES[Math.floor(Math.random() * this.TILES.length)];
+      tiles.push(tile);
+
+      const index = this.TILES.indexOf(tile);
+      this.TILES.splice(index, 1);
     }
     return tiles;
+  }
+};
+
+Scrabble.Dictionary = class {
+  constructor() {
+    this.dictionary = [];
+    const text = fs.readFileSync('/usr/share/dict/words', 'utf-8').split('\n');
+    text.forEach((word) => {
+      this.dictionary.push(word);
+    });
+  }
+  findInDictionary(word) {
+    return this.dictionary.includes(word);
   }
 };
 
