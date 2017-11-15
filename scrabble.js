@@ -16,16 +16,16 @@
 
 const Scrabble = {
 
-  score: function(word) {
+  score(word) {
     let score = 0;
 
     if (/^[a-zA-Z]+$/.test(word)) {
     } else {
-      throw 'invalid word';
+      throw new Error ('invalid word');
     }
 
     if (word.length > 7 || word.length === 0) {
-      throw 'invalid word';
+      throw new Error ('invalid word');
     }
 
     if (word.length === 7) {
@@ -35,9 +35,9 @@ const Scrabble = {
     }
 
     const upperCase = word.toUpperCase();
-    let letterArray = upperCase.split('');
+    const letterArray = upperCase.split('');
 
-    letterArray.forEach(function (letter){
+    letterArray.forEach((letter) => {
 
       switch (letter) {
         case 'A':
@@ -88,17 +88,15 @@ const Scrabble = {
           break;
 
         default:
-          throw 'invalid letter';
+          throw new Error ('invalid letter');
       }
     });
     return score;
+  },
+
+
+  highestScoreFrom(wordsArray) {
   }
-
-
-  highestScoreFrom: function(words_array) {
-
-  };
-
 
 
 };
@@ -108,8 +106,5 @@ Scrabble.Player = class {
 };
 
 module.exports = Scrabble;
-
-
-
 
 // console.log(Scrabble.score('apple'));
