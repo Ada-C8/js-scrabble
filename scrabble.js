@@ -80,10 +80,6 @@ Scrabble.Player = class {
     }
   }
 
-  // get name () {
-  //   return this._name;
-  // }
-
   totalScore() {
     let totalScore = 0;
       for (let word of this.plays) {
@@ -111,10 +107,14 @@ Scrabble.Player = class {
     }
   }
 
-  highestScoringWord(words) {
+  highestScoringWord() {
     return Scrabble.highestScoreFrom(this.plays);
   }
 
+  highestWordScore() {
+    const winningWord = this.highestScoringWord();
+    return Scrabble.score(winningWord);
+  }
 };
 
 module.exports = Scrabble;
@@ -129,3 +129,4 @@ console.log(sally.plays[0]);
 console.log(sally.plays.length);
 sally.play('zzzz');
 console.log(sally.highestScoringWord());
+console.log(sally.highestWordScore());
