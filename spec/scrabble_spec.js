@@ -214,14 +214,14 @@ describe('Player', function() {
   });
 
   describe('highestWordScore', function() {
-    xit('returns the score of the highest scoring word played', function() {
+    it('returns the score of the highest scoring word played', function() {
       let player = new Scrabble.Player('test player');
       player.play('cat');
       player.play('zzzz');
       expect(player.highestWordScore()).toBe(40);
     });
 
-    xit('throws an error if no words have been played', function() {
+    it('throws an error if no words have been played', function() {
       let player = new Scrabble.Player('test player');
       expect(() => { player.highestWordScore() }).toThrow();
     });
