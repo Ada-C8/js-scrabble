@@ -52,8 +52,8 @@ const Scrabble = {
 
       let highestScoringWord = "";
 
-      console.log('The high score is ')
-      console.log('highScore');
+      console.log(`The high score is ${highScore}`);
+
 
       words.forEach(function (word) {
         let wordScore = Scrabble.score(word);
@@ -90,8 +90,9 @@ const Scrabble = {
       if (highestScoringWords.length === 1) {
         highestScoringWord = highestScoringWords[0];
       } //end check for just one winning word
-      //this esle will rune if there's more than one word
+      //this esle will rune if there's more than one word ["dog", "cat"]
       else {
+        highestScoringWord = highestScoringWords[0];
         highestScoringWords.forEach(function (word) {
 
           if (word.length === 7) {
@@ -104,6 +105,7 @@ const Scrabble = {
 
           else {
             console.log("im in the else for when there aren't seven letter words")
+            console.log(`highest scoring word is ${highestScoringWord}`);
             console.log(`minLength is ${minLength}`);
             if(word.length < minLength) {
               minLength = word.length;
@@ -112,6 +114,7 @@ const Scrabble = {
               console.log(`highest scoring word is now: ${highestScoringWord}` );
               console.log(`minimum length is now ${minLength}` );
             } //else if for finding minimum
+
           }// end else -- words that aren't seven letters
         }); //end highest scoring word function
 
@@ -131,19 +134,19 @@ Scrabble.Player = class {
 };
 
 module.exports = Scrabble;
-const loser = 'zzzzzz';
-const winner = 'iiiiddd';
-
-// console.log("Comparing dog and pig");
-// console.log(Scrabble.highestScoreFrom(['dog', 'pig']));
-// console.log("*********************");
-// console.log("starting iwth pig")
-// console.log(Scrabble.highestScoreFrom(['pig', 'dog']));
-// console.log(Scrabble.highestScoreFrom([loser, winner]));
-// console.log("Comparing winner and loser");
-// console.log(Scrabble.highestScoreFrom([winner, loser]));
-console.log("schekcing i, dog, cat");
-console.log(Scrabble.highestScoreFrom(['i', 'dog', 'cat']));
+// const loser = 'zzzzzz';
+// const winner = 'iiiiddd';
+//
+// // console.log("Comparing dog and pig");
+// // console.log(Scrabble.highestScoreFrom(['dog', 'pig']));
+// // console.log("*********************");
+// // console.log("starting iwth pig")
+// // console.log(Scrabble.highestScoreFrom(['pig', 'dog']));
+// // console.log(Scrabble.highestScoreFrom([loser, winner]));
+// // console.log("Comparing winner and loser");
+// // console.log(Scrabble.highestScoreFrom([winner, loser]));
+// console.log("schekcing i, dog, cat");
+// console.log(Scrabble.highestScoreFrom(['i', 'dog', 'cd', 'cat']));
 
 
 
