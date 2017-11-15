@@ -88,7 +88,7 @@ Scrabble.Player = class {
 
   play(word) {
     if (word === undefined || word.length === 0){
-      throw new Error('Must pass in a valid word to play');
+      throw new Error('Must pass in a valid word to play.');
     }
     if (this.hasWon() || Scrabble.score(word) === undefined) {
       return false
@@ -110,6 +110,13 @@ Scrabble.Player = class {
       sum += Scrabble.score(word);
     });
     return sum;
+  }
+
+  highestScoringWord() {
+    if (this.plays.length === 0) {
+      throw new Error('There are no plays from this player yet.')
+    }
+    return Scrabble.highestScoreFrom(this.plays);
   }
 
 };

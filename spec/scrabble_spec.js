@@ -198,17 +198,17 @@ describe('Player', function() {
     });
   });
 
-  xdescribe('highestScoringWord', function() {
+  describe('highestScoringWord', function() {
     // Tie-breaking logic is already described in the tests
     // for highestWordFrom, so we will not repeat xit here.
-    xit ('returns the highest scoring word played', function() {
+    it ('returns the highest scoring word played', function() {
       let player = new Scrabble.Player('test player');
       player.play('cat');
       player.play('zzzz');
       expect(player.highestScoringWord()).toBe('zzzz');
     });
 
-    xit ('throws an error if no words have been played', function() {
+    it ('throws an error if no words have been played', function() {
       let player = new Scrabble.Player('test player');
       expect(() => { player.highestScoringWord() }).toThrow();
     });
