@@ -75,8 +75,6 @@ const Scrabble = {
   // TODO: add the highestScoreFrom method
 
   highestScoreFrom: function(wordArray) {
-
-    console.log();
     if (wordArray.length === 0 || Array.isArray(wordArray) === false) {
       throw new Error('no words to score')
     } //end error
@@ -87,24 +85,28 @@ const Scrabble = {
     if (wordArray.length > 1) {
       // iterate over the array and score each word.
       for (word of wordArray) {
-        if (this.score(word) > this.score(winner)) {
-          winner = word
-          console.log(winner);
-        }
-        console.log('score from word');
-        console.log(Scrabble.score(word));
-      }
-    }
-    console.log(winner);
-    // console.log(wordArray.forEach(function(word)));
-    // let highestScoreFrom = this.score(wordArray)
-    // console.log(highestScoreFrom);
+        let wordScore = this.score(word)
+        let winnerScore = this.score(winner)
+        // highest word if there are two words
+        if (wordScore > winnerScore) {
+          winner = word;
 
+        // if, tie take the word with 7 letters.
+        // if the words in the array have the same score, compare the lengths. the one with 7 letters wins.
+        } else if (wordScore === winnerScore && winner.length < 7 && word.length === 7) {
+          // winner.lenth is the first word in the array so
+          winner = word;
+
+        } else if (wordScore === winnerScore && winner.length < 7 && word.length < winner.length) {
+          winner = word;
+        }
+      }
+    } // end (wordArray.length > 1
     return winner
   } // end highestScoreFrom
 
 }; // end Scrabble
-Scrabble.highestScoreFrom(['aaa', 'zzz', 'zzzzz']);
+
 Scrabble.Player = class {
   // TODO: implement the Player class
 };
