@@ -9,12 +9,14 @@ const Scrabble = {
 
     let score = 0;
 
+    // if (word.length < 1) {
+    //   throw('Cannot score - no word entered');
+    // }
+
     if (word.length >= 1) {
       if ((/^[a-zA-Z]+$/.test(word)) == false) {
         throw('Word must contain only letters A-Z');
       }
-    } else {
-      throw('Cannot score - no word entered');
     }
 
     let letters = word.toUpperCase().split('');
@@ -35,7 +37,9 @@ const Scrabble = {
     // }
   })
 
-
+  // if (score === 0) {
+  //   throw('Cannot score - no word entered');
+  // }
   return score;
 },
 
@@ -44,12 +48,25 @@ const Scrabble = {
     if (arrayOfWords.length < 1) {
       throw('No words have been played yet');
     } else {
-    arrayOfWords.forEach(function(word) {
-      if (Scrabble.score(highestScoreWord) === 0 || Scrabble.score(word) > Scrabble.score(highestScoreWord)) {
-        highestScoreWord = word;
+      arrayOfWords.forEach(function(word) {
+        if (highestScoreWord === '' || Scrabble.score(word) > Scrabble.score(highestScoreWord)) {
+          highestScoreWord = word;
+        }
+        else if (Scrabble.score(word) === Scrabble.score(highestScoreWord)) {
+          if (word.length === 7 && word.length > highestScoreWord.length) {
+            highestScoreWord = word;
+          }
+        }
       }
-    });
-    }
+    )}
+    // This works but missing if a word is 7 letters long which one to choose
+    // arrayOfWords.forEach(function(word) {
+    //   if (highestScoreWord === '' || Scrabble.score(word) > Scrabble.score(highestScoreWord)) {
+    //     if highestScoreWord ===
+    //     highestScoreWord = word;
+    //   }
+    // });
+    // }
     return highestScoreWord;
   }
 };
@@ -124,6 +141,10 @@ let oneArray = ['doggie'];
 
 let emptyArrayScore
 
+let emptyWord = ''
+
 console.log(`HighestScoreFrom Empty array: ${Scrabble.highestScoreFrom(emptyArray)}`);
 console.log(`HighestScoreFrom Empty array: ${Scrabble.highestScoreFrom(emptyArray).length}`);
 console.log(`HighestScoreFrom One array: ${Scrabble.highestScoreFrom(oneArray)}`);
+
+console.log(`Empty Word Score: ${Scrabble.score(emptyWord)}`)
