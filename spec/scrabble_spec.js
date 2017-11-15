@@ -97,12 +97,12 @@ describe('highestScoreFrom', function() {
   });
 });
 
-xdescribe('Player', function() {
+describe('Player', function() {
   it ('is defined', function() {
     expect(Scrabble.Player).toBeDefined();
   });
 
-  xdescribe('Constructor', function() {
+  describe('Constructor', function() {
     it('Creates a new player', function() {
       let name = 'test name';
       let player = new Scrabble.Player(name);
@@ -114,7 +114,7 @@ xdescribe('Player', function() {
     });
   });
 
-  xdescribe ('play', function() {
+  describe ('play', function() {
     it ('Records the played word', function() {
       let word = 'dog';
       let player = new Scrabble.Player('test player');
@@ -196,7 +196,7 @@ xdescribe('Player', function() {
     });
   });
 
-  describe('highestScoringWord', function() {
+  xdescribe('highestScoringWord', function() {
     // Tie-breaking logic is already described in the tests
     // for highestWordFrom, so we will not repeat it here.
     it('returns the highest scoring word played', function() {
@@ -212,7 +212,7 @@ xdescribe('Player', function() {
     });
   });
 
-  describe('highestWordScore', function() {
+  xdescribe('highestWordScore', function() {
     it('returns the score of the highest scoring word played', function() {
       let player = new Scrabble.Player('test player');
       player.play('cat');

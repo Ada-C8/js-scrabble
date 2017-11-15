@@ -71,10 +71,55 @@ const Scrabble = {
 };
 
 Scrabble.Player = class {
-  // TODO: implement the Player class
+  constructor(name) {
+    if (typeof name === 'string' && name.length > 0) {
+      this.name = name;
+      this.plays = [];
+    }
+    else {
+      throw { name: 'InvalidInputError', message: 'must enter a name' };
+    }
+  }
+
+  // get name () {
+  //   return this._name;
+  // }
+
+  totalScore() {
+    let totalScore = 0;
+      for (let word of this.plays) {
+      totalScore += Scrabble.score(word);
+      }
+    return totalScore;
+  }
+
+  hasWon() {
+    if (this.totalScore() < 100) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  play(word) {
+    if (this.hasWon() === true) {
+      return false;
+    }
+    if (typeof word === 'string' && word.length > 0) {
+      return this.plays.push(word);
+    } else {
+      throw { name: 'InvalidInputError', message: 'must enter a word' };
+    }
+  }
 };
 
 module.exports = Scrabble;
 
-console.log(`pig score is ${Scrabble.score('pig')}`);
-console.log(`dog score is ${Scrabble.score('dog')}`);
+// let sally = new Scrabble.Player('Sally');
+// console.log(sally.name);
+// console.log(sally.plays);
+//
+// sally.play('dog');
+// console.log(sally.plays);
+// console.log(sally.plays[0]);
+// console.log(sally.plays.length);
