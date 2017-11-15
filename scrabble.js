@@ -48,7 +48,7 @@ const Scrabble = {
     },
     highestScoreFrom: function(arrayOfWords) {
       if (arrayOfWords.length === 0 || arrayOfWords === ""){
-        throw 'The input is not what I expected.'
+        throw 'The input is not what I expected.';
       } else if (arrayOfWords.length === 1){
         return arrayOfWords[0];
       }
@@ -68,7 +68,35 @@ const Scrabble = {
   };
 
   Scrabble.Player = class {
-    // TODO: implement the Player class
+    constructor(name) {
+      this.name = name;
+      this.plays = [];
+      if (this.name === null || this.name === '' || this.name === undefined){
+        throw 'A Scrabble player needs a name';
+      }
+    }
+
+    totalScore(){
+      let totalScore = 0;
+      for(let word in this.plays){
+        totalScore += Scrabble.score(word);
+      }
+      return totalScore;
+    }
+
+    hasWon(){
+      
+    }
+
+    play(word){
+      let matcher = /[A-Za-z]+/;
+      let matches = word.match(matcher);
+      if (word === undefined || matches[0].length != word.length){
+        throw 'You have to give a REAL word.';
+      }
+      this.plays.push(word);
+      return word
+    }
   };
 
   module.exports = Scrabble;
