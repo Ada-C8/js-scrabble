@@ -26,10 +26,10 @@ describe('score', function() {
     expect(Scrabble.score('DOG')).toBe(5);
     expect(Scrabble.score('DoG')).toBe(5);
   });
-//
-//   it ('does not allow words > 7 letters', function() {
-//     expect(function() { Scrabble.score('abcdefgh'); }).toThrow();
-//   });
+
+  it ('does not allow words > 7 letters', function() {
+    expect(function() { Scrabble.score('abcdefgh'); }).toThrow();
+  });
 //
 //   it ('does not allow empty words', function() {
 //     expect(function() { Scrabble.score(''); }).toThrow();
