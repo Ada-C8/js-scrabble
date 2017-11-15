@@ -12,7 +12,6 @@ const Scrabble = {
     // word.toUpperCase().split(' ').forEach(function(letter) {
     // console.log('this is the ' + word);
 
-
     let total = 0;
     let playedWord = word.toUpperCase();
 
@@ -24,6 +23,7 @@ const Scrabble = {
       }
 
       total += tiles[letter];
+
     }
     if (word.length === 7 && total > 0) {
       total += 50;
@@ -49,7 +49,7 @@ const Scrabble = {
       if ( Scrabble.score(wrd) > max ) {
         max = Scrabble.score(wrd);
         highestScoreWord = wrd;
-      } else if ( Scrabble.score(wrd) == max ) {
+      } else if (( Scrabble.score(wrd) === max ) && (wrd.length < highestScoreWord.length)) {
         highestScoreWord = word;
       }
     });
@@ -57,32 +57,6 @@ const Scrabble = {
   }
 
 }; // end of Scrabble function
-
-
-
-
-// def self.highest_score_from(array_of_words)
-//        max = 0
-//        highest_score_word = ''
-//
-//        array_of_words.each do |word|
-//          if self.score(word) > max
-//            max = self.score(word)
-//            highest_score_word = word
-//          elsif (self.score(word) == max) && (word.length < highest_score_word.length)
-//              highest_score_word = word
-//          end
-//        end
-//        return highest_score_word
-//      end
-//  end #end of class
-
-
-
-
-
-
-
 
 
 Scrabble.Player = class {
