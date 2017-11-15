@@ -17,6 +17,25 @@ const Scrabble = {
       [10, ['Q', 'Z']],
     ]);
 
+    let sum = 0;
+    let wordLetterArray = uppercaseWord.split('');
+
+    // go through each letter in the given word
+    wordLetterArray.forEach((letter) => {
+      let included = false;
+      letterMap.forEach((value, key) => {
+        // if the letter is valid, add the corresponding point to the sum
+        if (letterMap.get(key).includes(letter)) {
+          included = true;
+          sum += key;
+        }
+      });
+      // if it isn't a letter, throw an error
+      if (!included) {
+        throw new Error(`${letter} is not a letter from A-Z`);
+      }
+    });
+
   // TODO: add the highestScoreFrom method
 
 };
