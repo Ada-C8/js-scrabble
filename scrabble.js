@@ -65,20 +65,54 @@ Scrabble.Player = class {
     this.name = name;
     this.plays = [];
     this._totalScore = 0;
+    this._hasWon = false;
+    this._highestScoringWord;
+    this._highestWordScore = 0;
   }
 
   totalScore() {
     return this._totalScore;
   }
 
+  highestScoringWord() {
+    if (this._highestScoringWord) {
+      return this._highestScoringWord;
+    } else {
+      throw new Error(`Player ${this.name} has not played any words. `);
+    }
+  }
+
+  highestWordScore() {
+    if (this._highestWordScore) {
+      return this._highestWordScore;
+    } else {
+      throw new Error(`Player ${this.name} has not played any words. `);
+    }
+  }
+
+  hasWon() {
+    return this._hasWon;
+  }
+
   play(word) {
     let score = Scrabble.score(word);
-    if (word) {
+    if (word && !this._hasWon) {
       this.plays.push(word);
-      this._totalScore += score;
+      this.addScore(score);
+      if (score > this._highestWordScore) {
+        this._highestScoringWord = word;
+        this._highestWordScore = score;
+      }
       return this.plays;
     }
     return false;
+  }
+
+  addScore(score) {
+    this._totalScore += score;
+    if (this._totalScore >= 100) {
+      this._hasWon = true;
+    }
   }
 };
 
