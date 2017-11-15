@@ -42,11 +42,15 @@ const Scrabble = {
       let winner = a;
       return winner;
     } else if(b.length === 7){
+      console.log(`${b} is seven letters`)
       let winner = b;
       return winner;
     } else if(a.length > b.length) {
       console.log(`${b} is shorter than ${a}`);
       let winner = b;
+      return winner;
+    } else {
+      let winner = a;
       return winner;
     }
     // else {
@@ -128,8 +132,8 @@ module.exports = Scrabble;
 
 //
 // //
-const loser = 'zzzzzz';
-const winner = 'iiiiddd';
+// const loser = 'zzzzzz';
+// const winner = 'iiiiddd';
 
 // console.log("Comparing dog and pig");
 // console.log("pig should win ")
@@ -138,22 +142,22 @@ const winner = 'iiiiddd';
 // console.log("starting with pig, pig should win.")
 // console.log(Scrabble.highestScoreFrom(['pig', 'dog']));
 //
-console.log("Comparing winner and loser");
-console.log("iiiiddd should win -- seven letters ")
-console.log(Scrabble.highestScoreFrom([loser, winner]));
-
-console.log(Scrabble.highestScoreFrom([winner, loser]));
+// console.log("Comparing winner and loser");
+// console.log("iiiiddd should win -- seven letters ")
+// console.log(Scrabble.highestScoreFrom([loser, winner]));
+//
+// console.log(Scrabble.highestScoreFrom([winner, loser]));
 
 // console.log("***************************************")
 // console.log("schekcing i, dog, cat -- cd should win");
 // console.log(Scrabble.highestScoreFrom(['i', 'dog', 'cd', 'cat']));
-//
-// console.log("Comparing dog and cat, dog should win");
-// console.log(Scrabble.highestScoreFrom(['dog', 'cat']));
-// console.log("***********************");
-// console.log("Comparing cat and dog, cat should win");
-// console.log(Scrabble.highestScoreFrom(['cat', 'dog']));
-// console.log("***********************");
+
+console.log("Comparing dog and cat, dog should win");
+console.log(Scrabble.highestScoreFrom(['dog', 'cat']));
+console.log("***********************");
+console.log("Comparing cat and dog, cat should win");
+console.log(Scrabble.highestScoreFrom(['cat', 'dog']));
+console.log("***********************");
   // Test the functionality
 //   expect(Scrabble.highestScoreFrom(['dog', 'dog'])).toBe('dog');
 //   expect(Scrabble.highestScoreFrom(['dog', 'cat'])).toBe('dog');
