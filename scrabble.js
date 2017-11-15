@@ -7,6 +7,8 @@ function InvalidWord(word) {
     this.message = 'Your word can not be empty';
     return this.message;
   }
+  this.message = 'Your word has to be a string';
+  return this.message;
 }
 function InvalidCharacter(char) {
   this.char = char;
@@ -19,9 +21,14 @@ function EmptyArray() {
   return this.message;
 }
 
+function EmptyName() {
+  this.message = 'Player must have a name';
+  return this.message;
+}
+
 const Scrabble = {
   score: function (word) {
-    if (word.length < 1 || word.length > 7 || word === '') {
+    if (word.length < 1 || word.length > 7 || word === '' || typeof word !== 'string') {
       throw new InvalidWord(word);
     }
     let Totalscore = 0;
@@ -33,7 +40,7 @@ const Scrabble = {
     const EightPoints = ['J', 'X'];
     const TenPoints = ['Q', 'Z'];
     for (let i = 0; i < word.length; i++) {
-      if (word[i].match(/[A-Za-z]/) === null ) {
+      if (word[i].match(/[A-Za-z]/) === null) {
         throw new InvalidCharacter(word[i]);
       } else if (OnePoints.includes(word[i].toUpperCase())) {
         Totalscore += 1;
@@ -78,7 +85,42 @@ const Scrabble = {
 };
 
 Scrabble.Player = class {
-  // TODO: implement the Player class
+  constructor(name) {
+    if (name.length < 1) {
+      throw new EmptyName();
+    }
+    this.name = name;
+    this.plays = [];
+  }
+  play(word) {
+    Scrabble.score(word);
+    if (this.hasWon()) {
+      return false;
+    }
+    this.plays.push(word);
+    return true;
+  }
+  totalScore() {
+    let totalscore = 0;
+    this.plays.forEach((word) => {
+      const score = Scrabble.score(word);
+      totalscore += score;
+    });
+    return totalscore;
+  }
+  hasWon() {
+    if (this.totalScore() >= 100) {
+      return true;
+    }
+    return false;
+  }
+  highestScoringWord() {
+    return Scrabble.highestScoreFrom(this.plays);
+  }
+  highestWordScore() {
+    const winningWord = this.highestScoringWord();
+    return Scrabble.score(winningWord);
+  }
 };
 
 
