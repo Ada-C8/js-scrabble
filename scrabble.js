@@ -7,6 +7,7 @@ const Scrabble = {
   // Documentation says it should be highestScoreFrom: function(params){} but
   // this makes linter angry
   score(word) {
+    const lowerCaseWord = word.toLowerCase();
     const points = {
       one: ['a', 'e', 'i', 'o', 'u', 'l', 'n', 'r', 's', 't'],
       two: ['d', 'g'],
@@ -17,32 +18,35 @@ const Scrabble = {
       ten: ['q', 'z'],
     };
     let total = 0;
-    if (word.length > 7) {
-      // need to throw error, disallow words longer than 7 characters
-    }
-    for (let i = 0; i < word.length; i += 1) {
-      if (points.one.includes(word[i])) {
-        total += 1;
-      } else if (points.two.includes(word[i])) {
-        total += 2;
-      } else if (points.three.includes(word[i])) {
-        total += 3;
-      } else if (points.four.includes(word[i])) {
-        total += 4;
-      } else if (points.five.includes(word[i])) {
-        total += 5;
-      } else if (points.eight.includes(word[i])) {
-        total += 8;
-      } else if (points.eight.include(word[i])) {
-        total += 10;
-      } else {
-        // will need to throw error, invalid characters
+    if (lowerCaseWord.length > 7) {
+      throw new Error('You must play a word that has 7 characters or fewer');
+    } else if (lowerCaseWord.length === 0) {
+      throw new Error('The word can not be blank');
+    } else {
+      for (let i = 0; i < lowerCaseWord.length; i += 1) {
+        if (points.one.includes(lowerCaseWord[i])) {
+          total += 1;
+        } else if (points.two.includes(lowerCaseWord[i])) {
+          total += 2;
+        } else if (points.three.includes(lowerCaseWord[i])) {
+          total += 3;
+        } else if (points.four.includes(lowerCaseWord[i])) {
+          total += 4;
+        } else if (points.five.includes(lowerCaseWord[i])) {
+          total += 5;
+        } else if (points.eight.includes(lowerCaseWord[i])) {
+          total += 8;
+        } else if (points.ten.includes(lowerCaseWord[i])) {
+          total += 10;
+        } else {
+          throw new Error('You must use valid characters');
+        }
       }
+      if (lowerCaseWord.length === 7) {
+        total += 50;
+      }
+      return total;
     }
-    if (word.length === 7) {
-      total += 50;
-    }
-    return total;
   },
   // https://github.com/Ada-Developers-Academy/textbook-curriculum/blob/master/10-JavaScript/fun-with-functions.md
   // in the "attaching functions to objects" what's written is inconsistent
@@ -52,10 +56,13 @@ const Scrabble = {
   // Documentation says it should be highestScoreFrom: function(params){} but
   // this makes linter angry
   highestScoreFrom(arrayOfWords) {
+    if (arrayOfWords.length === 0) {
+      throw new Error('You need to make a guess first');
+    }
     let maxScore = 0;
     let bestWord = '';
     for (let i = 0; i < arrayOfWords.length; i += 1) {
-      let temp = Scrabble.score(arrayOfWords[i]);
+      let temp = Scrabble.score(arrayOfWords[i].toLowerCase());
 
       if (arrayOfWords[i].length === 7) {
         temp += 50;
@@ -64,10 +71,10 @@ const Scrabble = {
         maxScore = temp;
         bestWord = arrayOfWords[i];
       } else if (temp === maxScore) {
-        if (temp.length === 7) {
+        if (temp.length === 7 && bestWord.length !== 7) {
           maxScore = temp;
           bestWord = arrayOfWords[i];
-        } else if (temp.length < bestWord.length) {
+        } else if (arrayOfWords[i].length < bestWord.length) {
           maxScore = temp;
           bestWord = arrayOfWords[i];
         }
@@ -93,17 +100,16 @@ Scrabble.Player = class {
     return this.plays;
   }
 
-  play(word) {
+  set play(word) {
     if (this.hasWon()) {
       return false;
     }
 
     word.toLowerCase();
     if (word.length > 7) {
-      // throw new error preventing words longer than 7 characters
+      throw new Error('The word is longer than 7 characters');
     } else if (this.plays.includes(word)) {
-      // throw error for already playing this word
-      console.log('throw error - word already played');
+      throw new Error(`You have already played ${word}`);
     } else {
       this.plays.push(word);
       this.score = this.score + Scrabble.score(word);
@@ -111,7 +117,7 @@ Scrabble.Player = class {
     return true;
   }
 
-  static hasWon() {
+  get hasWon() {
     return this.score > 100;
   }
 
