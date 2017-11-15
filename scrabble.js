@@ -32,13 +32,13 @@ const Scrabble = {
   score: function(word) {
     // TODO: implement score
 
-    if (word === '') {
-      throw new Error('Word must have more than 0 letters')
+    if (word === '' || word.length > 7) {
+      throw new Error('Word must have more than 0 letters and less than or equal to 7 letters')
     }
 
-    if (word.length > 7) {
-      throw new Error('Word lengths must be either 7 letters or less')
-    }
+    // if (word.length > 7) {
+    //   throw new Error('Word lengths must be either 7 letters or less')
+    // }
 
     let splitWord = word.toUpperCase().split('')
     // for provides flexibility
@@ -46,13 +46,15 @@ const Scrabble = {
 
     let total = 0
     let localScoring = this.scoring
-    splitWord.forEach(function score(letter) {
+    splitWord.forEach(function localScore(letter) {
+
       // before localScoring we had the parameter set as this.scoring. When in repl the 'this' referenced the node object.
       let keysArray = Object.keys(localScoring) // returns an array with the keys
       // console.log(keysArray);
       if (!keysArray.includes(letter)) {
         throw new Error('Sorry we need words with only letters to calculate your score')
       }
+
 
       // console.log(`this is the word = ${word}`);
 
@@ -79,11 +81,30 @@ const Scrabble = {
       throw new Error('no words to score')
     } //end error
 
-    return wordArray[0]
+    let winner = wordArray[0]
+    // ['dog', 'pig'] is passed in and we want to return 'pig' because it has the highest score.
+
+    if (wordArray.length > 1) {
+      // iterate over the array and score each word.
+      for (word of wordArray) {
+        if (this.score(word) > this.score(winner)) {
+          winner = word
+          console.log(winner);
+        }
+        console.log('score from word');
+        console.log(Scrabble.score(word));
+      }
+    }
+    console.log(winner);
+    // console.log(wordArray.forEach(function(word)));
+    // let highestScoreFrom = this.score(wordArray)
+    // console.log(highestScoreFrom);
+
+    return winner
   } // end highestScoreFrom
 
 }; // end Scrabble
-Scrabble.highestScoreFrom(["aaa"]);
+Scrabble.highestScoreFrom(['aaa', 'zzz', 'zzzzz']);
 Scrabble.Player = class {
   // TODO: implement the Player class
 };
