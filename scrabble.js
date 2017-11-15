@@ -1,27 +1,10 @@
 let tiles = {
-    'A': 1, 'E': 1, 'I': 1, 'O': 1, 'L': 1, 'N': 1, 'R': 1,
-    'U': 1, 'S': 1, 'T': 1, 'D': 2, 'G': 2, 'B': 3, 'C': 3,
-    'M': 3, 'P': 3, 'F': 4, 'H': 4, 'V': 4, 'W': 4, 'Y': 4,
-    'K': 5, 'J': 8, 'X': 8, 'Q': 10, 'Z': 10
+  'A': 1, 'E': 1, 'I': 1, 'O': 1, 'L': 1, 'N': 1, 'R': 1,
+  'U': 1, 'S': 1, 'T': 1, 'D': 2, 'G': 2, 'B': 3, 'C': 3,
+  'M': 3, 'P': 3, 'F': 4, 'H': 4, 'V': 4, 'W': 4, 'Y': 4,
+  'K': 5, 'J': 8, 'X': 8, 'Q': 10, 'Z': 10
 };
 
-// def self.score(word)
-// -      @score = 0
-// +      value = 0
-//     word.upcase.each_char do |letter|
-// -        @score = TILES[letter] + @score
-// +        value += TILES[letter]
-//     end
-//     if word.length == 7
-// -        bonus = @score + 50
-// -        return bonus
-// -      end
-// -      return @score
-// -    end
-// +       value += 50
-// +     end
-// +     return value
-// +   end
 
 const Scrabble = {
   score: function(word) {
@@ -31,30 +14,76 @@ const Scrabble = {
 
 
     let total = 0;
-    // let word;
+    let playedWord = word.toUpperCase();
 
-    word.toUpperCase().split('').forEach(function(letter) {
-      // console.log(letter);
-      total = tiles[letter] + total;
-      // console.log(tiles[letter]);
-      // console.log(total);
-    });
-    if (word.length == 7 && total > 0) {
+    for (i=0; i < playedWord.length; i++) {
+      letter = playedWord[i];
+
+      if (letter === null) {
+        total = 0;
+      }
+
+      total += tiles[letter];
+    }
+    if (word.length === 7 && total > 0) {
       total += 50;
     }
     return total;
+  },
+
+  //  Question:  Is forEach less efficient that forloop word.toUpperCase().split('').forEach(function(letter) {
+  //     total = tiles[letter] + total;
+  //   });
+  //   if (word.length == 7 && total > 0) {
+  //     total += 50;
+  //   }
+  //   return total;
+  // },
+
+  // TODO: add the highestScoreFrom method
+  highestScoreFrom: function(arrayOfWords) {
+    let max = 0;
+    let highestScoreWord = '';
+
+    arrayOfWords.forEach(function(wrd) {
+      if ( Scrabble.score(wrd) > max ) {
+        max = Scrabble.score(wrd);
+        highestScoreWord = wrd;
+      } else if ( Scrabble.score(wrd) == max ) {
+        highestScoreWord = word;
+      }
+    });
+    return highestScoreWord;
   }
 
+}; // end of Scrabble function
 
 
-  // var letter, i, sum = 0;
-  // for (i = 0; i < word.length; i++) {
-  //     letter = word[i];
-  //     sum += alphabet[letter];
-  // }
-  // TODO: add the highestScoreFrom method
 
-};
+
+// def self.highest_score_from(array_of_words)
+//        max = 0
+//        highest_score_word = ''
+//
+//        array_of_words.each do |word|
+//          if self.score(word) > max
+//            max = self.score(word)
+//            highest_score_word = word
+//          elsif (self.score(word) == max) && (word.length < highest_score_word.length)
+//              highest_score_word = word
+//          end
+//        end
+//        return highest_score_word
+//      end
+//  end #end of class
+
+
+
+
+
+
+
+
 
 Scrabble.Player = class {
   // TODO: implement the Player class
