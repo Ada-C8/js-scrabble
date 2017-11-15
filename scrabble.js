@@ -17,19 +17,55 @@ const Scrabble = {
       if (word.length == 7) {
         score += 50;
       }
-
       return score;
     } else {
-      throw 'Error!';
+      throw 'Cannot play that word!';
     }
-  }
+  },
 
   // TODO: add the highestScoreFrom method
+  highestScoreFrom: function(words) {
+
+    if (words.constructor === Array && words.length > 0) {
+      let highest_score = 0;
+      let highest_words = [];
+
+      for (let word of words) {
+        let score = Scrabble.score(word);
+        if (score > highest_score) {
+          highest_score = score;
+          highest_words = [];
+          highest_words.push(word);
+        } else if (score === highest_score) {
+          highest_words.push(word);
+        }
+      }
+
+      if (highest_words.length === 1) {
+        return highest_words[0];
+      }
+
+      for (let word of highest_words) {
+        if (word.length === 7) {
+          return word;
+        }
+      }
+
+      return highest_words.reduce((a, v) => a && a.length <= v.length ? a : v, '');
+
+    } else {
+      throw 'No words have been played!';
+    }
+  }
 
 };
 
 Scrabble.Player = class {
   // TODO: implement the Player class
+  constructor(name) {
+    this.name = name;
+    const plays = [];
+  }
 };
 
 module.exports = Scrabble;
