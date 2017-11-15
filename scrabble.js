@@ -108,7 +108,14 @@ Scrabble.Player = class {
   highestScoringWord() {
     return Scrabble.highestScoreFrom(this.plays);
   }
-  // highestWordScore: function() {}
+
+  highestWordScore() {
+    if (Scrabble.score(this.highestScoringWord()) < 1) {
+      throw 'There isn\'t a word to score!'
+    }
+
+    return Scrabble.score(this.highestScoringWord());
+  }
 };
 
 module.exports = Scrabble;
