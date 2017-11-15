@@ -72,10 +72,15 @@ const Scrabble = {
             bestWordsLengths.push(words[i].length);
           }
         }
-        const minLength = Math.min.apply(null,bestWordsLengths);
-        let numberOfWordsAtMinLength = bestWordsLengths.filter(item => item == minLength).length;
-        let i = bestWordsLengths.indexOf(minLength);
-        winningWord = bestWords[i];
+        if (bestWordsLengths.includes(7)) {
+          let i = bestWordsLengths.indexOf(7);
+          winningWord = bestWords[i];
+        } else {
+          const minLength = Math.min.apply(null,bestWordsLengths);
+          let numberOfWordsAtMinLength = bestWordsLengths.filter(item => item == minLength).length;
+          let i = bestWordsLengths.indexOf(minLength);
+          winningWord = bestWords[i];
+        }
     }
     return winningWord;
   }
