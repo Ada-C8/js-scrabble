@@ -94,6 +94,7 @@ Scrabble.Player = class {
       return false
     }
     this.plays.push(item);
+    return true;
   }
 
   hasWon() {
@@ -104,7 +105,7 @@ Scrabble.Player = class {
   }
 
   totalScore() {
-    sum = 0;
+    let sum = 0;
     this.plays.forEach((word) => {
       sum += Scrabble.score(word);
     });
