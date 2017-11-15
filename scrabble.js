@@ -38,6 +38,22 @@ const NUMTILES = {
   12: ['E'],
 };
 
+const parse = require('csv-parse');
+// require('should');
+const fs = require('fs');
+// const rr = fs.createReadStream('./dictionary.csv');
+
+// rr.on('readable', () => {
+//   console.log('readable:', rr.read());
+// });
+// rr.on('end', () => {
+//   console.log('end');
+// });
+
+const parser = parse({ delimiter: ',' });
+fs.createReadStream('./dictionary.csv').pipe(parser);
+console.log(parser);
+
 function WordLengthException() {
   this.message = 'must contain between 1 and 7 letters';
 }
@@ -52,6 +68,10 @@ function NoWordsException() {
 
 function InvalidNameException() {
   this.message = 'name is required';
+}
+
+function InvalidNumToDrawException() {
+  this.message = 'must draw at least 1 and no more than 7 tiles';
 }
 
 const checkWord = function checkWord(word) {
@@ -139,11 +159,52 @@ Scrabble.Player = class {
   }
 };
 
-Scrabble.TileBag = {
+Scrabble.TileBag = class {
+  constructor() {
+    this.tiles = this.generateTiles();
+  }
 
+  generateTiles() {
+    this.tiles = [];
+    Object.entries(NUMTILES).forEach((entry) => {
+      const [freq, letters] = entry;
+      letters.forEach((letter) => {
+        this.tiles = this.tiles.concat(Array(Number(freq)).fill(letter));
+      });
+    });
+    return this.tiles.sort();
+  }
+
+  drawTiles(numTiles) {
+    if (Number.isNaN(Number(numTiles)) || numTiles < 1 || numTiles > 7) {
+      throw new InvalidNumToDrawException();
+    }
+    const drawn = [];
+
+    // check how many tiles remaining
+    const numToDraw = (numTiles <= this.tilesRemaining() ? numTiles : this.tilesRemaining());
+    // draw tiles
+    for (let i = 0; i < numToDraw; i += 1) {
+      const tile = this.tiles[Math.floor(Math.random() * this.tiles.length)];
+      drawn.push(tile);
+      this.tiles.splice(this.tiles.indexOf(tile), 1);
+    }
+    return drawn;
+  }
+
+  tilesRemaining() {
+    return this.tiles.length;
+  }
 };
+
+// Scrabble.Dictionary = class {
+//   constructor() {
+//     const input =
+//   }
+// }
 
 module.exports = Scrabble;
 
 // console.log(Scrabble.score('dog'));
-// console.log(Scrabble.score(5));
+// let tilebag = new Scrabble.TileBag();
+// console.log(tilebag.generateTiles());

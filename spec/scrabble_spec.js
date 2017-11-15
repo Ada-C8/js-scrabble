@@ -228,3 +228,79 @@ describe('Player', function() {
     });
   });
 });
+
+describe('TileBag', function() {
+  it ('is defined', function() {
+    expect(Scrabble.TileBag).toBeDefined();
+  });
+
+  describe('Constructor', function() {
+    it('Creates a new tilebag', function() {
+      const tilebag = new Scrabble.TileBag().tiles;
+      expect(tilebag.length).toBe(98);
+      expect(tilebag.filter(tile => tile === 'E').length).toBe(12);
+      expect(tilebag.filter(tile => tile === 'A').length).toBe(9);
+      expect(tilebag.filter(tile => tile === 2).length).toBe(0);
+    });
+  });
+
+  describe('drawTiles', function() {
+    let tilebag;
+
+    beforeEach(function () {
+      tilebag = new Scrabble.TileBag();
+    });
+
+    it('draws tiles from the tilebag', function() {
+      const TOTALTILES = 98;
+      let hand;
+
+      hand = tilebag.drawTiles(4);
+      expect(hand.length).toBe(4);
+      expect(tilebag.tiles.length).toBe(TOTALTILES - 4);
+
+      hand = tilebag.drawTiles(7);
+      expect(hand.length).toBe(7);
+      expect(tilebag.tiles.length).toBe(TOTALTILES - 4 - 7);
+    });
+
+    it('requires a number between 1 and 7', function() {
+      expect(() => { tilebag.drawTiles() }).toThrow();
+      expect(() => { tilebag.drawTiles(0) }).toThrow();
+      expect(() => { tilebag.drawTiles(8) }).toThrow();
+      expect(() => { tilebag.drawTiles('cat') }).toThrow();
+    });
+
+    it ('removes the number of tiles remaining if remaining tiles < number of tiles to draw', function() {
+      for (let i = 0; i < 96; i += 1) {
+        tilebag.drawTiles(1);
+      }
+
+      const hand = tilebag.drawTiles(5);
+      expect(hand.length).toBe(2);
+      expect(tilebag.tilesRemaining()).toBe(0);
+    });
+  });
+
+  describe('tilesRemaining', function() {
+    let tilebag;
+
+    beforeEach(function() {
+      tilebag = new Scrabble.TileBag();
+    });
+
+    it('returns the number of tiles remaining', function() {
+      expect(tilebag.tilesRemaining()).toBe(98);
+
+      tilebag.drawTiles(5);
+      expect(tilebag.tilesRemaining()).toBe(93);
+    });
+
+    it('returns 0 when the tilebag is empty', function() {
+      for (let i = 0; i < 98; i += 1) {
+        tilebag.drawTiles(1);
+      }
+      expect(tilebag.tilesRemaining()).toBe(0);
+    });
+  });
+});
