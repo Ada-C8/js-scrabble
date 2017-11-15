@@ -50,8 +50,8 @@ const Scrabble = {
       throw new Error('no words');
     }
     let maxWord = ["",0];
-    arrayOfWords.forEach( function (word) {
-      let wordScore = Scrabble.score(word);
+    arrayOfWords.forEach((word) => {
+      const wordScore = Scrabble.score(word);
 
       if (wordScore > maxWord[1]) {
         maxWord[0] = word;
@@ -98,7 +98,7 @@ Scrabble.Player = class {
   }
   totalScore() {
     let points = 0;
-    this.plays.forEach( function (word) {
+    this.plays.forEach((word) => {
       points += Scrabble.score(word);
     });
     return points;
