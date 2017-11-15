@@ -5,17 +5,27 @@ const Scrabble = {
       J: 8, X: 8, Q: 10, Z: 10
     },
   score: function(word) {
+    word = word.toUpperCase()
     let total = 0
     for(let letter of word) {
-    // word.forEach(function(letter) {
       total += this.scoring[letter]
     }
     return total
-    // TODO: implement score
   },
 
+  highestScore: function(arrayofwords) {
+    let highest = 'A'
+    arrayofwords.forEach(function(word) {
+      if(Scrabble.score(word) > Scrabble.score(highest)) {
+        highest = word
+      }
+      else if(Scrabble.score(word) == Scrabble.score(highest)) {
+        //call tie method
+      }
+    })
+    return highest
+  }
   // TODO: add the highestScoreFrom method
-// static method
 };
 
 Scrabble.Player = class {
@@ -24,5 +34,6 @@ Scrabble.Player = class {
 
 module.exports = Scrabble;
 
-console.log(Scrabble.score('THIS'))
+console.log(Scrabble.score('Consequential'))
+console.log(Scrabble.highestScore(['word', 'another', 'zzqqhi']))
 // Scrabble.scoring.A
