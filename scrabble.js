@@ -31,7 +31,7 @@ const Scrabble = {
 
   score(word) {
     let wordScore = 0;
-    word.split('').forEach(function(letter) {
+    word.toLowerCase().split('').forEach(function(letter) {
       let result = letterScores[letter];
       wordScore += result;
     });
