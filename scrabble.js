@@ -14,13 +14,19 @@ const Scrabble = {
 
     letters.forEach(function(letter) {
       if (!(letter in POINTS)) {
-        throw 'is not a valid char'
+        throw 'Word includes an invalid character.'
       };
       totalScore += POINTS[letter];
     });
-    if (word.length === 7) {
+
+    if (word.length > 7) {
+      throw 'Word is too long.';
+    } else if (word.length === 0) {
+      throw 'Word is too short.';
+    } else if (word.length === 7) {
       totalScore += 50;
     };
+
     return totalScore;
   },
 
