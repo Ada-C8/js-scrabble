@@ -40,9 +40,11 @@ const Scrabble = {
   }
     return totalScore;
 
-  }
+  },
 
-  // TODO: add the highestScoreFrom method
+  highestScoreFrom: function highestScoreFrom(array) {
+
+  }
 
 };
 
