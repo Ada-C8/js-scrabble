@@ -111,10 +111,31 @@ Scrabble.Player = class {
     if (typeof word !== 'string' || word === ''){
       throw 'You must play a word'
     }
-    
+
     this.plays.push(word)
     return this.plays;
   }
+
+  totalScore() {
+    let score = 0;
+    for (let i = 0; i < this.plays.length; i++)
+      score += this.plays[i];
+    end
+    return score
+  }
+
+  hasWon() {
+    if (this.totalScore() >= 100) {
+      
+    }
+  }
+  //method which returns true if the player has over 100 points, otherwise returns false
+
+  highestScoringWord():
+  //method which returns the highest scoring word the user has played
+
+  highestWordScore():
+  //returns to score of the highest scoring word
 };
 
 module.exports = Scrabble;
