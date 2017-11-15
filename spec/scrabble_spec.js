@@ -168,8 +168,8 @@ describe('Player', function() {
     });
   });
 
-  xdescribe('hasWon', function() {
-    xit ('returns false when score < 100', function() {
+  describe('hasWon', function() {
+    it ('returns false when score < 100', function() {
       let player = new Scrabble.Player('test player');
       expect(player.totalScore()).toBe(0);
       expect(player.hasWon()).toBe(false);
@@ -183,14 +183,14 @@ describe('Player', function() {
       expect(player.hasWon()).toBe(false);
     });
 
-    xit ('returns true when score == 100', function() {
+    it ('returns true when score == 100', function() {
       let player = new Scrabble.Player('test player');
       player.play('zzzzbbf'); // Score += 100
       expect(player.totalScore()).toBe(100);
       expect(player.hasWon()).toBe(true);
     });
 
-    xit ('returns true when score > 100', function() {
+    it ('returns true when score > 100', function() {
       let player = new Scrabble.Player('test player');
       player.play('zzzzzzz'); // Score += 120
       expect(player.totalScore()).toBe(120);
