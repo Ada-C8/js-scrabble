@@ -2,7 +2,7 @@
 const Scrabble = {
 
   score: function(word) {
-    let score = 0;
+    let score = word.length === 7 ? 50 : 0;
     const LETTER_TO_VALUE = {
       A: 1, E: 1, I: 1, O: 1, U: 1, L: 1, N: 1,
       R: 1, S: 1, T: 1, D: 2, G: 2, B: 3, C: 3,
@@ -17,16 +17,13 @@ const Scrabble = {
     if (word.length > 7 || word.length < 1) {
       throw new ArgumentError('Invalid word length detected');
     }
-    word.split('').forEach( function (letter) {
+    word.split('').forEach( (letter) => {
       if (letter.match(ALPHA)) {
         score += parseInt(LETTER_TO_VALUE[letter.toUpperCase()], 10);
       } else {
         throw new ArgumentError('Invalid characters detected');
       }
     });
-    if (word.length === 7) {
-      score += 50;
-    }
     return score;
   }
 ,
