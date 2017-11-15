@@ -7,12 +7,27 @@ const scores = {
 const Scrabble = {
   score: function(word) {
     // toUpperCase(word);
-    const scoreTotal = 0;
+    let scoreTotal = 0;
 
-    // console.log()
-    for (let letter of word) {
-      console.log(scores[letter.toUpperCase()]);
+    // regex below should return false for white space, non a-zA-Z characters, 1 letter or 7+ letter words
+    if (/^[a-zA-Z]{2,7}$/.test(word)){
+      for (let letter of word) {
+        scoreTotal += scores[letter.toUpperCase()];
+
+        console.log(`Letter: ${letter} Score:${scoreTotal}`);
+      }
+      if (word.length === 7){
+        scoreTotal += 50;
+      }
+    } else {
+      throw `Users word '${word}' was not playable. Scrabble words must be between 2-7 letters, contain no white space, and may not have non-alphabet characters.`;
     }
+    // console.log()
+
+
+    // TODO: score a 7 letter word + 50 points
+
+    return scoreTotal;
   }
 
   // TODO: add the highestScoreFrom method
