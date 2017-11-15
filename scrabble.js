@@ -27,6 +27,17 @@ const SCORES = {
   Z: 10,
 };
 
+const NUMTILES = {
+  1: ['J', 'K', 'Q', 'X', 'Z'],
+  2: ['B', 'C', 'F', 'H', 'M', 'P', 'V', 'W', 'Y'],
+  3: ['G'],
+  4: ['D', 'L', 'S', 'U'],
+  6: ['N', 'R', 'T'],
+  8: ['O'],
+  9: ['A', 'I'],
+  12: ['E'],
+};
+
 function WordLengthException() {
   this.message = 'must contain between 1 and 7 letters';
 }
@@ -39,14 +50,21 @@ function NoWordsException() {
   this.message = 'must score at least one word';
 }
 
+function InvalidNameException() {
+  this.message = 'name is required';
+}
+
+const checkWord = function checkWord(word) {
+  if (word.length < 1 || word.length > 7) {
+    throw new WordLengthException();
+  } else if (/[^a-zA-Z]/.exec(word) !== null) {
+    throw new InvalidCharsException();
+  }
+};
+
 const Scrabble = {
   score(word) {
-    // check word is valid
-    if (word.length < 1 || word.length > 7) {
-      throw new WordLengthException();
-    } else if (/[^a-zA-Z]/.exec(word) !== null) {
-      throw new InvalidCharsException();
-    }
+    checkWord(word);
 
     // add 50 pt bonus if use all 7 letters
     const startVal = word.length === 7 ? 50 : 0;
@@ -84,7 +102,45 @@ const Scrabble = {
 };
 
 Scrabble.Player = class {
-  // TODO: implement the Player class
+  constructor(name) {
+    if (typeof name === 'string' && name.length > 0) {
+      this.name = name;
+      this.plays = [];
+    } else {
+      throw new InvalidNameException();
+    }
+  }
+
+  play(word) {
+    if (this.hasWon()) {
+      return false;
+    }
+    // check word is valid
+    checkWord(word);
+    this.plays.push(word);
+    return true;
+  }
+
+  totalScore() {
+    const allScores = this.plays.map(play => Scrabble.score(play));
+    return allScores.reduce((sum, val) => sum + val, 0);
+  }
+
+  hasWon() {
+    return this.totalScore() >= 100;
+  }
+
+  highestScoringWord() {
+    return Scrabble.highestScoreFrom(this.plays);
+  }
+
+  highestWordScore() {
+    return Scrabble.score(this.highestScoringWord());
+  }
+};
+
+Scrabble.TileBag = {
+
 };
 
 module.exports = Scrabble;
