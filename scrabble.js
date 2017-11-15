@@ -1,7 +1,7 @@
+const ALPHA = /^[a-z]+$/i;
+
 const Scrabble = {
   score(word) {
-    let score = 0;
-    const ALPHA = /^[a-z]+$/i;
     const SCORECHART = {
       a: 1,
       b: 3,
@@ -30,15 +30,13 @@ const Scrabble = {
       y: 4,
       z: 10,
     };
+    let score = 0;
 
     if (typeof word === 'string' && word.length > 0 && word.length < 8) {
-      if (word.length === 7) {
-        score += 50;
-      }
+      if (word.length === 7) { score += 50; }
       for (let i = 0; i < word.length; i += 1) {
-        const letter = word[i];
-        if (letter.match(ALPHA)) {
-          score += parseInt(SCORECHART[letter.toLowerCase()], 10);
+        if (word[i].match(ALPHA)) {
+          score += parseInt(SCORECHART[word[i].toLowerCase()], 10);
         } else {
           throw new Error('Characters only');
         }
@@ -52,8 +50,6 @@ const Scrabble = {
   highestScoreFrom(wordArray) {
     if (wordArray.length === 0) {
       throw new Error('There are no words to score');
-    } else if (wordArray.length === 1) {
-      return wordArray[0];
     } else {
       const highestWords = this.highestScores(wordArray);
       return highestWords.length === 1 ? highestWords[0] : this.tiebreaker(highestWords);
@@ -66,9 +62,7 @@ const Scrabble = {
     const highestWords = [];
 
     wordArray.forEach((word) => {
-      if (this.score(word) === highestScore) {
-        highestWords.push(word);
-      }
+      if (this.score(word) === highestScore) { highestWords.push(word); }
     });
     return highestWords;
   },
@@ -102,20 +96,19 @@ Scrabble.Player = class {
   }
 
   play(word) {
-    if (this.hasWon()) {
+    if (!word.match(ALPHA) || word.length > 8) {
+      throw new Error('Not a valid play');
+    } else if (this.hasWon()) {
       return false;
-    }
-
-    word.toLowerCase();
-    if (word.length > 8) {
-      throw new Error('You cannot play a word longer than 7 letters');
-    } else if (this.plays.includes(word)) {
-      throw new Error('You have alreayd played this word');
     } else {
-      this.plays.push(word);
-      this.score += Scrabble.score(word);
+      if (this.plays.includes(word)) {
+        throw new Error('You have already played this word');
+      } else {
+        this.plays.push(word);
+        this.score += Scrabble.score(word);
+      }
+      return true;
     }
-    return true;
   }
 
   hasWon() {
