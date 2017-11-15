@@ -36,6 +36,12 @@ const Scrabble = {
       }
     });
 
+    if (word.length === 7) {
+      sum += 50;
+    }
+
+    return sum;
+  },
   // TODO: add the highestScoreFrom method
 
 };
