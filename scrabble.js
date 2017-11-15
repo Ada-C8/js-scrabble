@@ -93,6 +93,13 @@ Scrabble.Player = class {
     this.plays.push(item);
   }
 
+  hasWon() {
+    if (this.totalScore() >= 100) {
+      return true
+    }
+    return false
+  }
+
 };
 
 module.exports = Scrabble;
