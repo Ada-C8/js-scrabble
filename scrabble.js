@@ -88,7 +88,7 @@ const Scrabble = {
           break;
 
         default:
-          throw new Error ('invalid letter');
+          throw new Error('invalid letter');
       }
     });
     return score;
@@ -96,10 +96,30 @@ const Scrabble = {
 
 
   highestScoreFrom(wordsArray) {
+    if (wordsArray.length === 0 || wordsArray.constructor !== Array) {
+      throw new Error('ERROR');
+    }
+
+    const wordScoreObject = {}
+
+    wordsArray.forEach((word) => {
+      wordScoreObject[word] = Scrabble.score(word);
+    });
+
+    if (Object.keys(wordScoreObject).length === 1) {
+      // return wordScoreObject;
+      return Object.keys(wordScoreObject)[0];
+    } else (Object.keys(wordScoreObject).length >1){
+      
+    }
+
+    return wordScoreObject;
+    // return Object.keys(wordScoreObject)[0];
   }
 
 
 };
+
 
 Scrabble.Player = class {
   // TODO: implement the Player class
@@ -107,4 +127,16 @@ Scrabble.Player = class {
 
 module.exports = Scrabble;
 
+
 // console.log(Scrabble.score('apple'));
+
+
+// ---------------------------------------------------------
+const arr = ['cow', 'horse', 'pig', 'zzz'];
+
+Scrabble.highestScoreFrom(arr);
+
+console.log(Scrabble.highestScoreFrom(arr));
+
+
+//

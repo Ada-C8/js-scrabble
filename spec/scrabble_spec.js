@@ -50,15 +50,15 @@ describe('highestScoreFrom', function() {
     expect(Scrabble.highestScoreFrom(['dog'])).toBe('dog');
   });
 
-  // it ('returns the highest word if there are two words', function() {
-  //   // Check score assumptions
-  //   expect(Scrabble.score('dog')).toBe(5);
-  //   expect(Scrabble.score('pig')).toBe(6);
-  //
+  it ('returns the highest word if there are two words', function() {
+    // Check score assumptions
+    expect(Scrabble.score('dog')).toBe(5);
+    expect(Scrabble.score('pig')).toBe(6);
+
   //   // Test the functionality
-  //   expect(Scrabble.highestScoreFrom(['dog', 'pig'])).toBe('pig');
-  //   expect(Scrabble.highestScoreFrom(['pig', 'dog'])).toBe('pig');
-  // });
+    expect(Scrabble.highestScoreFrom(['dog', 'pig'])).toBe('pig');
+    expect(Scrabble.highestScoreFrom(['pig', 'dog'])).toBe('pig');
+  });
 
   // it ('if tied, prefer a word with 7 letters', function() {
   //   const loser = 'zzzzzz';
@@ -67,17 +67,17 @@ describe('highestScoreFrom', function() {
   //   // Check score assumptions
   //   expect(Scrabble.score(loser)).toBe(60);
   //   expect(Scrabble.score(winner)).toBe(60);
-
+  //
   //   // Test functionality
   //   expect(Scrabble.highestScoreFrom([loser, winner])).toBe(winner);
   //   expect(Scrabble.highestScoreFrom([winner, loser])).toBe(winner);
   // });
 
-  // it ('if tied and no word has 7 letters, prefers the word with fewer letters', function() {
+  // xit ('if tied and no word has 7 letters, prefers the word with fewer letters', function() {
   //   // Check score assumptions
   //   expect(Scrabble.score('dog')).toBe(5);
   //   expect(Scrabble.score('goat')).toBe(5);
-
+  //
   //   // Test functionality
   //   expect(Scrabble.highestScoreFrom(['dog', 'goat'])).toBe('dog');
   //   expect(Scrabble.highestScoreFrom(['goat', 'dog'])).toBe('dog');
@@ -88,8 +88,8 @@ describe('highestScoreFrom', function() {
   //   expect(Scrabble.score('i')).toBe(1);
   //   expect(Scrabble.score('dog')).toBe(5);
   //   expect(Scrabble.score('cat')).toBe(5);
-
-    // Test the functionality
+  //
+  //   // Test the functionality
   //   expect(Scrabble.highestScoreFrom(['dog', 'dog'])).toBe('dog');
   //   expect(Scrabble.highestScoreFrom(['dog', 'cat'])).toBe('dog');
   //   expect(Scrabble.highestScoreFrom(['cat', 'dog'])).toBe('cat');
