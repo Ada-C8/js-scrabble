@@ -1,33 +1,9 @@
-'use strict';
-var prompt = require('prompt');
+// 'use strict';
+// var prompt = require('prompt');
 const LETTER_VALUES = {
-  a: 1,
-  b: 3,
-  c: 3,
-  d: 2,
-  e: 1,
-  f: 4,
-  g: 2,
-  h: 4,
-  i: 1,
-  j: 8,
-  k: 5,
-  l: 1,
-  m: 3,
-  n: 1,
-  o: 1,
-  p: 3,
-  q: 10,
-  r: 1,
-  s: 1,
-  t: 1,
-  u: 1,
-  v: 4,
-  w: 4,
-  x: 8,
-  y: 4,
-  z: 10
+  a: 1, b: 3, c: 3, d: 2, e: 1, f: 4, g: 2, h: 4, i: 1, j: 8, k: 5, l: 1, m: 3, n: 1, o: 1, p: 3, q: 10, r: 1, s: 1, t: 1, u: 1, v: 4, w: 4, x: 8, y: 4, z: 10
 };
+
 const UserException = function UserException(message) {
   this.message = message;
   this.name = 'UserException';
@@ -36,10 +12,11 @@ const UserException = function UserException(message) {
 const Scrabble = {
   score: function(word) {
     if (word.length > 7 || word.length < 1) {
-      throw new UserException(`Invalid word, must be at least 1 character and less than 7 characters.`);
+      throw new UserException(`Invalid word, must be greater than 1 character and less than 7 characters.`);
     }
 
     let score = 0;
+    // const checkWordValidity = function() { }
     let letter = word.toLowerCase().split("");
     letter.forEach(function(char) {
       if (!(char in LETTER_VALUES)) {
@@ -89,20 +66,20 @@ Scrabble.Player = class {
       throw new UserException(`Please enter a name!`);
     }
     this.name = name;
-    this.currentScore = 0;
+    this.playingScore = 0;
     this.plays = [];
 
   }
+
   hasWon() {
-    return this.currentScore >= 100;
+    return this.playingScore >= 100;
   }
 
   play(word) {
-    if (this.hasWon()) {
+    if (this.hasWon() === true) {
       // wont allow to play a word if already won (higher than 100 points)
       return false;
     }
-
     let wordLetters = word.split("");
     wordLetters.forEach(function(char) {
       if (!(char in LETTER_VALUES)) {
@@ -110,12 +87,12 @@ Scrabble.Player = class {
       }
     });
     this.plays.push(word);
-    this.currentScore += Scrabble.score(word);
+    this.playingScore += Scrabble.score(word);
     return true;
   }
 
   totalScore() {
-    return this.currentScore;
+    return this.playingScore;
   }
 
   highestScoringWord() {
@@ -128,11 +105,11 @@ Scrabble.Player = class {
 
 };
 
-prompt.start();
-prompt.get(['word'], function(error, result){
-  let score = Scrabble.score(result.word);
-  console.log(score);
-});
+// prompt.start();
+// prompt.get(['word'], function(error, result){
+//   let score = Scrabble.score(result.word);
+//   console.log(score);
+// });
 
 module.exports = Scrabble;
 // where to store the letter value
