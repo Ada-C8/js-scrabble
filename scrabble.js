@@ -1,8 +1,29 @@
+function InvalidWord(word) {
+  if (word.length > 7) {
+    this.message = 'Your word can not exceed 7 letters';
+    return this.message;
+  }
+  if (word.length < 1 || word === '') {
+    this.message = 'Your word can not be empty';
+    return this.message;
+  }
+}
+function InvalidCharacter(char) {
+  this.char = char;
+  this.message = `invalid character used: ${char}`;
+  return this.message;
+}
+
+function EmptyArray() {
+  this.message = 'This array is empty';
+  return this.message;
+}
+
 const Scrabble = {
   score: function (word) {
-    // Throw error if word > 7 letters
-    // Throw error if word is empty
-    // Throw error if a character is not recognized
+    if (word.length < 1 || word.length > 7 || word === '') {
+      throw new InvalidWord(word);
+    }
     let Totalscore = 0;
     const OnePoints = ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'];
     const TwoPoints = ['D', 'G'];
@@ -12,63 +33,33 @@ const Scrabble = {
     const EightPoints = ['J', 'X'];
     const TenPoints = ['Q', 'Z'];
     for (let i = 0; i < word.length; i++) {
-      if (OnePoints.includes(word[i].toUpperCase())) {
+      if (word[i].match(/[A-Za-z]/) === null ) {
+        throw new InvalidCharacter(word[i]);
+      } else if (OnePoints.includes(word[i].toUpperCase())) {
         Totalscore += 1;
-      }
-      if (TwoPoints.includes(word[i].toUpperCase())) {
+      } else if (TwoPoints.includes(word[i].toUpperCase())) {
         Totalscore += 2;
-      }
-      if (ThreePoints.includes(word[i].toUpperCase())) {
+      } else if (ThreePoints.includes(word[i].toUpperCase())) {
         Totalscore += 3;
-      }
-      if (FourPoints.includes(word[i].toUpperCase())) {
+      } else if (FourPoints.includes(word[i].toUpperCase())) {
         Totalscore += 4;
-      }
-      if (FivePoints.includes(word[i].toUpperCase())) {
+      } else if (FivePoints.includes(word[i].toUpperCase())) {
         Totalscore += 5;
-      }
-      if (EightPoints.includes(word[i].toUpperCase())) {
+      } else if (EightPoints.includes(word[i].toUpperCase())) {
         Totalscore += 8;
-      }
-      if (TenPoints.includes(word[i].toUpperCase())) {
+      } else if (TenPoints.includes(word[i].toUpperCase())) {
         Totalscore += 10;
       }
     }
-    //   switch (word[i]) {
-    //     case (OnePoints.includes(word[i].toUpperCase()) === true):
-    //       Totalscore += 1;
-    //       break;
-    //     case (TwoPoints.includes(word[i].toUpperCase()) === true):
-    //       console.log('inside second case!');
-    //       Totalscore += 2;
-    //       break;
-    //       console.log('yeaaaah');
-    //     case (ThreePoints.includes(word[i].toUpperCase())):
-    //       Totalscore += 3;
-    //       break;
-    //     case (FourPoints.includes(word[i].toUpperCase())):
-    //       Totalscore += 4;
-    //       break;
-    //     case (FivePoints.includes(word[i].toUpperCase())):
-    //       Totalscore += 5;
-    //       break;
-    //     case (EightPoints.includes(word[i].toUpperCase())):
-    //       Totalscore += 8;
-    //       break;
-    //     case (TenPoints.includes(word[i].toUpperCase())):
-    //       Totalscore += 10;
-    //       break;
-    //     default:
-    //       console.log('uhoh');
-    //       // TO DO: Throw error
-    //   }
-    // }
     if (word.length === 7) {
       Totalscore += 50;
     }
     return Totalscore;
   },
   highestScoreFrom: function(arrayOfWords) {
+    if (arrayOfWords.length === 0) {
+      throw new EmptyArray();
+    }
     let max = arrayOfWords[0];
     arrayOfWords.forEach(function (word) {
       if (Scrabble.score(word) > Scrabble.score(max)) {
@@ -86,13 +77,11 @@ const Scrabble = {
   }
 };
 
-console.log(Scrabble.score('dogg'));
-console.log(Scrabble.score('pigg'));
-console.log(Scrabble.highestScoreFrom(['pig', 'dog']));
-
 Scrabble.Player = class {
   // TODO: implement the Player class
 };
+
+
 
 module.exports = Scrabble;
 
