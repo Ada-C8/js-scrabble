@@ -4,8 +4,8 @@ Congratulations! You're submitting your assignment!
 ## Comprehension Questions
 | Question | Answer    |
 | :------------- | :------------- |
-| What patterns were you able to use from your Ruby knowledge to apply to JavaScript? |   |
-| What was a challenge you were able to overcome on this assignment? |  |
-| What is your favorite thing about learning a new programming language? |  |
-| What is your least favorite thing about learning a new programming language? |  |
-| Do you have any recommendations on how we could improve this project for the next cohort? |  |
+| What patterns were you able to use from your Ruby knowledge to apply to JavaScript? | I was able to use similar nested if-loops to check against the tie scenarios. Same logic applied to most everything in this problem, I just needed to switch syntax. It was the same pattern of checking the first word in the array against the next and evaluating it.    |
+| What was a challenge you were able to overcome on this assignment? | I struggled with understanding when to call 'this' and when to call the object 'Scrabble'. I also wanted to DRY up my checkValidity function that I call twice and I overcame that tricky spot but pulling out completely and making it more of a 'globally scoped' function. |
+| What is your favorite thing about learning a new programming language? | I am loving that the translation portion of it and it has been fun to revel in the differences. It's neat that JS doesn't have the same functionality as ruby and now we are in the exploration phase of what those differences and similarities are. It's proving to be pretty fun and fascinating!   |
+| What is your least favorite thing about learning a new programming language? | Syntax confusion. Not quite knowing how to search for what I am needing on the internet. But I'm sure this is normal and is just my own growing-pains that will get better with time and effort. |
+| Do you have any recommendations on how we could improve this project for the next cohort? | I wonder if we could have used two classes as opposed to an object and class within that object. Just because it was what we had been working on in class on Tuesday it would have been fun to apply that new knowledge! |

@@ -62,7 +62,6 @@ const Scrabble = {
   },
 };
 
-
 Scrabble.Player = class {
   constructor(name) {
     if (name.length === 0) {
