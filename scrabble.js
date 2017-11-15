@@ -76,10 +76,10 @@ Scrabble.Player = class {
     if (!word || typeof word !== 'string'){
       throw 'Please enter a valid word.'
     };
-    //
-    // if (this.hasWon() === true) {
-    //   throw 'You\'ve already won!'
-    // };
+
+    if (this.hasWon() === true) {
+      return false;
+    };
 
     this.plays.push(word);
     return this.plays;
@@ -104,7 +104,10 @@ Scrabble.Player = class {
       return false;
     };
   }
-  // highestScoringWord: function() {}
+
+  highestScoringWord() {
+    return Scrabble.highestScoreFrom(this.plays);
+  }
   // highestWordScore: function() {}
 };
 
