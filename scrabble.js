@@ -87,6 +87,7 @@ const Scrabble = {
   Tilebag: {
     tiles: [],
     resetTiles() {
+      Scrabble.Tilebag.tiles = [];
       Object.keys(TILES).forEach((letter) => {
         for (let i = 0; i < TILES[letter].quantity; i += 1) {
           Scrabble.Tilebag.tiles.push(letter);
