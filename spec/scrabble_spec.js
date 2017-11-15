@@ -150,13 +150,13 @@ describe('Player', function() {
     });
   });
 
-  xdescribe ('totalScore', function() {
-    xit ('Is zero if the player has not played anything', function() {
+  describe ('totalScore', function() {
+    it ('Is zero if the player has not played anything', function() {
       let player = new Scrabble.Player('test player');
       expect(player.totalScore()).toBe(0);
     });
 
-    xit ('Is updated by play', function() {
+    it ('Is updated by play', function() {
       let player = new Scrabble.Player('test player');
       expect(player.totalScore()).toBe(0);
       player.play('dog');
