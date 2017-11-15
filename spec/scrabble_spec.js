@@ -227,3 +227,32 @@ describe('Player', function() {
     });
   });
 });
+
+describe('Tilebag', function() {
+  it ('is defined', function() {
+    expect(Scrabble.Tilebag).toBeDefined();
+  });
+
+  describe('Constructor', function() {
+    it('Creates a new tilebag', function() {
+      let tilebag = new Scrabble.Tilebag();
+      expect(tilebag.bag.length).toBe(98);
+    });
+
+  describe('drawTile', function(){
+    it('Removes a tile from the bag', function() {
+      let tilebag = new Scrabble.Tilebag();
+      expect(tilebag.bag.length).toBe(98);
+      tilebag.drawTile()
+      expect(tilebag.bag.length).toBe(97)
+    });
+
+    it('Returns a letter from the bag', function() {
+      let tilebag = new Scrabble.Tilebag();
+      expect(typeof tilebag.drawTile()).toBe('string')
+    });
+  });
+
+
+  });
+});
