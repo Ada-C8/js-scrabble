@@ -71,9 +71,8 @@ Scrabble.Player = class {
   constructor(name) {
     if (name === undefined) {
       throw new Error('No name');
-    } else {
-      this.name = name;
     }
+    this.name = name;
     this.plays = [];
   }
   play(word) {
@@ -81,10 +80,9 @@ Scrabble.Player = class {
       throw new Error('No word');
     } else if (this.hasWon()) {
       return false;
-    } else {
-      this.plays.push(word);
-      return true;
     }
+    this.plays.push(word);
+    return true;
   }
   plays() {
     return this.plays;
@@ -96,10 +94,7 @@ Scrabble.Player = class {
     return false;
   }
   totalScore() {
-    let points = 0;
-    this.plays.forEach((word) => {
-      points += Scrabble.score(word);
-    });
+    const points = this.plays.reduce((total, word) => total + Scrabble.score(word), 0);
     return points;
   }
   highestScoringWord() {
