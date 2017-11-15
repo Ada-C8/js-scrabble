@@ -69,7 +69,45 @@ const Scrabble = {
 }
 
 Scrabble.Player = class {
-  // TODO: implement the Player class
+  constructor(name) {
+    this.name = name;
+
+    if (name.length === 0) {
+      throw new ArgumentException('List of words can\'t be blank');
+    }
+
+    this.plays = [];
+    this.totalScore = 0;
+  }
+
+
+  play(word) {
+    if (this.hasWon() === true) {
+      return false;
+    }
+    let newScore = Scrabble.score(word)
+    this.totalScore += newScore;
+    this.plays.push(word);
+    return word;
+  }
+
+  hasWon() {
+    if (this.totalScore >= 100) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 };
 
 module.exports = Scrabble;
+
+// tests
+// let player = new Scrabble.Player('test player');
+// player.play('zzzzzzz'); // +120 pts
+// console.log(player.plays.length); // 1
+// console.log(player.hasWon()); //true
+
+// player.play('dog')).toBe(false);
+// player.plays.length).toBe(1);
