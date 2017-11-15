@@ -73,7 +73,29 @@ const Scrabble = {
 };
 
 Scrabble.Player = class {
-  // TODO: implement the Player class
+  constructor(name) {
+    if (name === undefined) {
+      throw new UserException('You must provide a name for a player');
+    }
+    this.name = name;
+    this.plays = [];
+    this.totalScore = 0;
+  };
+
+  plays() {
+    return this.plays;
+  };
+
+  play(word) {
+
+
+  }
+
+  hasWon(){
+    this.totalScore >= 100 ? true : false;
+  };
+
+
 };
 
 module.exports = Scrabble;
