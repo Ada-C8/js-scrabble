@@ -45,52 +45,33 @@ const Scrabble = {
     if(words.length === 1) {
       return words[0];
     } else if(words.length >= 2) {
-      console.log("Im in the else if for when there are 2 or more words in array")
       let highScore = Scrabble.score(words[0]);
 
       let scoreHash = {};
 
       let highestScoringWord = "";
 
-      console.log(`The high score is ${highScore}`);
-
-
       words.forEach(function (word) {
         let wordScore = Scrabble.score(word);
 
         if (scoreHash[wordScore] === undefined) {
-          console.log('word is ' + word + ' score is ' + wordScore);
-          console.log('im about to make a hash');
           scoreHash[wordScore] = [word];
-          console.log('in the If, scoreHash is ');
-          console.log(scoreHash);
         } //if hash undefined
         else {
           scoreHash[wordScore].push(word);
-          console.log('in the Else, scorehash is ');
-          console.log(scoreHash);
         } //else for hash creation
         if (wordScore > highScore) {
-          console.log("word is");
-          console.log(word);
-          console.log("word score is ");
-          console.log(wordScore);
-          console.log("high score is ");
-          console.log(highScore);
           highScore = wordScore;
         } // if for finding high score
       }); //end of first for.each
 
-      console.log('here is the hash: ')
-      console.log(scoreHash);
+
       let highestScoringWords = scoreHash[highScore];
       let minLength = highestScoringWords[0].length;
-      console.log(`and here are the highestscoring words ${highestScoringWords}`);
 
       if (highestScoringWords.length === 1) {
         highestScoringWord = highestScoringWords[0];
       } //end check for just one winning word
-      //this esle will rune if there's more than one word ["dog", "cat"]
       else {
         highestScoringWord = highestScoringWords[0];
         highestScoringWords.forEach(function (word) {
@@ -98,32 +79,18 @@ const Scrabble = {
           if (word.length === 7) {
             highestScoringWord = word;
             minLength = 0;
-            console.log('im in the if for 7 letter words');
-            console.log(`highest scoring word is now: ${highestScoringWord}`);
-            console.log('minLength is now ' + minLength);
           } //if word length === 7
 
           else {
-            console.log("im in the else for when there aren't seven letter words")
-            console.log(`highest scoring word is ${highestScoringWord}`);
-            console.log(`minLength is ${minLength}`);
             if(word.length < minLength) {
               minLength = word.length;
               highestScoringWord = word;
-              console.log(`In the else if for non-seven letter words checking word lengths`);
-              console.log(`highest scoring word is now: ${highestScoringWord}` );
-              console.log(`minimum length is now ${minLength}` );
             } //else if for finding minimum
-
           }// end else -- words that aren't seven letters
         }); //end highest scoring word function
-
       } //end else for multiple high scoring words
-      console.log("Im about to return " + highestScoringWord);
       return highestScoringWord;
-
     } //else if array has 2 or more words
-    console.log("really:");
     return highestScoringWord;
   } //end highestscorefrom
 
