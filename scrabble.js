@@ -7,7 +7,7 @@ const Scrabble = {
     let scoreTotal = 0;
 
     // regex below should return false for white space, non a-zA-Z characters, 1 letter or 7+ letter words
-    if (/^[a-zA-Z]{2,7}$/.test(word)){
+    if (/^[a-zA-Z]{1,7}$/.test(word)){
       for (let letter of word) {
         scoreTotal += scores[letter.toUpperCase()];
       }
@@ -20,11 +20,20 @@ const Scrabble = {
     return scoreTotal;
   },
 
-  highestScoreFrom: function(arrayOfWords){
-    // this if statement will throw an exception is any of the following are true (1) it is undefined (2) the length = 0 (3) the input is not an array
-    if (arrayOfWords === undefined || arrayOfWords.length === 0 || !Array.isArray(arrayOfWords)) {
+  highestScoreFrom: function(arrWords){
+    // this if statement will throw an exception is any of the following are true (1) the input is not an array (2) the length = 0
+    let wordsAndScores = {};
+    if (!Array.isArray(arrWords) || arrWords.length === 0 ) {
       throw `Error: Input in ${this.name} must be data type Array and must have at least one element`;
+    } else if (arrWords.length === 1) {
+      return arrWords[0];
+    } else {
+      arrWords.forEach(function(word) {
+
+      });
     }
+
+
   }
   // TODO: add the highestScoreFrom method
 
