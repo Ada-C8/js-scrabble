@@ -10,9 +10,11 @@ const Scrabble = {
     let score = 0;
 
     if (word.length >= 1) {
-      if ((/^[a-zA-Z]/.test(word)) == false) {
+      if ((/^[a-zA-Z]+$/.test(word)) == false) {
         throw('Word must contain only letters A-Z');
       }
+    } else {
+      throw('Cannot score - no word entered');
     }
 
     let letters = word.toUpperCase().split('');
@@ -26,11 +28,11 @@ const Scrabble = {
     }
 
     letters.forEach(function(letter) {
-      if (/^[a-zA-Z]/.test) {
+      // if (/^[a-zA-Z]+$/.test) {
       score += scoringHash[letter];
-    } else {
-      throw('Word must contain only letters A-Z')
-    }
+    // } else {
+      // throw('Word must contain only letters A-Z')
+    // }
   })
 
 
@@ -116,3 +118,12 @@ newPlayer = new Scrabble.Player('Jeff')
 newPlayer.play('apple')
 
 console.log(newPlayer.plays)
+
+let emptyArray = [''];
+let oneArray = ['doggie'];
+
+let emptyArrayScore
+
+console.log(`HighestScoreFrom Empty array: ${Scrabble.highestScoreFrom(emptyArray)}`);
+console.log(`HighestScoreFrom Empty array: ${Scrabble.highestScoreFrom(emptyArray).length}`);
+console.log(`HighestScoreFrom One array: ${Scrabble.highestScoreFrom(oneArray)}`);
