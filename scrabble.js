@@ -93,15 +93,25 @@ Scrabble.Player = class {
     return this.plays;
   }
 
-  static play(word) {
-    if (this.plays.includes(word)) {
-      //throw error for already playing this word
-    } else {
-      this.plays
+  play(word) {
+    if (this.hasWon()) {
+      return false;
     }
+
+    word.toLowerCase();
+    if (word.length > 7) {
+      // throw new error preventing words longer than 7 characters
+    } else if (this.plays.includes(word)) {
+      // throw error for already playing this word
+      console.log('throw error - word already played');
+    } else {
+      this.plays.push(word);
+      this.score = this.score + Scrabble.score(word);
+    }
+    return true;
   }
 
-  get hasWon() {
+  static hasWon() {
     return this.score > 100;
   }
 
