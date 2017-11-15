@@ -23,14 +23,13 @@ let tiles = {
 // +     return value
 // +   end
 
-
-
-
 const Scrabble = {
   score: function(word) {
     // TODO: implement score
     // word.toUpperCase().split(' ').forEach(function(letter) {
     // console.log('this is the ' + word);
+
+
     let total = 0;
     // let word;
 
@@ -39,8 +38,10 @@ const Scrabble = {
       total = tiles[letter] + total;
       // console.log(tiles[letter]);
       // console.log(total);
-
     });
+    if (word.length == 7 && total > 0) {
+      total += 50;
+    }
     return total;
   }
 
