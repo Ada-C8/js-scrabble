@@ -1,7 +1,7 @@
-/* eslint-disable */
+// /* eslint-disable */
 
 const Scrabble = {
-  score: function(word) {
+  score(word) {
     const letterValues = {
       A: 1,
       B: 3,
@@ -29,43 +29,43 @@ const Scrabble = {
       X: 8,
       Y: 4,
       Z: 10
-    }
+    };
 
     const splitChars = function splitChars(str) {
       const chars = [];
       for (let i = 0; i < str.length; i++) {
         chars.push(str.charAt(i))
-      };
+      }
       return chars;
     };
 
     const totalScore = function totalScore(array) {
-
       let total = 0;
-
       array.forEach((char) => {
         if (!(char in letterValues)) {
-          throw 'Word must only contain letters from A-Z';
+          throw new Error('Word must only contain letters from A-Z');
         }
-
         total += letterValues[char];
-
       });
 
-      if (array.length == 7) {
+      if (array.length === 7) {
         total += 50;
-      } else if (array.length > 7 || array.length == 0) {
-        throw 'Word must have 1-7 letters';
+      } else if (array.length > 7 || array.length === 0) {
+        throw new Error('Word must have 1-7 letters');
       }
 
       return total;
-    }
+    };
 
     const uppercaseWord = word.toUpperCase();
 
     const characters = splitChars(uppercaseWord);
 
     return totalScore(characters);
+  },
+
+  highestScoreFrom(arrayOfWords) {
+
   }
 };
 
