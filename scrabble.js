@@ -93,6 +93,9 @@ Scrabble.Player = class {
     this.plays = [];
 
   }
+  hasWon() {
+    return this.currentScore >= 100;
+  }
 
   play(word) {
     if (this.hasWon()) {
@@ -111,14 +114,17 @@ Scrabble.Player = class {
     return true;
   }
 
-  hasWon() {
-    return this.currentScore >= 100;
-  }
-
   totalScore() {
     return this.currentScore;
   }
 
+  highestScoringWord() {
+    return Scrabble.highestScoreFrom(this.plays);
+  }
+
+  highestWordScore() {
+    return Scrabble.score(this.highestScoringWord());
+  }
 
 };
 
