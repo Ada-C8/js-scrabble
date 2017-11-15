@@ -145,6 +145,7 @@ describe('Player', function() {
 
       expect(player.play('dog')).toBe(false);
       expect(player.plays.length).toBe(1);
+
     });
   });
 

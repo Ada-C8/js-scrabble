@@ -27,76 +27,101 @@ const Scrabble = {
     } else if (wordArray.length > 7){
       throw `This word is too long. Are you sure you aren't cheating?`;
     } else if (wordArray.length === 0){
-      throw 'You have to choose a word.'
+      throw 'You have to choose a word.';
     } else{}
 
-    for (let letter of wordArray){
 
+
+    for (let letter of wordArray){
       let point = letter_points[letter.toUpperCase()];
       // try {
       if(point === undefined) {
-        throw 'not found';}
-        // }
-        // catch(err) {
-        //   message.innerHTML = "Input is " + err;
-        // }
-
-        score += point;
+        throw 'not found';
       }
 
+      score += point;
+    }
+
+    return score;
+  },
+  highestScoreFrom: function(arrayOfWords) {
+    if (arrayOfWords.length === 0 || arrayOfWords === "") {
+      throw 'The input is not what I expected.';
+    } else if (arrayOfWords.length === 1){
+      return arrayOfWords[0];
+    }
+    let highestScore = 0;
+    let highestScoringWord = '';
+    for (let word of arrayOfWords){
+      let wordScore = this.score(word);
+
+
+      if (wordScore > highestScore || (highestScore === wordScore && word.length < highestScoringWord.length && highestScoringWord.length != 7) || (highestScore === wordScore && word.length === 7)){
+        highestScore = wordScore;
+        highestScoringWord = word;
+      }
+    }
+    return highestScoringWord;
+  }
+
+};
+
+Scrabble.Player = class {
+  constructor(name) {
+    this.name = name;
+    this.plays = [];
+    if (this.name === null || this.name === '' || this.name === undefined){
+      throw 'A Scrabble player needs a name';
+    }
+  }
+
+  totalScore() {
+    let score = 0;
+
+    if (this.plays.length === 0) {
       return score;
-    },
-    highestScoreFrom: function(arrayOfWords) {
-      if (arrayOfWords.length === 0 || arrayOfWords === ""){
-        throw 'The input is not what I expected.';
-      } else if (arrayOfWords.length === 1){
-        return arrayOfWords[0];
-      }
-      let highestScore = 0;
-      let highestScoringWord = '';
-      for (let word of arrayOfWords){
-        let wordScore = this.score(word);
-
-
-        if (wordScore > highestScore || (highestScore === wordScore && word.length < highestScoringWord.length && highestScoringWord.length != 7) || (highestScore === wordScore && word.length === 7)){
-          highestScore = wordScore;
-          highestScoringWord = word;
-        } else{}
-      }
-      return highestScoringWord;
     }
-  };
-
-  Scrabble.Player = class {
-    constructor(name) {
-      this.name = name;
-      this.plays = [];
-      if (this.name === null || this.name === '' || this.name === undefined){
-        throw 'A Scrabble player needs a name';
-      }
+    for(let word of this.plays){
+      score += Scrabble.score(word);
     }
+    return score;
+  }
 
-    totalScore(){
-      let totalScore = 0;
-      for(let word in this.plays){
-        totalScore += Scrabble.score(word);
-      }
-      return totalScore;
+  hasWon(){
+    let winningPoints = 100;
+    let currentScore = this.totalScore();
+    if(currentScore >= winningPoints){
+      return true;
     }
+    return false;
+  }
 
-    hasWon(){
-      
+  play(word){
+    let matcher = /[A-Za-z]+/;
+    let matches = word.match(matcher);
+    if (word === undefined || matches[0].length != word.length){
+      throw 'You have to give a REAL word.';
     }
+    let won = this.hasWon();
+    if( won === true){
+      return false;
+    }
+    this.plays.push(word);
+    return word;
+  }
 
-    play(word){
-      let matcher = /[A-Za-z]+/;
-      let matches = word.match(matcher);
-      if (word === undefined || matches[0].length != word.length){
-        throw 'You have to give a REAL word.';
-      }
-      this.plays.push(word);
-      return word
-    }
-  };
+
+  highestScoringWord(){
+    let playArray = this.plays;
+    let highestWord = Scrabble.highestScoreFrom(playArray);
+    return highestWord;
+  }
+
+  highestWordScore(){
+    let highestWord = this.highestScoringWord();
+    let highestScore = Scrabble.score(highestWord);
+    return highestScore;
+  }
+};
 
   module.exports = Scrabble;
