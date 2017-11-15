@@ -1,3 +1,10 @@
+function Exception(message) {
+  this.message = message;
+  this.name = 'Exception';
+}
+
+
+
 const Scrabble = {
   score(word) {
     const scoreShart = {
@@ -31,16 +38,28 @@ const Scrabble = {
     let score = 0;
     word = word.toUpperCase();
     for (let letter of word) {
-      score += scoreShart[letter];
+      if (scoreShart.hasOwnProperty(letter)) {
+        score += scoreShart[letter];
+      }else{
+        throw new Exception('InvalidInput');
+      }
     }
     if (word.length ===7){
       score+= 50;
+    } else if (word.length > 7) {
+      throw new Exception('The size of the word should be at most 7');
+    } else if (word.length === 0 ){
+      throw new Exception('The word should have length bigger than 0');
     }
     return score;
   }, //close the score function
 
 
   highestScoreFrom(arrayOfWords) {
+    // chnage later
+    // if (arrayOfWords === []){
+    //   return 'No words yet'
+    // }
     let all_scores = [];
     for(let word of arrayOfWords) {
       all_scores.push(Scrabble.score(word));
@@ -52,25 +71,25 @@ const Scrabble = {
       if (all_scores[i] === maximo) {
         maximosWords.push(arrayOfWords[i]); //return the array with maximo values.
       };
-    i++;
-  };
+      i++;
+    };
 
-  if (maximosWords.length === 1){
-    return maximosWords[[0]];
-  } else {
-    let minlength = maximosWords[0].length;
-    let minword = maximosWords[0];
-    for(let word of maximosWords) {
-      if (word.length === 7 ) {
-        return word
-      }
-      if(word.length < minlength){
+    if (maximosWords.length === 1){
+      return maximosWords[[0]];
+    } else {
+      let minlength = maximosWords[0].length;
+      let minword = maximosWords[0];
+      for(let word of maximosWords) {
+        if (word.length === 7 ) {
+          return word
+        }
+        if(word.length < minlength){
           minlength = word.length;
           minword = word;
         }
+      }
+      return minword;
     }
-    return minword;
-  }
 
   } //highestScoreFrom close
 };
