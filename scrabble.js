@@ -52,6 +52,10 @@ const Scrabble = {
     }
     return wordScore;
   },
+
+  highestScoreFrom(array) {
+
+  },
 }; // end of object Scrabble
 
 // TODO: add the highestScoreFrom method

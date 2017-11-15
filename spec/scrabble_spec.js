@@ -35,12 +35,12 @@ describe('score', function() {
     expect(function() { Scrabble.score(''); }).toThrow();
   });
 });
-//
-// describe('highestScoreFrom', function() {
-//   it ('is defined', function() {
-//     expect(Scrabble.highestScoreFrom).toBeDefined();
-//   });
-//
+
+describe('highestScoreFrom', function() {
+  it ('is defined', function() {
+    expect(Scrabble.highestScoreFrom).toBeDefined();
+  });
+
 //   it ('throws if no words were passed', function() {
 //     expect(function() { Scrabble.highestScoreFrom([]); }).toThrow();
 //     expect(function() { Scrabble.highestScoreFrom('not array'); }).toThrow();
@@ -95,7 +95,7 @@ describe('score', function() {
 //     expect(Scrabble.highestScoreFrom(['cat', 'dog'])).toBe('cat');
 //     expect(Scrabble.highestScoreFrom(['i', 'dog', 'cat'])).toBe('dog');
 //   });
-// });
+});
 //
 // describe('Player', function() {
 //   it ('is defined', function() {
