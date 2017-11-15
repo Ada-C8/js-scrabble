@@ -91,7 +91,7 @@ Scrabble.Player = class {
       throw new Error('Must pass in a valid word to play.');
     }
     if (this.hasWon() || Scrabble.score(word) === undefined) {
-      return false
+      return false;
     }
     this.plays.push(word);
     return true;
@@ -99,9 +99,9 @@ Scrabble.Player = class {
 
   hasWon() {
     if (this.totalScore() >= 100) {
-      return true
+      return true;
     }
-    return false
+    return false;
   }
 
   totalScore() {
@@ -114,9 +114,13 @@ Scrabble.Player = class {
 
   highestScoringWord() {
     if (this.plays.length === 0) {
-      throw new Error('There are no plays from this player yet.')
+      throw new Error('There are no plays from this player yet.');
     }
     return Scrabble.highestScoreFrom(this.plays);
+  }
+
+  highestWordScore(){
+    return Scrabble.score(this.highestScoringWord());
   }
 
 };
