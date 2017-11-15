@@ -30,9 +30,7 @@ const letterScores = {
 const ErrorMsg = function ErrorMsg(value) {
   this.value = value;
   this.message = 'is not valid';
-  this.toString = function () {
-    return this.value + this.message;
-  };
+  this.toString = () => this.value + this.message;
 };
 
 const Scrabble = {
@@ -42,8 +40,8 @@ const Scrabble = {
     }
 
     let wordScore = 0;
-    word.toLowerCase().split('').forEach(function(letter) {
-      let result = letterScores[letter];
+    word.toLowerCase().split('').forEach((letter) => {
+      const result = letterScores[letter];
       wordScore += result;
     });
 
@@ -53,9 +51,9 @@ const Scrabble = {
     return wordScore;
   },
 
-  highestScoreFrom(wordArray) {
-    if ((wordArray.length === 0) || (Array.isArray(wordArray) === false)) {
-      throw new ErrorMsg(wordArray);
+  highestScoreFrom(wordsArray) {
+    if ((wordsArray.length === 0) || (Array.isArray(wordsArray) === false)) {
+      throw new ErrorMsg(wordsArray);
     }
   },
 }; // end of object Scrabble
