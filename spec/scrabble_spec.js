@@ -15,11 +15,11 @@ describe('score', function() {
     expect(Scrabble.score('academy')).toBe(65);
   });
 
-  // it ('throws on bad characters', function() {
-  //   expect(function () {
-  //     Scrabble.score('char^');
-  //   }).toThrow();
-  // });
+  it ('throws on bad characters', function() {
+    expect(function () {
+      Scrabble.score('char^');
+    }).toThrow();
+  });
 
   it ('handles all upper- and lower-case letters', function() {
     expect(Scrabble.score('dog')).toBe(5);
@@ -27,13 +27,13 @@ describe('score', function() {
     expect(Scrabble.score('DoG')).toBe(5);
   });
 
-  // it ('does not allow words > 7 letters', function() {
-  //   expect(function() { Scrabble.score('abcdefgh'); }).toThrow();
-  // });
+  it ('does not allow words > 7 letters', function() {
+    expect(function() { Scrabble.score('abcdefgh'); }).toThrow();
+  });
 
-  // it ('does not allow empty words', function() {
-  //   expect(function() { Scrabble.score(''); }).toThrow();
-  // });
+  it ('does not allow empty words', function() {
+    expect(function() { Scrabble.score(''); }).toThrow();
+  });
 });
 
 // describe('highestScoreFrom', function() {
