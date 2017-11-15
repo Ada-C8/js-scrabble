@@ -65,7 +65,39 @@ const Scrabble = {
 
 
 Scrabble.Player = class {
-  // TODO: implement the Player class
+  constructor(name) {
+    this.name = name;
+    this.plays = [];
+    this.score = 0;
+  }
+
+  get name() {
+    return this.name;
+  }
+
+  get plays() {
+    return this.plays;
+  }
+
+  static play(word) {
+    if (this.plays.includes(word)) {
+      //throw error for already playing this word
+    } else {
+      this.plays
+    }
+  }
+
+  get hasWon() {
+    return this.score > 100;
+  }
+
+  get highestScoringWord() {
+    return Scrabble.highestScoreFrom(this.plays);
+  }
+
+  get highestWordScore() {
+    return Scrabble.score(Scrabble.highestScoreFrom(this.plays));
+  }
 };
 
 module.exports = Scrabble;
