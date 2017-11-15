@@ -46,10 +46,10 @@ describe('highestScoreFrom', function() {
     expect(function() { Scrabble.highestScoreFrom('not array'); }).toThrow();
   });
 
-//   it ('returns the only word in a length-1 array', function() {
-//     expect(Scrabble.highestScoreFrom(['dog'])).toBe('dog');
-//   });
-//
+  it ('returns the only word in a length-1 array', function() {
+    expect(Scrabble.highestScoreFrom(['dog'])).toBe('dog');
+  });
+
 //   it ('returns the highest word if there are two words', function() {
 //     // Check score assumptions
 //     expect(Scrabble.score('dog')).toBe(5);

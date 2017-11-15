@@ -54,7 +54,7 @@ const Scrabble = {
   },
 
   highestScoreFrom(wordArray) {
-    if ((wordArray.length === 0) || (wordArray.isArray() === false)) {
+    if ((wordArray.length === 0) || (Array.isArray(wordArray) === false)) {
       throw new ErrorMsg(wordArray);
     }
   },
