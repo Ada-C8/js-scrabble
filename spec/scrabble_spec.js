@@ -207,7 +207,7 @@ describe('Player', function() {
       expect(player.highestScoringWord()).toBe('zzzz');
     });
 
-    xit('throws an error if no words have been played', function() {
+    it('throws an error if no words have been played', function() {
       let player = new Scrabble.Player('test player');
       expect(() => { player.highestScoringWord() }).toThrow();
     });
