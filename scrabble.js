@@ -1,4 +1,11 @@
 const Scrabble = {
+  // https://github.com/Ada-Developers-Academy/textbook-curriculum/blob/master/10-JavaScript/fun-with-functions.md
+  // in the "attaching functions to objects" what's written is inconsistent
+  // with what's here which is inconsistent with what
+  // linter underlines in red.
+
+  // Documentation says it should be highestScoreFrom: function(params){} but
+  // this makes linter angry
   score(word) {
     const points = {
       one: ['a', 'e', 'i', 'o', 'u', 'l', 'n', 'r', 's', 't'],
@@ -37,6 +44,13 @@ const Scrabble = {
     }
     return total;
   },
+  // https://github.com/Ada-Developers-Academy/textbook-curriculum/blob/master/10-JavaScript/fun-with-functions.md
+  // in the "attaching functions to objects" what's written is inconsistent
+  // with what's here which is inconsistent with what
+  // linter underlines in red.
+
+  // Documentation says it should be highestScoreFrom: function(params){} but
+  // this makes linter angry
   highestScoreFrom(arrayOfWords) {
     let maxScore = 0;
     let bestWord = '';
