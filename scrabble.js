@@ -33,8 +33,17 @@ const Scrabble = {
     return score;
   },
 
-  highestScoreFrom: function(array) {
-
+  highestScoreFrom: function(wordArray) {
+    if (wordArray.length === 0) {
+      throw new Error('There are no words given');
+    }
+    else if (wordArray.length === 1) {
+      return wordArray[0];
+    }
+    else {
+      wordArray.forEach((word) => {
+      });
+    }
   }
 
 };
