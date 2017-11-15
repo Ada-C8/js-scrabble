@@ -1,4 +1,4 @@
-/* eslint-disable */
+// /* eslint-disable */
 const Scrabble = {
   score: function score(word) {
     // TODO: implement score
@@ -42,8 +42,38 @@ const Scrabble = {
 
     return sum;
   },
-  // TODO: add the highestScoreFrom method
 
+  // TODO: add the highestScoreFrom method
+  highestScoreFrom: function highestScoreFrom(wordsArray) {
+    if (wordsArray === undefined || wordsArray.length === 0 ||
+        wordsArray.constructor.name !== 'Array') {
+      throw new Error('Must pass in an array with at least one valid word');
+    } else if (wordsArray.length === 1) {
+      return wordsArray[0];
+    }
+
+    const compareWordScores = (a, b) => {
+      return this.score(b) - this.score(a);
+    }
+    // sort words according to score from largest score to smallest score
+    const sortedByScoreWords = wordsArray.sort(compareWordScores);
+    // first word in sorted array will always have the highest score
+    // set its score as the highest score
+    const highestScore = this.score(sortedByScoreWords[0]);
+    // limit results to those with equal max score, .filter keeps the original order of wordArray
+    let wordsWithHighestScore = wordsArray.filter(word => this.score(word) === highestScore);
+    // pick out which words that have 7 letters and have the max score
+    const wordsWithSevenLetters = wordsWithHighestScore.filter(word => word.length === 7);
+    // if the first word has 7 letters with max score, pick that
+    if (wordsWithSevenLetters[0] !== undefined) {
+      return wordsWithSevenLetters[0];
+    }// none of the words have 7 letters
+    // sort maintains the order of the string if the first word was the shortest for example
+    wordsWithHighestScore = wordsWithHighestScore.sort((a, b) {
+      return a.length - b.length;
+    });
+    return wordsWithHighestScore[0];
+  },
 };
 
 Scrabble.Player = class {

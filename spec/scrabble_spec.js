@@ -39,20 +39,20 @@ describe('score', function() {
 });
 
 describe('highestScoreFrom', function() {
-  xit ('is defined', function() {
+  it ('is defined', function() {
     expect(Scrabble.highestScoreFrom).toBeDefined();
   });
 
-  xit ('throws if no words were passed', function() {
+  it ('throws if no words were passed', function() {
     expect(function() { Scrabble.highestScoreFrom([]); }).toThrow();
     expect(function() { Scrabble.highestScoreFrom('not array'); }).toThrow();
   });
 
-  xit ('returns the only word in a length-1 array', function() {
+  it ('returns the only word in a length-1 array', function() {
     expect(Scrabble.highestScoreFrom(['dog'])).toBe('dog');
   });
 
-  xit ('returns the highest word if there are two words', function() {
+  it ('returns the highest word if there are two words', function() {
     // Check score assumptions
     expect(Scrabble.score('dog')).toBe(5);
     expect(Scrabble.score('pig')).toBe(6);
@@ -62,7 +62,7 @@ describe('highestScoreFrom', function() {
     expect(Scrabble.highestScoreFrom(['pig', 'dog'])).toBe('pig');
   });
 
-  xit ('if tied, prefer a word with 7 letters', function() {
+  it ('if tied, prefer a word with 7 letters', function() {
     const loser = 'zzzzzz';
     const winner = 'iiiiddd';
 
@@ -75,7 +75,7 @@ describe('highestScoreFrom', function() {
     expect(Scrabble.highestScoreFrom([winner, loser])).toBe(winner);
   });
 
-  xit ('if tied and no word has 7 letters, prefers the word with fewer letters', function() {
+  it ('if tied and no word has 7 letters, prefers the word with fewer letters', function() {
     // Check score assumptions
     expect(Scrabble.score('dog')).toBe(5);
     expect(Scrabble.score('goat')).toBe(5);
@@ -85,7 +85,7 @@ describe('highestScoreFrom', function() {
     expect(Scrabble.highestScoreFrom(['goat', 'dog'])).toBe('dog');
   });
 
-  xit ('returns the first word of a tie with same letter count', function() {
+  it ('returns the first word of a tie with same letter count', function() {
     // Check score assumptions
     expect(Scrabble.score('i')).toBe(1);
     expect(Scrabble.score('dog')).toBe(5);
@@ -99,7 +99,7 @@ describe('highestScoreFrom', function() {
   });
 });
 
-describe('Player', function() {
+xdescribe('Player', function() {
   xit ('is defined', function() {
     expect(Scrabble.Player).toBeDefined();
   });
@@ -116,7 +116,7 @@ describe('Player', function() {
     });
   });
 
-  describe ('play', function() {
+  xdescribe ('play', function() {
     xit ('Records the played word', function() {
       let word = 'dog';
       let player = new Scrabble.Player('test player');
@@ -150,7 +150,7 @@ describe('Player', function() {
     });
   });
 
-  describe ('totalScore', function() {
+  xdescribe ('totalScore', function() {
     xit ('Is zero if the player has not played anything', function() {
       let player = new Scrabble.Player('test player');
       expect(player.totalScore()).toBe(0);
@@ -168,7 +168,7 @@ describe('Player', function() {
     });
   });
 
-  describe('hasWon', function() {
+  xdescribe('hasWon', function() {
     xit ('returns false when score < 100', function() {
       let player = new Scrabble.Player('test player');
       expect(player.totalScore()).toBe(0);
@@ -198,7 +198,7 @@ describe('Player', function() {
     });
   });
 
-  describe('highestScoringWord', function() {
+  xdescribe('highestScoringWord', function() {
     // Tie-breaking logic is already described in the tests
     // for highestWordFrom, so we will not repeat xit here.
     xit ('returns the highest scoring word played', function() {
@@ -214,7 +214,7 @@ describe('Player', function() {
     });
   });
 
-  describe('highestWordScore', function() {
+  xdescribe('highestWordScore', function() {
     xit ('returns the score of the highest scoring word played', function() {
       let player = new Scrabble.Player('test player');
       player.play('cat');
