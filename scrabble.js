@@ -1,30 +1,30 @@
 const TILES = {
-  A: 1,
-  B: 3,
-  C: 3,
-  D: 2,
-  E: 1,
-  F: 4,
-  G: 2,
-  H: 4,
-  I: 1,
-  J: 8,
-  K: 5,
-  L: 1,
-  M: 3,
-  N: 1,
-  O: 1,
-  P: 3,
-  Q: 10,
-  R: 1,
-  S: 1,
-  T: 1,
-  U: 1,
-  V: 4,
-  W: 4,
-  X: 8,
-  Y: 4,
-  Z: 10,
+  A: { value: 1, quantity: 9 },
+  B: { value: 3, quantity: 2 },
+  C: { value: 3, quantity: 2 },
+  D: { value: 2, quantity: 4 },
+  E: { value: 1, quantity: 12 },
+  F: { value: 4, quantity: 2 },
+  G: { value: 2, quantity: 3 },
+  H: { value: 4, quantity: 2 },
+  I: { value: 1, quantity: 9 },
+  J: { value: 8, quantity: 1 },
+  K: { value: 5, quantity: 1 },
+  L: { value: 1, quantity: 4 },
+  M: { value: 3, quantity: 2 },
+  N: { value: 1, quantity: 6 },
+  O: { value: 1, quantity: 8 },
+  P: { value: 3, quantity: 2 },
+  Q: { value: 10, quantity: 2 },
+  R: { value: 1, quantity: 6 },
+  S: { value: 1, quantity: 4 },
+  T: { value: 1, quantity: 6 },
+  U: { value: 1, quantity: 4 },
+  V: { value: 4, quantity: 2 },
+  W: { value: 4, quantity: 2 },
+  X: { value: 8, quantity: 1 },
+  Y: { value: 4, quantity: 2 },
+  Z: { value: 10, quantity: 1 },
 };
 
 const add = function add(num1, num2) {
@@ -40,7 +40,7 @@ const Scrabble = {
     if (word === '') {
       err();
     }
-    const scores = word.split('').map(letter => TILES[letter.toUpperCase()]);
+    const scores = word.split('').map(letter => TILES[letter.toUpperCase()].value);
     if (scores.some(score => score === undefined)) {
       err();
     }
@@ -83,6 +83,35 @@ const Scrabble = {
       }
     }
     return highestWord;
+  },
+  Tilebag: {
+    tiles: [],
+    resetTiles() {
+      Object.keys(TILES).forEach((letter) => {
+        for (let i = 0; i < TILES[letter].quantity; i += 1) {
+          Scrabble.Tilebag.tiles.push(letter);
+        }
+      });
+    },
+    drawTiles(numTiles) {
+      const self = Scrabble.Tilebag;
+      const drawnTiles = [];
+      for (let i = 0; i < numTiles; i += 1) {
+        const randomIndex = Math.floor(Math.random() * self.tiles.length);
+        drawnTiles.push(Scrabble.Tilebag.tiles[randomIndex]);
+        Scrabble.Tilebag.tiles.splice(randomIndex, 1);
+      }
+      return drawnTiles;
+    },
+    remainingTiles() {
+      const self = Scrabble.Tilebag;
+      const remainingTiles = {};
+      Object.keys(TILES).forEach((letter) => {
+        const letterCount = self.tiles.filter(tile => tile === letter).length;
+        remainingTiles[letter] = letterCount;
+      });
+      return remainingTiles;
+    },
   },
 
 };
