@@ -58,6 +58,7 @@ const Scrabble = {
     if (word.length === 7){
       score += 50;
     }
+    return score;
   },
 
   // TODO: add the highestScoreFrom method
@@ -73,23 +74,47 @@ const Scrabble = {
 
     words.forEach(function(word){
       wordScore = Scrabble.score(word)
-
       if (wordScore > highScorer.score){
         highScorer.word = [word]
         highScorer.score = wordScore
-      } else if(wordScore = highScorer.score){
-        highScoreWords.push(word)
+      } else if(wordScore === highScorer.score){
+        highScorer.word.push(word)
       }
     })
 
-    if
-    return highScorer.word;
+    if (highScorer.word.length === 1){
+      return highScorer.word[0];
+    }
+
+    let shortestLengthWord = "1234567";
+    for (let i = 0; i < highScorer.word.length; i++){
+      if (highScorer.word[i].length === 7){
+        return highScorer.word[i]
+      } else if (highScorer.word[i].length < shortestLengthWord.length) {
+          shortestLengthWord = highScorer.word[i];
+        }
+      }
+      return shortestLengthWord;
+    }
   }
 
-};
-
 Scrabble.Player = class {
-  // TODO: implement the Player class
+  constructor(name){
+    if (name.length < 1){
+      throw 'Must have a name';
+    }
+    this.name = name;
+    this.plays = [];
+  }
+
+  play(word){
+    if (typeof word !== 'string' || word === ''){
+      throw 'You must play a word'
+    }
+    
+    this.plays.push(word)
+    return this.plays;
+  }
 };
 
 module.exports = Scrabble;

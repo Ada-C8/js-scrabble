@@ -74,7 +74,7 @@ describe('highestScoreFrom', function() {
     expect(Scrabble.highestScoreFrom([winner, loser])).toBe(winner);
   });
 
-  xit ('if tied and no word has 7 letters, prefers the word with fewer letters', function() {
+  it ('if tied and no word has 7 letters, prefers the word with fewer letters', function() {
     // Check score assumptions
     expect(Scrabble.score('dog')).toBe(5);
     expect(Scrabble.score('goat')).toBe(5);
@@ -84,7 +84,7 @@ describe('highestScoreFrom', function() {
     expect(Scrabble.highestScoreFrom(['goat', 'dog'])).toBe('dog');
   });
 
-  xit ('returns the first word of a tie with same letter count', function() {
+  it ('returns the first word of a tie with same letter count', function() {
     // Check score assumptions
     expect(Scrabble.score('i')).toBe(1);
     expect(Scrabble.score('dog')).toBe(5);
@@ -99,24 +99,24 @@ describe('highestScoreFrom', function() {
 });
 
 describe('Player', function() {
-  xit ('is defined', function() {
+  it ('is defined', function() {
     expect(Scrabble.Player).toBeDefined();
   });
 
   describe('Constructor', function() {
-    xit('Creates a new player', function() {
+    it('Creates a new player', function() {
       let name = 'test name';
       let player = new Scrabble.Player(name);
       expect(player.name).toBe(name);
     });
 
-    xit('Requires a name', function() {
+    it('Requires a name', function() {
       expect(function() { new Scrabble.Player(); }).toThrow();
     });
   });
 
   describe ('play', function() {
-    xit ('Records the played word', function() {
+    it ('Records the played word', function() {
       let word = 'dog';
       let player = new Scrabble.Player('test player');
       expect(player.plays.length).toBe(0);
@@ -127,7 +127,7 @@ describe('Player', function() {
       expect(player.plays[0]).toBe(word);
     });
 
-    xit ('Requires a real word', function() {
+    it ('Requires a real word', function() {
       let player = new Scrabble.Player('test player');
       expect(player.plays.length).toBe(0);
 
@@ -138,7 +138,7 @@ describe('Player', function() {
       expect(player.plays.length).toBe(0);
     });
 
-    xit ('Returns false and does not update plays if the player has already won', function() {
+    it ('Returns false and does not update plays if the player has already won', function() {
       let player = new Scrabble.Player('test player');
       expect(player.play('zzzzzzz')).toBeTruthy(); // +120 pts
       expect(player.plays.length).toBe(1);
