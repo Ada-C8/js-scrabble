@@ -137,7 +137,7 @@ describe('Player', function() {
       expect(player.plays.length).toBe(0);
     });
 
-    xit ('Returns false and does not update plays if the player has already won', function() {
+    it ('Returns false and does not update plays if the player has already won', function() {
       let player = new Scrabble.Player('test player');
       expect(player.play('zzzzzzz')).toBeTruthy(); // +120 pts
       expect(player.plays.length).toBe(1);
@@ -166,7 +166,7 @@ describe('Player', function() {
     });
   });
 
-  xdescribe('hasWon', function() {
+  describe('hasWon', function() {
     it('returns false when score < 100', function() {
       let player = new Scrabble.Player('test player');
       expect(player.totalScore()).toBe(0);
@@ -206,7 +206,7 @@ describe('Player', function() {
       expect(player.highestScoringWord()).toBe('zzzz');
     });
 
-    xit('throws an error if no words have been played', function() {
+    it('throws an error if no words have been played', function() {
       let player = new Scrabble.Player('test player');
       expect(() => { player.highestScoringWord() }).toThrow();
     });

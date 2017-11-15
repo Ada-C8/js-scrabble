@@ -9,9 +9,9 @@ const Scrabble = {
 
     let score = 0;
 
-    // if (word.length < 1) {
-    //   throw('Cannot score - no word entered');
-    // }
+    if (word.length < 1) {
+      throw new Error ('Cannot score - no word entered');
+    }
 
     if (word.length >= 1) {
       if ((/^[a-zA-Z]+$/.test(word)) == false) {
@@ -61,14 +61,7 @@ const Scrabble = {
         }
       }
     )}
-    // This works but missing if a word is 7 letters long which one to choose
-    // arrayOfWords.forEach(function(word) {
-    //   if (highestScoreWord === '' || Scrabble.score(word) > Scrabble.score(highestScoreWord)) {
-    //     if highestScoreWord ===
-    //     highestScoreWord = word;
-    //   }
-    // });
-    // }
+
     return highestScoreWord;
   }
 };
@@ -85,8 +78,8 @@ Scrabble.Player = class {
   }
 
   play(word) {
-    if (this.hasWon()) {
-      return false
+    if (this.hasWon() === true) {
+      return false;
     } else {
     let wordScore = Scrabble.score(word);
     // this.totalScore += wordScore;
@@ -104,7 +97,7 @@ Scrabble.Player = class {
   }
 
   hasWon() {
-    if (this.totalScore >= 100) {
+    if (this.totalScore() >= 100) {
       return true;
     } else {
       return false;
@@ -130,23 +123,27 @@ Scrabble.Player = class {
 module.exports = Scrabble;
 
 
-console.log(Scrabble.score('cat'));
-
-newPlayer = new Scrabble.Player('Jeff')
-
-newPlayer.play('apple')
-
-console.log(newPlayer.plays)
-
-let emptyArray = [''];
-let oneArray = ['doggie'];
-
-let emptyArrayScore
-
-let emptyWord = ''
-
-console.log(`HighestScoreFrom Empty array: ${Scrabble.highestScoreFrom(emptyArray)}`);
-console.log(`HighestScoreFrom Empty array: ${Scrabble.highestScoreFrom(emptyArray).length}`);
-console.log(`HighestScoreFrom One array: ${Scrabble.highestScoreFrom(oneArray)}`);
-
-console.log(`Empty Word Score: ${Scrabble.score(emptyWord)}`)
+// console.log(Scrabble.score('cat'));
+//
+// newPlayer = new Scrabble.Player('Jeff')
+//
+// newPlayer.play('zzzzzzz')
+//
+// console.log(newPlayer.plays)
+//
+// let emptyArray = [''];
+// let oneArray = ['doggie'];
+//
+// let emptyArrayScore
+//
+// let emptyWord = ''
+//
+// console.log(`HighestScoreFrom Empty array: ${Scrabble.highestScoreFrom(emptyArray)}`);
+// console.log(`HighestScoreFrom Empty array: ${Scrabble.highestScoreFrom(emptyArray).length}`);
+// console.log(`HighestScoreFrom One array: ${Scrabble.highestScoreFrom(oneArray)}`);
+//
+// // console.log(`Empty Word Score: ${Scrabble.score(emptyWord)}`);
+//
+// console.log(`Player with one word total score: ${newPlayer.totalScore()}`);
+//
+// console.log(newPlayer.hasWon());
