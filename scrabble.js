@@ -88,10 +88,7 @@ Scrabble.Player = class {
     return this.plays;
   }
   hasWon() {
-    if (this.totalScore() >= 100) {
-      return true;
-    }
-    return false;
+    return (this.totalScore() >= 100);
   }
   totalScore() {
     const points = this.plays.reduce((total, word) => total + Scrabble.score(word), 0);
@@ -102,6 +99,55 @@ Scrabble.Player = class {
   }
   highestWordScore() {
     return Scrabble.score(this.highestScoringWord());
+  }
+};
+
+Scrabble.TileBag = class {
+  constructor() {
+    const tilesToFill = {
+      J: 1,
+      K: 1,
+      Q: 1,
+      X: 1,
+      Z: 1,
+      B: 2,
+      F: 2,
+      H: 2,
+      M: 2,
+      P: 2,
+      V: 2,
+      W: 2,
+      Y: 2,
+      G: 3,
+      D: 4,
+      L: 4,
+      S: 4,
+      U: 4,
+      N: 6,
+      R: 6,
+      T: 6,
+      O: 8,
+      A: 9,
+      I: 9,
+      E: 12,
+    };
+    this.TILES = [];
+    tilesToFill.forEach((letter) => {
+      for (let i = 0; i < tilesToFill[letter]; i += 1) {
+        this.TILES.push(letter);
+      }
+    });
+  }
+  drawTiles(num) {
+    const tiles = [];
+    let toFill = num;
+    if (this.TILES.length < num) {
+      toFill = this.TILES.length;
+    }
+    for (let i = 0; i < toFill; i += 1) {
+      tiles.push(this.TILES[Math.floor(Math.random() * this.TILES.length)]);
+    }
+    return tiles;
   }
 };
 
