@@ -3,11 +3,20 @@ const ArgumentException = function ArgumentException(message) {
   this.name = 'ArgumentException';
 }
 
+// ifValid(word) {
+//   if (/^[A-Za-z]+$/.test(word) && word.length <= 7) {
+//     return true;
+//   } esle {
+//     return false;
+//   }
+// }
+
 const SCORES = { 'A': 1, 'E': 1, 'I': 1, 'O': 1, 'U': 1, 'L': 1, 'N': 1, 'R': 1, 'S': 1, 'T': 1, 'D': 2, 'G': 2, 'B': 3, 'C': 3, 'M': 3, 'P': 3, 'F': 4, 'H': 4, 'V': 4, 'W': 4, 'Y': 4, 'K': 5, 'J': 8, 'X': 8, 'Q': 10, 'Z': 10 };
 
 const Scrabble = {
   score: function(word) {
     if (/^[A-Za-z]+$/.test(word) && word.length <= 7) {
+    // if (ifValid(word) === true) {
       let totalScore = 0;
       for (let i = 0; i < word.length; i++) {
         let letter = word[i].toUpperCase();
@@ -77,7 +86,7 @@ Scrabble.Player = class {
     }
 
     this.plays = [];
-    this.totalScore = 0;
+    // this.totalScore = 0;
   }
 
 
@@ -85,18 +94,30 @@ Scrabble.Player = class {
     if (this.hasWon() === true) {
       return false;
     }
-    let newScore = Scrabble.score(word)
-    this.totalScore += newScore;
+    // let newScore = Scrabble.score(word)
+    // this.totalScore += newScore;
+    if (word.length === 0 || /^[A-Za-z]+$/.test(word) === false) {
+      throw new ArgumentException('Word can\'t be blank');
+    }
+
     this.plays.push(word);
     return word;
   }
 
   hasWon() {
-    if (this.totalScore >= 100) {
+    if (this.totalScore() >= 100) {
       return true;
     } else {
       return false;
     }
+  }
+
+  totalScore() {
+    let totalScore = 0;
+    for (let word of this.plays) {
+      totalScore += Scrabble.score(word);
+    }
+    return totalScore;
   }
 
 };
@@ -104,10 +125,6 @@ Scrabble.Player = class {
 module.exports = Scrabble;
 
 // tests
-// let player = new Scrabble.Player('test player');
-// player.play('zzzzzzz'); // +120 pts
-// console.log(player.plays.length); // 1
-// console.log(player.hasWon()); //true
 
 // player.play('dog')).toBe(false);
 // player.plays.length).toBe(1);
