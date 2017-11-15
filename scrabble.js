@@ -75,8 +75,7 @@ Scrabble.Player = class {
     if (typeof name === 'string' && name.length > 0) {
       this.name = name;
       this.plays = [];
-    }
-    else {
+    } else {
       throw { name: 'InvalidInputError', message: 'must enter a name' };
     }
   }
@@ -111,15 +110,22 @@ Scrabble.Player = class {
       throw { name: 'InvalidInputError', message: 'must enter a word' };
     }
   }
+
+  highestScoringWord(words) {
+    return Scrabble.highestScoreFrom(this.plays);
+  }
+
 };
 
 module.exports = Scrabble;
 
-// let sally = new Scrabble.Player('Sally');
-// console.log(sally.name);
-// console.log(sally.plays);
-//
-// sally.play('dog');
-// console.log(sally.plays);
-// console.log(sally.plays[0]);
-// console.log(sally.plays.length);
+let sally = new Scrabble.Player('Sally');
+console.log(sally.name);
+console.log(sally.plays);
+
+sally.play('dog');
+console.log(sally.plays);
+console.log(sally.plays[0]);
+console.log(sally.plays.length);
+sally.play('zzzz');
+console.log(sally.highestScoringWord());
