@@ -46,9 +46,7 @@ const Scrabble = {
       return words[0];
     } else if(words.length >= 2) {
       let highScore = Scrabble.score(words[0]);
-
       let scoreHash = {};
-
       let highestScoringWord = "";
 
       words.forEach(function (word) {
@@ -56,8 +54,7 @@ const Scrabble = {
 
         if (scoreHash[wordScore] === undefined) {
           scoreHash[wordScore] = [word];
-        } //if hash undefined
-        else {
+        } else {
           scoreHash[wordScore].push(word);
         } //else for hash creation
         if (wordScore > highScore) {
@@ -69,19 +66,17 @@ const Scrabble = {
       let highestScoringWords = scoreHash[highScore];
       let minLength = highestScoringWords[0].length;
 
+
       if (highestScoringWords.length === 1) {
         highestScoringWord = highestScoringWords[0];
-      } //end check for just one winning word
-      else {
+      } else {
         highestScoringWord = highestScoringWords[0];
         highestScoringWords.forEach(function (word) {
 
           if (word.length === 7) {
             highestScoringWord = word;
             minLength = 0;
-          } //if word length === 7
-
-          else {
+          } else {
             if(word.length < minLength) {
               minLength = word.length;
               highestScoringWord = word;
@@ -91,9 +86,8 @@ const Scrabble = {
       } //end else for multiple high scoring words
       return highestScoringWord;
     } //else if array has 2 or more words
-    return highestScoringWord;
+    // return highestScoringWord;
   } //end highestscorefrom
-
 }; //end const Scrabble
 
 Scrabble.Player = class {
