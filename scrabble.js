@@ -29,7 +29,35 @@ const Scrabble = {
     }
     return score;
   }
-  // TODO: add the highestScoreFrom method
+,
+  highestScoreFrom: function(array) {
+    if (array.length === 0 || Array.isArray(array) != true) {
+      throw new ArgumentError('Requires at least one word');
+    } else if (array.length === 1) {
+      return array[0];
+    } else {
+      if (Scrabble.score(array[0]) > Scrabble.score(array[1])) {
+        return array[0];
+      } else if (Scrabble.score(array[0]) < Scrabble.score(array[1])) {
+        return array[1];
+      } else {
+        if (array[0].length === 7) {
+          return array[0];
+        } else if (array[1].length === 7) {
+          return array[1];
+        } else {
+          if (array[0].length < array[1].length) {
+            return array[0];
+          } else if (array[0].length > array[1].length) {
+            return array[1];
+          } else {
+            return array[0];
+          }
+        }
+      }
+    }
+
+  }
 };
 
 Scrabble.Player = class {

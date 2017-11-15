@@ -37,7 +37,7 @@ describe('score', function() {
   });
 });
 
-xdescribe('highestScoreFrom', function() {
+describe('highestScoreFrom', function() {
   it ('is defined', function() {
     expect(Scrabble.highestScoreFrom).toBeDefined();
   });
