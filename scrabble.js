@@ -51,7 +51,6 @@ const Scrabble = {
 
       words.forEach(function (word) {
         let wordScore = Scrabble.score(word);
-
         if (scoreHash[wordScore] === undefined) {
           scoreHash[wordScore] = [word];
         } else {
@@ -91,10 +90,44 @@ const Scrabble = {
 }; //end const Scrabble
 
 Scrabble.Player = class {
+  constructor(name) {
+    if(name === undefined){
+      throw new UserException("Must Include a Name");
+    }
+  this.name = name;
+} //constructor
+
+// if(name.length === 0) {
+//   throw new UserException("Must Include Name");
+// } else if (typeof words!= 'string') {
+//   throw new UserException("Name must be a string");
+// }
+//exception tests
+
   // TODO: implement the Player class
 };
 
 module.exports = Scrabble;
+
+
+
+// it('Creates a new player', function() {
+//   let name = 'test name';
+  // let player = new Scrabble.Player();
+  // console.log(player);
+// });
+
+// it('Requires a name', function() {
+//   expect(function() { new Scrabble.Player(); }).toThrow();
+// });
+
+
+
+
+
+
+
+
 // const loser = 'zzzzzz';
 // const winner = 'iiiiddd';
 //

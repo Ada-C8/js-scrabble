@@ -97,23 +97,23 @@ describe('highestScoreFrom', function() {
   });
 });
 
-// describe('Player', function() {
-//   it ('is defined', function() {
-//     expect(Scrabble.Player).toBeDefined();
-//   });
-//
-//   describe('Constructor', function() {
-//     it('Creates a new player', function() {
-//       let name = 'test name';
-//       let player = new Scrabble.Player(name);
-//       expect(player.name).toBe(name);
-//     });
-//
-//     it('Requires a name', function() {
-//       expect(function() { new Scrabble.Player(); }).toThrow();
-//     });
-//   });
-//
+describe('Player', function() {
+  it ('is defined', function() {
+    expect(Scrabble.Player).toBeDefined();
+  });
+
+  describe('Constructor', function() {
+    it('Creates a new player', function() {
+      let name = 'test name';
+      let player = new Scrabble.Player(name);
+      expect(player.name).toBe(name);
+    });
+
+    it('Requires a name', function() {
+      expect(function() { new Scrabble.Player(); }).toThrow();
+    });
+  });
+
 //   describe ('play', function() {
 //     it ('Records the played word', function() {
 //       let word = 'dog';
@@ -124,7 +124,7 @@ describe('highestScoreFrom', function() {
 //
 //       expect(player.plays.length).toBe(1);
 //       expect(player.plays[0]).toBe(word);
-//     });
+    });
 //
 //     it ('Requires a real word', function() {
 //       let player = new Scrabble.Player('test player');
