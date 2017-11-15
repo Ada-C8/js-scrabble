@@ -4,11 +4,11 @@ const Scrabble = {
     let regex = /^[a-zA-Z]+$/
 
     if (!regex.test(word)) {
-      throw 'Bad characters';
+      throw new UserException('Bad characters');
     }
 
     if (word.length > 7) {
-      throw 'Word has to be between 1 and 7 characters long';
+      throw new UserException('Word has to be between 1 and 7 characters long');
     }
 
     let lowercaseWord = word.toLowerCase();
@@ -58,19 +58,17 @@ const Scrabble = {
       let array = arrayOfWords
 
       if (array.length === 0 || !Array.isArray(array)) {
-        throw 'Not valid input';
+        throw new UserException('Not valid input');
       }
 
       if (array.length === 1) {
         return array[0];
       }
+
     }
 
   };
 
-  // Scrabble.score('word')
-  // console.log(Scrabble.score.toString);
-  //
   // Scrabble.Player = class {
   //   // TODO: implement the Player class
   // };
