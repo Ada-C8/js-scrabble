@@ -50,6 +50,7 @@ const Scrabble = {
       let scoreHash = {};
       let highestScoringWord = "";
 
+
       words.forEach(function (word) {
         let wordScore = Scrabble.score(word);
         if (scoreHash[wordScore] === undefined) {
@@ -63,19 +64,28 @@ const Scrabble = {
       });
 
       let highestScoringWords = scoreHash[highScore];
-      console.log("highest array: " + highestScoringWords);
+      let minLength = highestScoringWords[0].length;
 
       if (highestScoringWords.length === 1) {
         highestScoringWord = highestScoringWords[0];
-        // return highestScoringWords[0];
       } else {
         highestScoringWords.forEach(function (word) {
           if (word.length === 7) {
-            console.log("seven lettesr? " + word + word.length);
             highestScoringWord = word;
           } //if word length
-        }); //array iteration 
+          else {
+            highestScoringWords.forEach(function (word){
+              if(word.length < minLength) {
+                minLength = word.length;
+                highestScoringWord = word;
+              } //inner if on min
+            }); //foreach with min
+          } //else line 76
+
+          } //else if start with 7 letters
+        }); //array iteration
       } //else for array length
+
 
       return highestScoringWord;
     } //else if
