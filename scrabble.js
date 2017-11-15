@@ -10,13 +10,13 @@ const Scrabble = {
     };
 
     let letters = word.toUpperCase().split('');
-    let totalScore = 0;
+    let wordScore = 0;
 
     letters.forEach(function(letter) {
       if (!(letter in POINTS)) {
         throw 'Word includes an invalid character.'
       };
-      totalScore += POINTS[letter];
+      wordScore += POINTS[letter];
     });
 
     if (word.length > 7) {
@@ -24,10 +24,10 @@ const Scrabble = {
     } else if (word.length === 0) {
       throw 'Word is too short.';
     } else if (word.length === 7) {
-      totalScore += 50;
+      wordScore += 50;
     };
 
-    return totalScore;
+    return wordScore;
   },
 
   highestScoreFrom: function(arrayOfWords) {
@@ -76,12 +76,34 @@ Scrabble.Player = class {
     if (!word || typeof word !== 'string'){
       throw 'Please enter a valid word.'
     };
+    //
+    // if (this.hasWon() === true) {
+    //   throw 'You\'ve already won!'
+    // };
 
     this.plays.push(word);
-    return this.plays
+    return this.plays;
   }
-  // totalScore: function() {}
-  // hasWon: function() {}
+
+  totalScore() {
+    let total = 0;
+    if (this.plays.length === 0) {
+      return total;
+    } else {
+      this.plays.forEach(function (word) {
+        total += Scrabble.score(word)
+      });
+      return total;
+    };
+  }
+  //
+  // hasWon() {
+  //   if (this.totalScore() > 100) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   };
+  // }
   // highestScoringWord: function() {}
   // highestWordScore: function() {}
 };
