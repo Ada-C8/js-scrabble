@@ -16,7 +16,9 @@ const Scrabble = {
       throw new UserException("Word is Too Long");
     } else if (word.length ==- 0) {
       throw new UserException("You must enter a word to be scored"
-      )
+    );
+  } else if (word.match(/[^a-z]+/i)) {
+      throw new UserException("Word can only contain letters");
     }
 
     let total = 0; //set initial total
