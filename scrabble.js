@@ -24,7 +24,7 @@ const Scrabble = {
     points.forEach(function(point) {
       if (Scrabble.scoreChart[point].includes(letter)) {
         value = point;
-      } 
+      }
     });
     //console.log(letter);
     return Number(value);
@@ -32,7 +32,7 @@ const Scrabble = {
 
   score: function(word) {
     let total = 0;
-    if (null == word || word === "" || /[^a-zA-Z]/.test(word)) {
+    if (null == word || word === "" || /[^a-zA-Z]/.test(word) || word.length > 7) {
       throw 'You did not enter a valid word (empty string or non alphabetic characters)';
     }
     for (let i = 0, len = word.length; i < len; i++) {
@@ -46,6 +46,9 @@ const Scrabble = {
   },
 
   highestScoreFrom: function(words) {
+    if (words.length == 0) {
+      throw 'Empty array.';
+    }
     let values = words.map(function(word) {
       //console.log(Scrabble.score(word));
       return Scrabble.score(word);
