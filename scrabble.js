@@ -12,6 +12,7 @@ const Scrabble = {
     // word.toUpperCase().split(' ').forEach(function(letter) {
     // console.log('this is the ' + word);
 
+    let regex = /^[a-zA-Z]+$/;
     let total = 0;
     let playedWord = word.toUpperCase();
 
@@ -20,6 +21,10 @@ const Scrabble = {
     }
 
     if (playedWord === '') {
+      throw new UserException('Illegal play')
+    }
+
+    if (!playedWord.match(regex) ) {
       throw new UserException('Illegal play')
     }
 
