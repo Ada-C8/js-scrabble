@@ -49,7 +49,7 @@ const Scrabble = {
     if (arrayOfWords.length === 0) {
       throw new Error('no words');
     }
-    let maxWord = ["",0];
+    const maxWord = ['', 0];
     arrayOfWords.forEach((word) => {
       const wordScore = Scrabble.score(word);
 
@@ -92,9 +92,8 @@ Scrabble.Player = class {
   hasWon() {
     if (this.totalScore() >= 100) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
   totalScore() {
     let points = 0;
