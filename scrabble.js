@@ -87,6 +87,9 @@ Scrabble.Player = class {
   }
 
   play(item) {
+    if (item === undefined || item.length === 0){
+      throw new Error('Must pass in a valid word to play');
+    }
     if (this.hasWon()) {
       return false
     }
@@ -98,6 +101,13 @@ Scrabble.Player = class {
       return true
     }
     return false
+  }
+
+  totalScore() {
+    sum = 0;
+    this.plays.forEach((word) => {
+      sum += Scrabble.score(word);
+    });
   }
 
 };

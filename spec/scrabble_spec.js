@@ -117,7 +117,7 @@ describe('Player', function() {
   });
 
   xdescribe ('play', function() {
-    xit ('Records the played word', function() {
+    it ('Records the played word', function() {
       let word = 'dog';
       let player = new Scrabble.Player('test player');
       expect(player.plays.length).toBe(0);
@@ -128,7 +128,7 @@ describe('Player', function() {
       expect(player.plays[0]).toBe(word);
     });
 
-    xit ('Requires a real word', function() {
+    it ('Requires a real word', function() {
       let player = new Scrabble.Player('test player');
       expect(player.plays.length).toBe(0);
 
@@ -139,7 +139,7 @@ describe('Player', function() {
       expect(player.plays.length).toBe(0);
     });
 
-    xit ('Returns false and does not update plays if the player has already won', function() {
+    it ('Returns false and does not update plays if the player has already won', function() {
       let player = new Scrabble.Player('test player');
       expect(player.play('zzzzzzz')).toBeTruthy(); // +120 pts
       expect(player.plays.length).toBe(1);
