@@ -43,16 +43,60 @@ const Scrabble = {
       }
     } // if
     else {
-      throw new Error('Please enter valid input');
+      throw new Error(`Invalid word to score "${ word }"`);
       // console.log('Please enter valid input');
     } // else
-  } // score
+  }, // score
+
+  highestScoreFrom: function(arrayOfWords) {
+    if (arrayOfWords.length === 0) {
+      throw new Error('No words to score');
+    } else if (arrayOfWords.length === 1){
+      return arrayOfWords[0];
+    }
+    tie = [];
+    max_so_far = -1;
+    for(let word of arrayOfWords) {
+      // console.log(`About to call score on "${ word }"`);
+      current_high_score = Scrabble.score(word);
+      if (current_high_score > max_so_far) {
+        tie = [];
+        tie.push(word);
+        max_so_far = current_high_score;
+      }
+      else if (current_high_score === max_so_far) {
+        tie.push(word);
+      }
+    }
+
+    if (tie.length === 1){
+      return tie[0];
+    }
+    else {
+      winner = "";
+      min_length = 100;
+      for (let i of tie) {
+        if (i.length === 7){
+          return i;
+        }
+        else {
+          if (i.length < min_length){
+            winner = i;
+            min_length = i.length;
+          }
+        }
+      }
+    }
+    return winner;
+  }
 }; // scrabble
 
-let result = Scrabble.score('buBBLES');
-console.log(result);
 
-// TODO: add the highestScoreFrom method
+// let result = Scrabble.highestScoreFrom(['buBBLES', 'cat', 'wolf']);
+// console.log(result);
+
+// let result = Scrabble.score('buBBLES');
+// console.log(result);
 
 Scrabble.Player = class {
   // TODO: implement the Player class
