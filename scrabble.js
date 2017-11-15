@@ -86,21 +86,24 @@ const Scrabble = {
 
 
 Scrabble.Player = class {
-  constructor(name) {
+  constructor(name = null) {
+    if (name === null) {
+      throw new Error('Enter a name');
+    }
     this.name = name;
     this.plays = [];
     this.score = 0;
   }
 
-  get name() {
+  name() {
     return this.name;
   }
 
-  get plays() {
+  plays() {
     return this.plays;
   }
 
-  set play(word) {
+  play(word) {
     if (this.hasWon()) {
       return false;
     }
@@ -117,15 +120,19 @@ Scrabble.Player = class {
     return true;
   }
 
-  get hasWon() {
-    return this.score > 100;
+  totalScore() {
+    return this.score;
   }
 
-  get highestScoringWord() {
+  hasWon() {
+    return this.score >= 100;
+  }
+
+  highestScoringWord() {
     return Scrabble.highestScoreFrom(this.plays);
   }
 
-  get highestWordScore() {
+  highestWordScore() {
     return Scrabble.score(Scrabble.highestScoreFrom(this.plays));
   }
 };
