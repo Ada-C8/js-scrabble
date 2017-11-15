@@ -42,17 +42,25 @@ const Scrabble = {
     const totalScore = function totalScore(array) {
 
       let total = 0;
+
       array.forEach((char) => {
+        if (!(char in letterValues)) {
+          throw 'Word must only contain letters from A-Z';
+        }
+
         total += letterValues[char];
+
       });
 
       if (array.length == 7) {
         total += 50;
+      } else if (array.length > 7 || array.length == 0) {
+        throw 'Word must have 1-7 letters';
       }
 
       return total;
     }
-    
+
     const uppercaseWord = word.toUpperCase();
 
     const characters = splitChars(uppercaseWord);
