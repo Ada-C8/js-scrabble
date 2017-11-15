@@ -126,7 +126,7 @@ describe('Player', function() {
       expect(player.plays[0]).toBe(word);
     });
 
-    xit ('Requires a real word', function() {
+    it ('Requires a real word', function() {
       let player = new Scrabble.Player('test player');
       expect(player.plays.length).toBe(0);
 
@@ -137,7 +137,7 @@ describe('Player', function() {
       expect(player.plays.length).toBe(0);
     });
 
-    xit ('Returns false and does not update plays if the player has already won', function() {
+    it ('Returns false and does not update plays if the player has already won', function() {
       let player = new Scrabble.Player('test player');
       expect(player.play('zzzzzzz')).toBeTruthy(); // +120 pts
       expect(player.plays.length).toBe(1);
@@ -148,7 +148,7 @@ describe('Player', function() {
     });
   });
 
-  xdescribe ('totalScore', function() {
+  describe ('totalScore', function() {
     it ('Is zero if the player has not played anything', function() {
       let player = new Scrabble.Player('test player');
       expect(player.totalScore()).toBe(0);
@@ -166,7 +166,7 @@ describe('Player', function() {
     });
   });
 
-  xdescribe('hasWon', function() {
+  describe('hasWon', function() {
     it('returns false when score < 100', function() {
       let player = new Scrabble.Player('test player');
       expect(player.totalScore()).toBe(0);
@@ -196,7 +196,7 @@ describe('Player', function() {
     });
   });
 
-  xdescribe('highestScoringWord', function() {
+  describe('highestScoringWord', function() {
     // Tie-breaking logic is already described in the tests
     // for highestWordFrom, so we will not repeat it here.
     it('returns the highest scoring word played', function() {
@@ -212,11 +212,12 @@ describe('Player', function() {
     });
   });
 
-  xdescribe('highestWordScore', function() {
+  describe('highestWordScore', function() {
     it('returns the score of the highest scoring word played', function() {
       let player = new Scrabble.Player('test player');
       player.play('cat');
       player.play('zzzz');
+      //console.log(`player.highestWordScore = ${player.highestWordScore}`)
       expect(player.highestWordScore()).toBe(40);
     });
 

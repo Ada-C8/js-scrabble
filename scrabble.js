@@ -1,10 +1,10 @@
 //Julia Meier - JS Scrabble
 
 //EXCEPTIONS:
-function UserException(message) {
-   this.message = message;
-   this.name = 'UserException';
-}
+// function UserException(message) {
+//    this.message = message;
+//    this.name = 'UserException';
+// }
 //throw new UserException('InvalidMonthNo');
 
 const Scrabble = {
@@ -32,7 +32,7 @@ const Scrabble = {
 
   score: function(word) {
     let total = 0;
-    if (null == word || word === "" || /[^a-zA-Z]/.test(word) || word.length > 7) {
+    if (null == word || word.length === 0 || /[^a-zA-Z]/.test(word) || word.length > 7) {
       throw 'You did not enter a valid word (empty string or non alphabetic characters)';
     }
     for (let i = 0, len = word.length; i < len; i++) {
@@ -55,13 +55,12 @@ const Scrabble = {
     });
     let maxValue = Math.max.apply(null, values);
     let numberOfHighestScore = values.filter(item => item == maxValue).length;
-    console.log(`number of high score: ${numberOfHighestScore}`);
+    //console.log(`number of high score: ${numberOfHighestScore}`);
     let winningWord = null;
     if (numberOfHighestScore === 1) {
       let i = values.indexOf(maxValue);
-      // let i = values.indexOf(Math.max(...values));
-      console.log(`index of highest scoring word: ${i}`);
-      console.log(words[i]);
+      //console.log(`index of highest scoring word: ${i}`);
+      //console.log(words[i]);
       winningWord = words[i];
     } else {
         let bestWords = [];
@@ -98,24 +97,50 @@ const Scrabble = {
       if (null == word || word === "" || /[^a-zA-Z]/.test(word) || word.length > 7) {
         throw 'not a valid word';
       }
-      // if (hasWon()) {
-      //   return false
-      // } else {
+      if (this.hasWon()) {
+        return false;
+      } else {
         this.plays.push(word);
-        return true
-      // }
+        return true;
+      }
+    }
+
+    hasWon() {
+      if (this.totalScore() >= 100) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    totalScore() {
+      let points = 0;
+      this.plays.forEach(function(word) {
+        points += Scrabble.score(word);
+      });
+      return points;
+    }
+
+    highestScoringWord() {
+      //console.log(`highest scoring word = ${Scrabble.highestScoreFrom(this.plays)}`);
+      return Scrabble.highestScoreFrom(this.plays);
+    }
+
+    // highestWordScore(): method which returns the highestScoringWord score
+    highestWordScore() {
+      //console.log(`This players plays: ${this.plays}`);
+      //console.log(`This.highestScoringWord: ${this.highestScoringWord}`);
+      const bestWord = this.highestScoringWord();
+      //console.log(`bestWord = ${bestWord}`);
+      if (bestWord.length === 0 || bestWord === undefined) {
+        throw 'highest scoring word is an empty string';
+      } else {
+        return Scrabble.score(bestWord);
+      }
     }
 
   }
 };
-
-// plays: property which returns an Array of the words played by the player
-// play(word): method which adds the input word to the plays Array
-// Returns false if player has already won
-// totalScore(): method which sums up and returns the score of the players words
-// hasWon(): method which returns true if the player has over 100 points, otherwise returns false
-// highestScoringWord(): method which returns the highest scoring word the user has played
-// highestWordScore(): method which returns the highestScoringWord score
 
 //TESTING letterValue
 //let a = Scrabble.letterValue('I');
