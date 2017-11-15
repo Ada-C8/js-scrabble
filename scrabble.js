@@ -1,14 +1,74 @@
+// try {
+//     if(x == "") throw "empty";
+//     if(isNaN(x)) throw "not a number";
+//     x = Number(x);
+//     if(x < 5) throw "too low";
+//     if(x > 10) throw "too high";
+// }
+// catch(err) {
+//     message.innerHTML = "Input is " + err;
+// }
+//  do this inside of your stuff
+//
+// const UserException = function UserException(message) {
+//   this.message = message;
+//   this.name = 'UserException';
+// }
+//  throw new ScrabbleException('InvalidMonthNo');
+
 const Scrabble = {
+
   score: function(word) {
-    // TODO: implement score
-  }
+    let wordArray = word.split('');
+    let letter_points = { 'A': 1,'B': 3,'C':3,'D':2,'E':1,'F':4,'G':2,'H':4,'I':1,'J':8, 'K':5, 'L':1, 'M':3, 'N':1, 'O':1, 'P':3,'Q':10,'R':1,'S':1,'T':1,'U':1,'V':4,'W':4,'X':8, 'Y':4, 'Z':10 };
+    let score = 0;
+    if (wordArray.length === 7){
+      score += 50;
+    } else if (wordArray.length > 7){
+      throw `This word is too long. Are you sure you aren't cheating?`;
+    } else if (wordArray.length === 0){
+      throw 'You have to choose a word.'
+    } else{}
 
-  // TODO: add the highestScoreFrom method
+    for (let letter of wordArray){
 
-};
+      let point = letter_points[letter.toUpperCase()];
+      // try {
+      if(point === undefined) {
+        throw 'not found';}
+        // }
+        // catch(err) {
+        //   message.innerHTML = "Input is " + err;
+        // }
 
-Scrabble.Player = class {
-  // TODO: implement the Player class
-};
+        score += point;
+      }
 
-module.exports = Scrabble;
+      return score;
+    },
+    highestScoreFrom: function(arrayOfWords) {
+      if (arrayOfWords.length === 0 || arrayOfWords === ""){
+        throw 'The input is not what I expected.'
+      } else if (arrayOfWords.length === 1){
+        return arrayOfWords[0];
+      }
+      let highestScore = 0;
+      let highestScoringWord = '';
+      for (let word of arrayOfWords){
+        let wordScore = this.score(word);
+
+
+        if (wordScore > highestScore || (highestScore === wordScore && word.length < highestScoringWord.length && highestScoringWord.length != 7) || (highestScore === wordScore && word.length === 7)){
+          highestScore = wordScore;
+          highestScoringWord = word;
+        } else{}
+      }
+      return highestScoringWord;
+    }
+  };
+
+  Scrabble.Player = class {
+    // TODO: implement the Player class
+  };
+
+  module.exports = Scrabble;
