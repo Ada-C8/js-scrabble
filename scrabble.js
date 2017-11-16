@@ -100,24 +100,19 @@ const Scrabble = {
       throw new Error('ERROR');
     }
 
-    const wordScoreObject = {}
+    let currentHighestWord = wordsArray[0];
+    const playedScore = this.score(currentHighestWord);
 
     wordsArray.forEach((word) => {
-      wordScoreObject[word] = Scrabble.score(word);
+      const playedWord = word;
+      const getScore = this.score(playedWord);
+
+      if (getScore > playedScore) {
+        currentHighestWord = playedWord;
+      }
     });
-
-    if (Object.keys(wordScoreObject).length === 1) {
-      // return wordScoreObject;
-      return Object.keys(wordScoreObject)[0];
-    } else (Object.keys(wordScoreObject).length >1){
-      
-    }
-
-    return wordScoreObject;
-    // return Object.keys(wordScoreObject)[0];
-  }
-
-
+    return currentHighestWord;
+  },
 };
 
 
@@ -132,11 +127,3 @@ module.exports = Scrabble;
 
 
 // ---------------------------------------------------------
-const arr = ['cow', 'horse', 'pig', 'zzz'];
-
-Scrabble.highestScoreFrom(arr);
-
-console.log(Scrabble.highestScoreFrom(arr));
-
-
-//
