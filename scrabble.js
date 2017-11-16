@@ -69,7 +69,25 @@ Scrabble.Player = class {
     this.plays = [];
     this._totalScore = 0;
   }
+  play(word) {
+      if (this.hasWon()) {
+        return false;
+      }
+      this._totalScore += Scrabble.score(word);
+      this.plays.push(word);
+      return true;
+    }
 
+    totalScore() {
+  return this._totalScore;
+}
+
+hasWon() {
+  if (this._totalScore < 100) {
+    return false;
+  }
+  return true;
+}
   //
 };
 
