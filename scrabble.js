@@ -1,58 +1,31 @@
-const SCORES = {
-  A: 1,
-  B: 3,
-  C: 3,
-  D: 2,
-  E: 1,
-  F: 4,
-  G: 2,
-  H: 4,
-  I: 1,
-  J: 8,
-  K: 5,
-  L: 1,
-  M: 3,
-  N: 1,
-  O: 1,
-  P: 3,
-  Q: 10,
-  R: 1,
-  S: 1,
-  T: 1,
-  U: 1,
-  V: 4,
-  W: 4,
-  X: 8,
-  Y: 4,
-  Z: 10,
+const TILES = {
+  A: { val: 1, qty: 9 },
+  B: { val: 3, qty: 2 },
+  C: { val: 3, qty: 2 },
+  D: { val: 2, qty: 4 },
+  E: { val: 1, qty: 12 },
+  F: { val: 4, qty: 2 },
+  G: { val: 2, qty: 3 },
+  H: { val: 4, qty: 2 },
+  I: { val: 1, qty: 9 },
+  J: { val: 8, qty: 1 },
+  K: { val: 5, qty: 1 },
+  L: { val: 1, qty: 4 },
+  M: { val: 3, qty: 2 },
+  N: { val: 1, qty: 6 },
+  O: { val: 1, qty: 8 },
+  P: { val: 3, qty: 2 },
+  Q: { val: 10, qty: 1 },
+  R: { val: 1, qty: 6 },
+  S: { val: 1, qty: 4 },
+  T: { val: 1, qty: 6 },
+  U: { val: 1, qty: 4 },
+  V: { val: 4, qty: 2 },
+  W: { val: 4, qty: 2 },
+  X: { val: 8, qty: 1 },
+  Y: { val: 4, qty: 2 },
+  Z: { val: 10, qty: 1 },
 };
-
-const NUMTILES = {
-  1: ['J', 'K', 'Q', 'X', 'Z'],
-  2: ['B', 'C', 'F', 'H', 'M', 'P', 'V', 'W', 'Y'],
-  3: ['G'],
-  4: ['D', 'L', 'S', 'U'],
-  6: ['N', 'R', 'T'],
-  8: ['O'],
-  9: ['A', 'I'],
-  12: ['E'],
-};
-
-const parse = require('csv-parse');
-// require('should');
-const fs = require('fs');
-// const rr = fs.createReadStream('./dictionary.csv');
-
-// rr.on('readable', () => {
-//   console.log('readable:', rr.read());
-// });
-// rr.on('end', () => {
-//   console.log('end');
-// });
-
-const parser = parse({ delimiter: ',' });
-fs.createReadStream('./dictionary.csv').pipe(parser);
-console.log(parser);
 
 function WordLengthException() {
   this.message = 'must contain between 1 and 7 letters';
@@ -89,7 +62,7 @@ const Scrabble = {
     // add 50 pt bonus if use all 7 letters
     const startVal = word.length === 7 ? 50 : 0;
 
-    const vals = word.toUpperCase().split('').map(char => SCORES[char]);
+    const vals = word.toUpperCase().split('').map(char => TILES[char].val);
     return vals.reduce((sum, val) => sum + val, startVal);
   },
 
@@ -166,11 +139,9 @@ Scrabble.TileBag = class {
 
   generateTiles() {
     this.tiles = [];
-    Object.entries(NUMTILES).forEach((entry) => {
-      const [freq, letters] = entry;
-      letters.forEach((letter) => {
-        this.tiles = this.tiles.concat(Array(Number(freq)).fill(letter));
-      });
+    Object.keys(TILES).forEach((letter) => {
+      const [qty] = TILES[letter].qty;
+      this.tiles = this.tiles.concat(Array(Number(qty)).fill(letter));
     });
     return this.tiles.sort();
   }
@@ -197,14 +168,4 @@ Scrabble.TileBag = class {
   }
 };
 
-// Scrabble.Dictionary = class {
-//   constructor() {
-//     const input =
-//   }
-// }
-
 module.exports = Scrabble;
-
-// console.log(Scrabble.score('dog'));
-// let tilebag = new Scrabble.TileBag();
-// console.log(tilebag.generateTiles());
