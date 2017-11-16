@@ -104,6 +104,38 @@ Scrabble.Player = class {
     } else {
       throw new Error('Player must have a name');
     }
+
+    this.plays = [];
+  }
+
+  play(word) {
+    if (typeof word !== 'string' || word.length < 0) {
+      throw new Error('Player must play a valid word');
+    }
+    if (this.hasWon()) {
+      return false;
+    }
+    this.plays.push(word);
+    return true;
+  }
+
+  totalScore() {
+    if (this.plays === []) {
+      return 0;
+    }
+
+    const wordScores = this.plays.map(play => Scrabble.score(play));
+
+    const total = wordScores.reduce((accumulator, value) => accumulator + value, 0);
+
+    return total;
+  }
+
+  hasWon() {
+    if (this.totalScore() >= 100) {
+      return true;
+    }
+    return false;
   }
 };
 

@@ -114,7 +114,7 @@ describe('Player', function() {
     });
   });
 
-  xdescribe ('play', function() {
+  describe ('play', function() {
     it ('Records the played word', function() {
       let word = 'dog';
       let player = new Scrabble.Player('test player');
