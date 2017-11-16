@@ -53,11 +53,11 @@ const Scrabble = {
     } else if (arrayOfWords.length === 1){
       return arrayOfWords[0];
     }
-    tie = [];
-    max_so_far = -1;
+    let tie = [];
+    let max_so_far = -1;
     for(let word of arrayOfWords) {
       // console.log(`About to call score on "${ word }"`);
-      current_high_score = Scrabble.score(word);
+      let current_high_score = Scrabble.score(word);
       if (current_high_score > max_so_far) {
         tie = [];
         tie.push(word);
@@ -103,7 +103,7 @@ Scrabble.Player = class {
 // highestWordScore(): method which returns the highestScoringWord score
   // TODO: implement the Player class
   constructor(name){
-    if (name.length == 0){
+    if (name.length === 0){
       throw new Error('It requires name');
     }
     this.name = name;
@@ -114,38 +114,37 @@ Scrabble.Player = class {
     if (this.hasWon()){
       return false;
     }
-    if (typeof word !== 'string' || word === ''){
-      throw 'You must play a word'
+    // if (typeof word !== 'string' || word === ''){
+    //   throw 'Please enter a word'
+    // }
+    format = /^[a-zA-Z]+$/;
+    if (format.test(word) && word.length <= 7 && word != ''){
+      this.plays.push(word);
+      return Scrabble.score(word);
     }
-    this.plays.push(word);
-    return Scrabble.score(word);
+    else {
+      throw new Error(' You must enter a word');
+    }
   }
 
   totalScore() {
     let total = 0;
-    for(let i in this.plays){
+    for(let i of this.plays){
       total += Scrabble.score(i);
     }
     return total;
   }
 
   hasWon() {
-  //   let score = totalScore();
-  //   if ( score > 100){
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-
-    return this.totalScore() > 100 ?  true :  false
+    return this.totalScore() >= 100 ?  true :  false
   }
 
   highestScoringWord() {
-    return Scrabble.highestScoreFrom(plays);
+    return Scrabble.highestScoreFrom(this.plays);
   }
 
   highestWordScore() {
-    return Scrabble.score(highestScoringWord);
+    return Scrabble.score(this.highestScoringWord());
   }
 
 };
