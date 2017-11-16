@@ -136,7 +136,7 @@ describe('Player', function() {
       expect(function() { player.play(44); }).toThrow();
       expect(player.plays.length).toBe(0);
     });
-
+//1
     it ('Returns false and does not update plays if the player has already won', function() {
       let player = new Scrabble.Player('test player');
       expect(player.play('zzzzzzz')).toBeTruthy(); // +120 pts
@@ -153,7 +153,7 @@ describe('Player', function() {
       let player = new Scrabble.Player('test player');
       expect(player.totalScore()).toBe(0);
     });
-
+//2
     it ('Is updated by play', function() {
       let player = new Scrabble.Player('test player');
       expect(player.totalScore()).toBe(0);

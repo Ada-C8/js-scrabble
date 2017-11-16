@@ -91,7 +91,6 @@ Scrabble.Player = class {
   } //constructor
 
   totalScore() {
-    console.log("Im in total score");
     let playerScore = 0;
     this.plays.forEach(function (word) {
       playerScore += Scrabble.score(word);
@@ -100,13 +99,8 @@ Scrabble.Player = class {
   } //ts method
 
   hasWon() {
-    console.log("I'm in has Won.");
-    let score = player.totalScore();
-    console.log(`score is ${score} and is that more than 100?`);
-    console.log(score);
-    console.log("*****************");
-    if(score >= 100) {
-      console.log("total score is more than 100");
+    let score = player.totalScore(); //error line
+    if(score > 100) {
       return true;
     } else {
       return false;
@@ -122,22 +116,24 @@ Scrabble.Player = class {
       throw new UserException("Word can only contain letters");
     } //exception tests
 
-    console.log(`array length is ${this.plays.length}`);
-    console.log("__________________");
-    console.log(`has won returns (true or false): `);
-    console.log(player.hasWon());
-    console.log("________________");
-// if( (this.plays.length > 0) && (player.hasWon() != true))
-    if(player.hasWon() != true) {
-      console.log("It shouldn't let you play this word");
+
+    if( (this.plays.length > 0) && (player.hasWon() === true)) {
       return false;
     } else {
       this.plays.push(word);
-      console.log("Im adding a word now");
       return true;
     }
 
   }; //play function
+
+  highestScoringWord() {
+    return Scrabble.highestScoreFrom(this.plays);
+  }
+
+  highestWordScore() {
+
+    return Scrabble.score(Scrabble.highestScoreFrom(this.plays));
+  }
 
 
 
@@ -145,39 +141,50 @@ Scrabble.Player = class {
 
 module.exports = Scrabble;
 
-// speak() {
-//   console.log(this.sound);
-// }
-//
-// static createAnimals(sounds) {
-//   let animals = [];
-//   for (let sound of sounds) {
-//     let animal = new this(sound);
-//     animals.push(animal);
-//   }
-//   return animals;
-// }
-// }
-
-// - `name`: property which returns the value of the player's name
-// - `plays`: property which returns an Array of the words played by the player
-// - `play(word)`: method which adds the input word to the `plays` Array
-//     - Returns false if player has already won
-// - `totalScore()`: method which sums up and returns the score of the players words
 
 
-let word = 'dog';
+
+
 let player = new Scrabble.Player("Dave");
-console.log(player.plays.length);
-player.play("zzzzzzz");
+console.log("Player begins game");
 console.log(player.totalScore());
-player.play("qqqqqqq");
+player.play('dog');
 console.log(player.totalScore());
-player.play("shoes");
-// expect(player.play(word)).toBeTruthy();
-console.log("AFTER PLAYS");
-console.log(player.plays.length);
-console.log(player.plays);
-console.log("THis is showing if the player won");
+player.play('cat');
+console.log(player.totalScore());
+player.play('goat');
+console.log(player.totalScore());
+console.log("has player won? ");
 console.log(player.hasWon());
+console.log("Plays zzzzzzz");
+player.play('zzzzzzz');
 console.log(player.totalScore());
+console.log("has player won? ");
+console.log(player.hasWon());
+console.log(player.highestScoringWord());
+console.log(player.highestWordScore());
+
+
+
+
+
+
+
+
+
+
+
+
+// console.log(player.plays.length);
+// player.play("zzzzzzz");
+// console.log(player.totalScore());
+// player.play("qqqqqqq");
+// console.log(player.totalScore());
+// player.play("shoes");
+// // expect(player.play(word)).toBeTruthy();
+// console.log("AFTER PLAYS");
+// console.log(player.plays.length);
+// console.log(player.plays);
+// console.log("THis is showing if the player won");
+// console.log(player.hasWon());
+// console.log(player.totalScore());
