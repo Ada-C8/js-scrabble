@@ -30,7 +30,7 @@ const letterScores = {
 const ErrorMsg = function ErrorMsg(value) {
   this.value = value;
   this.message = 'is not valid';
-  this.toString = () => this.value + this.message;
+  this.toString = () => `${this.value} ${this.message}`;
 };
 
 const Scrabble = {
@@ -82,6 +82,9 @@ Scrabble.Player = class {
   }
 
   play(word) {
+    if (word == null || typeof word !== 'string') {
+      throw new ErrorMsg(word);
+    }
     this.plays.push(word);
     return true;
   }

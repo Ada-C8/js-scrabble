@@ -125,17 +125,17 @@ describe('Player', function() {
       expect(player.plays.length).toBe(1);
       expect(player.plays[0]).toBe(word);
     });
-//
-//     it ('Requires a real word', function() {
-//       let player = new Scrabble.Player('test player');
-//       expect(player.plays.length).toBe(0);
-//
-//       expect(function() { player.play(); }).toThrow();
-//       expect(player.plays.length).toBe(0);
-//
-//       expect(function() { player.play(44); }).toThrow();
-//       expect(player.plays.length).toBe(0);
-//     });
+
+    it ('Requires a real word', function() {
+      let player = new Scrabble.Player('test player');
+      expect(player.plays.length).toBe(0);
+
+      expect(function() { player.play(); }).toThrow();
+      expect(player.plays.length).toBe(0);
+
+      expect(function() { player.play(44); }).toThrow();
+      expect(player.plays.length).toBe(0);
+    });
 //
 //     it ('Returns false and does not update plays if the player has already won', function() {
 //       let player = new Scrabble.Player('test player');
