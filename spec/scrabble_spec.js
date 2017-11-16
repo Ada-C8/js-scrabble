@@ -137,7 +137,7 @@ describe('Player', function() {
       expect(player.plays.length).toBe(0);
     });
 
-    // xit ('Returns false and does not update plays if the player has already won', function() {
+    // it ('Returns false and does not update plays if the player has already won', function() {
     //   let player = new Scrabble.Player('test player');
     //   expect(player.play('zzzzzzz')).toBeTruthy(); // +120 pts
     //   expect(player.plays.length).toBe(1);

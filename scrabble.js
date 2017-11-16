@@ -21,11 +21,11 @@ const Scrabble = {
 
     if (/^[a-zA-Z]+$/.test(word)) {
     } else {
-      throw new Error ('invalid word');
+      throw new Error('invalid word');
     }
 
     if (word.length > 7 || word.length === 0) {
-      throw new Error ('invalid word');
+      throw new Error('invalid word');
     }
 
     if (word.length === 7) {
@@ -38,7 +38,6 @@ const Scrabble = {
     const letterArray = upperCase.split('');
 
     letterArray.forEach((letter) => {
-
       switch (letter) {
         case 'A':
         case 'E':
@@ -109,14 +108,13 @@ const Scrabble = {
 
       if (playedScore > highestScore ||
           (playedScore === highestScore && playedWord.length === 7) ||
-          (playedScore === highestScore && playedWord.length < currentHighestWord.length && currentHighestWord.length != 7)) {
-
+          (playedScore === highestScore && playedWord.length < currentHighestWord.length && currentHighestWord.length !== 7)) {
         currentHighestWord = playedWord;
-        highestScore= this.score(playedWord);
+        highestScore = this.score(playedWord);
       }
     });
     return currentHighestWord;
-  }
+  },
 };
 
 
@@ -134,7 +132,7 @@ Scrabble.Player = class {
     if (typeof word !== 'string' || typeof word === 'number') {
       throw new Error('invalid');
     }
-
+    // look into using hasWon to check if the player has won or not. if they have won do not push word to this.plays. TEST IS COMMENTED OUT.
     this.plays.push(word);
     return true;
   }
@@ -192,23 +190,3 @@ Scrabble.Player = class {
 };
 
 module.exports = Scrabble;
-
-
-// ---------------------------------------------------------
-
-
-
-    // let numOneWord = this.plays[0];
-    // let numOneWordScore = this.score(this.plays[0]);
-    //
-    // this.plays.forEach((word) => {
-    //   const currentWord = word;
-    //   const currentWordScore = this.score(currentWord);
-    //
-    //   if (currentWordScore > numOneWordScore) {
-    //     numOneWord = currentWord;
-    //     numOneWordScore = this.score(currentWord);
-    //   }
-    //
-    // });
-    // return numOneWord;
