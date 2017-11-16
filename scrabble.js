@@ -105,9 +105,9 @@ Scrabble.Player = class {
     }
     this.name = name;
   }
-  // plays() {
-  //
-  // }
+  plays() {
+    return plays
+  }
 
   // play(word) {
   //
