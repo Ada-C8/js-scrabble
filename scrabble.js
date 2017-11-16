@@ -98,7 +98,13 @@ const Scrabble = {
 };
 
 Scrabble.Player = class {
-  // TODO: implement the Player class
+  constructor(name) {
+    this.name = name;
+  }
+
+  // if (name !== undefined) {
+  //   throw new Error('Player requires a name');
+  // }
 };
 
 module.exports = Scrabble;
