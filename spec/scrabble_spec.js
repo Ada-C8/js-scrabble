@@ -136,35 +136,35 @@ describe('Player', function() {
       expect(function() { player.play(44); }).toThrow();
       expect(player.plays.length).toBe(0);
     });
-//
-//     it ('Returns false and does not update plays if the player has already won', function() {
-//       let player = new Scrabble.Player('test player');
-//       expect(player.play('zzzzzzz')).toBeTruthy(); // +120 pts
-//       expect(player.plays.length).toBe(1);
-//       expect(player.hasWon()).toBeTruthy();
-//
-//       expect(player.play('dog')).toBe(false);
-//       expect(player.plays.length).toBe(1);
-//     });
+
+    // it ('Returns false and does not update plays if the player has already won', function() {
+    //   let player = new Scrabble.Player('test player');
+    //   expect(player.play('zzzzzzz')).toBeTruthy(); // +120 pts
+    //   expect(player.plays.length).toBe(1);
+    //   expect(player.hasWon()).toBeTruthy();
+    //
+    //   expect(player.play('dog')).toBe(false);
+    //   expect(player.plays.length).toBe(1);
+    // });
   });
-//
-//   describe ('totalScore', function() {
-//     it ('Is zero if the player has not played anything', function() {
-//       let player = new Scrabble.Player('test player');
-//       expect(player.totalScore()).toBe(0);
-//     });
-//
-//     it ('Is updated by play', function() {
-//       let player = new Scrabble.Player('test player');
-//       expect(player.totalScore()).toBe(0);
-//       player.play('dog');
-//       expect(player.totalScore()).toBe(5);
-//       player.play('cat');
-//       expect(player.totalScore()).toBe(10);
-//       player.play('goat');
-//       expect(player.totalScore()).toBe(15);
-//     });
-//   });
+
+  describe ('totalScore', function() {
+    it ('Is zero if the player has not played anything', function() {
+      let player = new Scrabble.Player('test player');
+      expect(player.totalScore()).toBe(0);
+    });
+
+    it ('Is updated by play', function() {
+      let player = new Scrabble.Player('test player');
+      expect(player.totalScore()).toBe(0);
+      player.play('dog');
+      expect(player.totalScore()).toBe(5);
+      player.play('cat');
+      expect(player.totalScore()).toBe(10);
+      player.play('goat');
+      expect(player.totalScore()).toBe(15);
+    });
+  });
 //
 //   describe('hasWon', function() {
 //     it('returns false when score < 100', function() {
@@ -194,7 +194,7 @@ describe('Player', function() {
 //       expect(player.totalScore()).toBe(120);
 //       expect(player.hasWon()).toBe(true);
 //     });
-//   });
+  });
 //
 //   describe('highestScoringWord', function() {
 //     // Tie-breaking logic is already described in the tests
@@ -225,4 +225,4 @@ describe('Player', function() {
 //       expect(() => { player.highestWordScore() }).toThrow();
 //     });
 //   });
-});
+// });

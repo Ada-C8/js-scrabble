@@ -88,6 +88,14 @@ Scrabble.Player = class {
     this.plays.push(word);
     return true;
   }
+
+  totalScore() {
+    let totalScore = 0;
+    this.plays.forEach((word) => {
+      totalScore += Scrabble.score(word);
+    });
+    return totalScore;
+  }
 };
 
 module.exports = Scrabble;
