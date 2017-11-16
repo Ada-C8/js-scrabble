@@ -86,18 +86,17 @@ Scrabble.Player = class {
 
   totalScore() {
     let totalScore = 0;
-    for (let word of this.plays) {
+    this.plays.forEach((word) => {
       totalScore += Scrabble.score(word);
-    }
+    });
     return totalScore;
   }
 
   hasWon() {
     if (this.totalScore() < 100) {
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
 
   play(word) {
@@ -106,9 +105,8 @@ Scrabble.Player = class {
     }
     if (typeof word === 'string' && word.length > 0) {
       return this.plays.push(word);
-    } else {
-      throw new InputError('must enter a word');
     }
+    throw new InputError('must enter a word');
   }
 
   highestScoringWord() {
@@ -166,8 +164,8 @@ Scrabble.TileBag = class {
       throw new InputError('must enter a number');
     }
     this.drawnTiles = [];
-    for (let i = 0; i < number; i++) {
-      let index = Math.floor(Math.random() * this.tilebag.length);
+    for (let i = 0; i < number; i += 1) {
+      const index = Math.floor(Math.random() * this.tilebag.length);
       this.drawnTiles.push(this.tilebag.splice(index, 1));
     }
     return this.drawnTiles;
@@ -179,21 +177,3 @@ Scrabble.TileBag = class {
 };
 
 module.exports = Scrabble;
-
-// let newTileBag = new Scrabble.TileBag();
-// myTiles = newTileBag.drawTiles(10);
-// console.log(myTiles);
-// myRemaining = newTileBag.remainingTiles();
-// console.log(myRemaining);
-
-// let sally = new Scrabble.Player('Sally');
-// console.log(sally.name);
-// console.log(sally.plays);
-//
-// sally.play('dog');
-// console.log(sally.plays);
-// console.log(sally.plays[0]);
-// console.log(sally.plays.length);
-// sally.play('zzzz');
-// console.log(sally.highestScoringWord());
-// console.log(sally.highestWordScore());
