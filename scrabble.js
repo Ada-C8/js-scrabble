@@ -160,7 +160,6 @@ Scrabble.Player = class {
   }
 
   highestScoringWord() {
-
     if (this.plays.length === 0) {
       throw new Error('no word has been played.')
     }
@@ -176,10 +175,20 @@ Scrabble.Player = class {
   }
 
   // highestWordScore(): method which returns the highestScoringWord score
-  highWordScore() {
+  highestWordScore() {
+    if (this.plays.length === 0) {
+      throw new Error('no word has been played.')
+    }
 
+    let winningScore = Scrabble.score(this.plays[0]);
+
+    this.plays.forEach((word) => {
+      if (Scrabble.score(word) > winningScore) {
+        winningScore = Scrabble.score(word);
+      }
+    });
+    return winningScore;
   }
-
 };
 
 module.exports = Scrabble;
