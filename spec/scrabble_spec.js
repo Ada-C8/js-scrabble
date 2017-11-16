@@ -82,19 +82,19 @@ describe('highestScoreFrom', function() {
     expect(Scrabble.highestScoreFrom(['dog', 'goat'])).toBe('dog');
     expect(Scrabble.highestScoreFrom(['goat', 'dog'])).toBe('dog');
   });
-//
-//   it ('returns the first word of a tie with same letter count', function() {
-//     // Check score assumptions
-//     expect(Scrabble.score('i')).toBe(1);
-//     expect(Scrabble.score('dog')).toBe(5);
-//     expect(Scrabble.score('cat')).toBe(5);
-//
-//     // Test the functionality
-//     expect(Scrabble.highestScoreFrom(['dog', 'dog'])).toBe('dog');
-//     expect(Scrabble.highestScoreFrom(['dog', 'cat'])).toBe('dog');
-//     expect(Scrabble.highestScoreFrom(['cat', 'dog'])).toBe('cat');
-//     expect(Scrabble.highestScoreFrom(['i', 'dog', 'cat'])).toBe('dog');
-//   });
+
+  it ('returns the first word of a tie with same letter count', function() {
+    // Check score assumptions
+    expect(Scrabble.score('i')).toBe(1);
+    expect(Scrabble.score('dog')).toBe(5);
+    expect(Scrabble.score('cat')).toBe(5);
+
+    // Test the functionality
+    expect(Scrabble.highestScoreFrom(['dog', 'dog'])).toBe('dog');
+    expect(Scrabble.highestScoreFrom(['dog', 'cat'])).toBe('dog');
+    expect(Scrabble.highestScoreFrom(['cat', 'dog'])).toBe('cat');
+    expect(Scrabble.highestScoreFrom(['i', 'dog', 'cat'])).toBe('dog');
+  });
 });
 //
 // describe('Player', function() {
