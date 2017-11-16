@@ -101,29 +101,60 @@ const Scrabble = {
     }
 
     let currentHighestWord = wordsArray[0];
-    const playedScore = this.score(currentHighestWord);
+    let highestScore = this.score(currentHighestWord);
 
     wordsArray.forEach((word) => {
       const playedWord = word;
-      const getScore = this.score(playedWord);
+      const playedScore = this.score(playedWord);
 
-      if (getScore > playedScore) {
+      if (playedScore > highestScore ||
+          (playedScore === highestScore && playedWord.length === 7) ||
+          (playedScore === highestScore && playedWord.length < currentHighestWord.length && currentHighestWord.length != 7)) {
+
         currentHighestWord = playedWord;
+        highestScore= this.score(playedWord);
       }
     });
     return currentHighestWord;
-  },
+  }
 };
 
 
 Scrabble.Player = class {
-  // TODO: implement the Player class
+
+  constructor(name) {
+    if (typeof name !== 'string') {
+      throw new Error('no name');
+    }
+    this.name = name;
+    this.plays = [];
+  }
+
+  play(word) {
+    if (typeof word !== 'string' || typeof word === 'number') {
+      throw new Error('invalid');
+    }
+
+    this.plays.push(word);
+    return true;
+  }
+
+  totalScore() {
+    let sum = 0;
+    this.plays.forEach((word) => {
+      const score = Scrabble.score(word);
+      sum += score;
+    });
+    return sum;
+  }
 };
 
 module.exports = Scrabble;
 
 
 // console.log(Scrabble.score('apple'));
+
+
 
 
 // ---------------------------------------------------------
