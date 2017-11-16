@@ -87,10 +87,28 @@ Scrabble.Player = class {
     } //exception
     this.name = name;
     this.plays = [];
+    // this.totalScore = 0;
   } //constructor
 
-  play(word) {
+  totalScore() {
+    console.log("Im in total score");
+    let totalScore = 0;
+    this.plays.forEach(function (word) {
+      totalScore += Scrabble.score(word);
+    }); //for each
+    return totalScore;
+  } //ts method
 
+  hasWon() {
+    console.log("I'm in has Won.");
+    if(player.totalScore >= 100) {
+      console.log("total score is more than 100")
+      let hasWon = true;
+      return hasWon;
+    }
+  }
+
+  play(word) {
     if(word.length > 7) {
       throw new UserException("Word is Too Long");
     } else if (word.length === 0) {
@@ -99,31 +117,16 @@ Scrabble.Player = class {
       throw new UserException("Word can only contain letters");
     } //exception tests
 
-
-    if((this.plays.length > 0) && (hasWon === false)) {
+    if((this.plays.length > 0) && (player.hasWon() === false)) {
       return false
     } else {
       this.plays.push(word);
       return true;
     }
 
-
-
   }; //play function
 
-  totalScore() {
-    let totalScore = 0;
-    this.plays.forEach(function (word) {
-      total += Scrabble.score(word);
-    }); //for each
-    return totalScore;
-  } //ts method
 
-  hasWon() {
-    if(totalScore >= 100) {
-      return true;
-    }
-  }
 
 }; //player class
 
@@ -153,47 +156,14 @@ module.exports = Scrabble;
 let word = 'dog';
 let player = new Scrabble.Player("Dave");
 console.log(player.plays.length);
-player.play(word);
+player.play("zzzzzz");
+console.log(player.totalScore());
+player.play("zzzzzz");
+console.log(player.totalScore());
+player.play("shoes");
 // expect(player.play(word)).toBeTruthy();
-
+console.log("AFTER PLAYS");
 console.log(player.plays.length);
-console.log(player.plays[0]);
-
-
-
-// //
-// const loser = 'zzzzzz';
-// const winner = 'iiiiddd';
-
-// console.log("Comparing dog and pig");
-// console.log("pig should win ")
-// console.log(Scrabble.highestScoreFrom(['dog', 'pig']));
-// console.log("*********************\n");
-// console.log("starting with pig, pig should win.")
-// console.log(Scrabble.highestScoreFrom(['pig', 'dog']));
-//
-// console.log("Comparing winner and loser");
-// console.log("iiiiddd should win -- seven letters ")
-// console.log(Scrabble.highestScoreFrom([loser, winner]));
-//
-// console.log(Scrabble.highestScoreFrom([winner, loser]));
-
-// console.log("***************************************")
-// console.log("schekcing i, dog, cat -- cd should win");
-// console.log(Scrabble.highestScoreFrom(['i', 'dog', 'cd', 'cat']));
-//
-// console.log("Comparing dog and cat, dog should win");
-// console.log(Scrabble.highestScoreFrom(['dog', 'cat']));
-// console.log("***********************");
-// console.log("Comparing cat and dog, cat should win");
-// console.log(Scrabble.highestScoreFrom(['cat', 'dog']));
-// console.log("***********************");
-//   // Test the functionality
-//   expect(Scrabble.highestScoreFrom(['dog', 'dog'])).toBe('dog');
-//   expect(Scrabble.highestScoreFrom(['dog', 'cat'])).toBe('dog');
-//   expect(Scrabble.highestScoreFrom(['cat', 'dog'])).toBe('cat');
-//   expect(Scrabble.highestScoreFrom(['i', 'dog', 'cat'])).toBe('dog');
-// });
-
-
-///
+console.log(player.plays);
+player.hasWon();
+console.log(player.totalScore());
