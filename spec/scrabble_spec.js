@@ -206,11 +206,11 @@ describe('Player', function() {
       player.play('zzzz');
       expect(player.highestScoringWord()).toBe('zzzz');
     });
-//
-//     it('throws an error if no words have been played', function() {
-//       let player = new Scrabble.Player('test player');
-//       expect(() => { player.highestScoringWord() }).toThrow();
-//     });
+
+    it('throws an error if no words have been played', function() {
+      let player = new Scrabble.Player('test player');
+      expect(() => { player.highestScoringWord() }).toThrow();
+    });
   });
 //
 //   describe('highestWordScore', function() {
