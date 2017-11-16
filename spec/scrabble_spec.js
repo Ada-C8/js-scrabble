@@ -108,10 +108,10 @@ describe('Player', function() {
       let player = new Scrabble.Player(name);
       expect(player.name).toBe(name);
     });
-//
-//     it('Requires a name', function() {
-//       expect(function() { new Scrabble.Player(); }).toThrow();
-//     });
+
+    it('Requires a name', function() {
+      expect(function() { new Scrabble.Player(); }).toThrow();
+    });
   });
 //
 //   describe ('play', function() {

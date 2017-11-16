@@ -74,6 +74,9 @@ const Scrabble = {
 
 Scrabble.Player = class {
   constructor(name) {
+    if (name == null) {
+      throw new ErrorMsg(name);
+    }
     this.name = name;
   }
 };
