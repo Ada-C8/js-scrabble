@@ -148,13 +148,11 @@ Scrabble.Player = class {
     // return this.total;
   }
 
-
   hasWon() {
     if (this.totalScore() >= 100) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
 
   highestScoringWord() {
