@@ -1,8 +1,8 @@
-
 const Scrabble = {
   score: function(word) {
 
-    let letterScores = {
+    const letterScores = {
+
         A: 1, E: 1, I: 1, O: 1, U: 1,
         L: 1, N: 1, R: 1, S: 1, T: 1,
         D: 2, G: 2, B: 3, C: 3, M: 3,
@@ -11,30 +11,66 @@ const Scrabble = {
         Z: 10
       };
 
-    let letters = word.toUpperCase().split("");
-    let wordScore = 0;
-
-    for (let letter in letters){
-      if (letterScores[letter] !== null) {
-        wordScore += letterScores[letter];
-      }
-      if (word.length === 7){
-        wordScore += 50;
-      }
+    if (word.length > 7 || word.length === 0 || (/^[a-zA-Z]+$/.test(word) === false) ) {
+      throw(`Error`);
     }
-    return wordScore;
+
+    let wordScore = 0;
+    word.split("").forEach(function(letter){
+      wordScore +=
+      letterScores[letter.toUpperCase()]
+    });
+    if (word.length == 7){
+      wordScore += 50;
+    }
+    return wordScore
   },
 
-  highestScoreFrom: function(arrayOfWords){
+  highestScoreFrom: function(arrayOfWords) {
 
-  }
+    if (arrayOfWords.length === 0){
+    throw(`Error`);
+    }
 
-}; // do not remove me, i end the const !!!
+    let highestScore = 0;
+    let highestWord = "";
+    let that = this;
 
+    arrayOfWords.forEach(function(word) {
+      if (that.score(word) > highestScore){
+        highestScore = that.score(word);
+        highestWord = word;
+      }
 
+      if (that.score(word) == highestScore){
+        if (highestWord.length != 7 && word.length == 7){
+          highestWord = word;
+          highestScore = that.score(word);
+        }
+
+        if (highestWord.length != 7 && word.length != 7 && highestWord.length != word.length){
+          if (word.length < highestWord.length) {
+            highestWord = word;
+            highestScore = that.score(word);
+          }
+        }
+      }
+    });
+    return highestWord;
+  },
+};
 
 Scrabble.Player = class {
-  // TODO: implement the Player class
+  constructor(name) {
+    if (!name) {
+      throw('Player must have a name!');
+    }
+    this.name = name;
+    this.plays = [];
+    this._totalScore = 0;
+  }
+
+  //
 };
 
 module.exports = Scrabble;
