@@ -129,10 +129,16 @@ Scrabble.Player = class {
   }
 
   play(word) {
+
+    if (this.hasWon() === true) {
+      return false;
+    }
+
     if (typeof word !== 'string' || typeof word === 'number') {
       throw new Error('invalid');
     }
-    // look into using hasWon to check if the player has won or not. if they have won do not push word to this.plays. TEST IS COMMENTED OUT.
+
+
     this.plays.push(word);
     return true;
   }
@@ -172,7 +178,6 @@ Scrabble.Player = class {
     return winningWord;
   }
 
-  // highestWordScore(): method which returns the highestScoringWord score
   highestWordScore() {
     if (this.plays.length === 0) {
       throw new Error('no word has been played.')
