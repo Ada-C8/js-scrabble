@@ -44,7 +44,6 @@ const Scrabble = {
     } // if
     else {
       throw new Error(`Invalid word to score "${ word }"`);
-      // console.log('Please enter valid input');
     } // else
   }, // score
 
@@ -89,17 +88,66 @@ const Scrabble = {
     }
     return winner;
   }
-}; // scrabble
-
-
-// let result = Scrabble.highestScoreFrom(['buBBLES', 'cat', 'wolf']);
-// console.log(result);
-
-// let result = Scrabble.score('buBBLES');
-// console.log(result);
+}; // const scrabble
 
 Scrabble.Player = class {
+//   Create a new Player class within the Scrabble object. The class should have the following methods:
+// Constructor: Called when you use new Scrabble.Player(name), sets up an instance with the instance variable name assigned
+// name: property which returns the value of the player's name
+// plays: property which returns an Array of the words played by the player
+// play(word): method which adds the input word to the plays Array
+// Returns false if player has already won
+// totalScore(): method which sums up and returns the score of the players words
+// hasWon(): method which returns true if the player has over 100 points, otherwise returns false
+// highestScoringWord(): method which returns the highest scoring word the user has played
+// highestWordScore(): method which returns the highestScoringWord score
   // TODO: implement the Player class
+  constructor(name){
+    if (name.length == 0){
+      throw new Error('It requires name');
+    }
+    this.name = name;
+    this.plays = [];
+  }
+
+  play(word) {
+    if (this.hasWon()){
+      return false;
+    }
+    if (typeof word !== 'string' || word === ''){
+      throw 'You must play a word'
+    }
+    this.plays.push(word);
+    return Scrabble.score(word);
+  }
+
+  totalScore() {
+    let total = 0;
+    for(let i in this.plays){
+      total += Scrabble.score(i);
+    }
+    return total;
+  }
+
+  hasWon() {
+  //   let score = totalScore();
+  //   if ( score > 100){
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+
+    return this.totalScore() > 100 ?  true :  false
+  }
+
+  highestScoringWord() {
+    return Scrabble.highestScoreFrom(plays);
+  }
+
+  highestWordScore() {
+    return Scrabble.score(highestScoringWord);
+  }
+
 };
 
 module.exports = Scrabble;
