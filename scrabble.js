@@ -56,7 +56,6 @@ const Scrabble = {
     let tie = [];
     let max_so_far = -1;
     for(let word of arrayOfWords) {
-      // console.log(`About to call score on "${ word }"`);
       let current_high_score = Scrabble.score(word);
       if (current_high_score > max_so_far) {
         tie = [];
@@ -91,17 +90,7 @@ const Scrabble = {
 }; // const scrabble
 
 Scrabble.Player = class {
-//   Create a new Player class within the Scrabble object. The class should have the following methods:
-// Constructor: Called when you use new Scrabble.Player(name), sets up an instance with the instance variable name assigned
-// name: property which returns the value of the player's name
-// plays: property which returns an Array of the words played by the player
-// play(word): method which adds the input word to the plays Array
-// Returns false if player has already won
-// totalScore(): method which sums up and returns the score of the players words
-// hasWon(): method which returns true if the player has over 100 points, otherwise returns false
-// highestScoringWord(): method which returns the highest scoring word the user has played
-// highestWordScore(): method which returns the highestScoringWord score
-  // TODO: implement the Player class
+
   constructor(name){
     if (name.length === 0){
       throw new Error('It requires name');
@@ -114,9 +103,6 @@ Scrabble.Player = class {
     if (this.hasWon()){
       return false;
     }
-    // if (typeof word !== 'string' || word === ''){
-    //   throw 'Please enter a word'
-    // }
     format = /^[a-zA-Z]+$/;
     if (format.test(word) && word.length <= 7 && word != ''){
       this.plays.push(word);
