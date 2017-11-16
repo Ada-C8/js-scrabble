@@ -1,3 +1,7 @@
+function InputError(message) {
+  this.message = message;
+  this.name = 'Input Error';
+}
 
 const Scrabble = {
 
@@ -6,7 +10,7 @@ const Scrabble = {
     const lowerWord = word.toLowerCase();
 
     if (typeof word.length === 0 || word.length > 7 || /^[a-zA-Z]+$/.test(word) === false ) {
-      throw { name: 'NotWordError', message: 'word must include only letters' };
+      throw new InputError('word must include only letters');
     }
 
     const letterScores = {
@@ -52,7 +56,7 @@ const Scrabble = {
 
   highestScoreFrom(words) {
     if (Array.isArray(words) === false || words.length === 0) {
-      throw { name: 'NoWordsError', message: 'must input array of words to determine highest scoring word' };
+      throw new InputError('must input array of words to determine highest scoring word');
     }
 
     let winner = words[0];
@@ -76,7 +80,7 @@ Scrabble.Player = class {
       this.name = name;
       this.plays = [];
     } else {
-      throw { name: 'InvalidInputError', message: 'must enter a name' };
+      throw new InputError('must enter a name');
     }
   }
 
@@ -103,7 +107,7 @@ Scrabble.Player = class {
     if (typeof word === 'string' && word.length > 0) {
       return this.plays.push(word);
     } else {
-      throw { name: 'InvalidInputError', message: 'must enter a word' };
+      throw new InputError('must enter a word');
     }
   }
 
@@ -159,7 +163,7 @@ Scrabble.TileBag = class {
 
   drawTiles(number) {
     if (isNaN(number)) {
-      throw { name: 'InvalidInputError', message: 'must enter a number' };
+      throw new InputError('must enter a number');
     }
     this.drawnTiles = [];
     for (let i = 0; i < number; i++) {
