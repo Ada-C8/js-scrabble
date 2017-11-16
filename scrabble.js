@@ -99,12 +99,12 @@ const Scrabble = {
 
 Scrabble.Player = class {
   constructor(name) {
-    this.name = name;
+    if (typeof name === 'string' && name.length > 0) {
+      this.name = name;
+    } else {
+      throw new Error('Player must have a name');
+    }
   }
-
-  // if (name !== undefined) {
-  //   throw new Error('Player requires a name');
-  // }
 };
 
 module.exports = Scrabble;
