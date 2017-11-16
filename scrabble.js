@@ -106,6 +106,13 @@ Scrabble.Player = class {
     }
     return false;
   }
+
+  highestScoringWord() {
+    if (this.plays === []) {
+      throw new ErrorMsg(this.plays);
+    }
+    return Scrabble.highestScoreFrom(this.plays);
+  }
 };
 
 module.exports = Scrabble;
