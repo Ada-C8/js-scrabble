@@ -70,10 +70,12 @@ const Scrabble = {
     }
     return highestWord;
   },
-}; // end of object Scrabble
+};
 
 Scrabble.Player = class {
-  // TODO: implement the Player class
+  constructor(name) {
+    this.name = name;
+  }
 };
 
 module.exports = Scrabble;
