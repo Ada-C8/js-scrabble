@@ -52,9 +52,37 @@ const Scrabble = {
     return wordScore;
   },
 
-  highestScoreFrom: function(){
-  // TODO: add the highestScoreFrom method
+  highestScoreFrom: function(arrayOfWords) {
+    let wordOne = arrayOfWords[0];
+    let wordTwo = arrayOfWords[1];
 
+    if (arrayOfWords.length === 0 || !Array.isArray(arrayOfWords)) {
+      throw 'No words have been played. Absolutely none.';
+    } else if (arrayOfWords.length === 1) {
+      return wordOne;
+    };
+
+    let wordOneScore = this.score(wordOne);
+    let wordTwoScore = this.score(wordTwo);
+
+    if (wordOneScore > wordTwoScore) {
+      return wordOne;
+    } else if (wordOneScore < wordTwoScore) {
+      return wordTwo;
+    } else if (wordOneScore === wordTwoScore) {
+      if (wordOne.length === 7 ) {
+        return wordOne;
+      } else if (wordTwo.length == 7) {
+        return wordTwo;
+      } else if (wordOne.length < wordTwo.length) {
+        return wordOne;
+      } else if (wordTwo.length < wordOne.length) {
+        return wordTwo;
+      } else if (wordOne.length === wordTwo.length) {
+        return wordOne;
+      };
+    }
+  }
 };
 
 // Wave 2
