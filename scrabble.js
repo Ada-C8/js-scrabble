@@ -111,11 +111,37 @@ Scrabble.Player = class {
   // TODO: implement the Player class
 
   constructor(name) {
+    if (typeof name !== 'string' && !name.length > 0 ) {
+      throw new Error('Player must have name')
+    };
+
     this.name = name
-  }
+    this.totalScore = 0
+    this.plays = []
+  };
+
+  // plays: property which returns an Array of the words played by the player
+  plays() {
+    // let arrayOfWords = []
+    // arrayOfWords.push(word)
+    //
+    // return arrayOfWords
+  };
+
+  // play(word): method which adds the input word to the plays Array
+    // Returns false if player has already won
+
+  play(word) {
+    if (this.totalScore > 100) {
+      return false
+    } else {
+      this.plays.push(word)
+      // this.arrayOfWords.push(word)
+    }
+  };
 
 
 };
 
-
+console.log(new Scrabble.Player('angela').totalScore);
 module.exports = Scrabble;
