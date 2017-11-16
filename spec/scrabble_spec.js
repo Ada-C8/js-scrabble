@@ -165,35 +165,35 @@ describe('Player', function() {
       expect(player.totalScore()).toBe(15);
     });
   });
-//
-//   describe('hasWon', function() {
-//     it('returns false when score < 100', function() {
-//       let player = new Scrabble.Player('test player');
-//       expect(player.totalScore()).toBe(0);
-//       expect(player.hasWon()).toBe(false);
-//
-//       player.play('zzzzz'); // Score += 50
-//       expect(player.totalScore()).toBe(50);
-//       expect(player.hasWon()).toBe(false);
-//
-//       player.play('zzzzji'); // Score += 49
-//       expect(player.totalScore()).toBe(99);
-//       expect(player.hasWon()).toBe(false);
-//     });
-//
-//     it('returns true when score == 100', function() {
-//       let player = new Scrabble.Player('test player');
-//       player.play('zzzzbbf'); // Score += 100
-//       expect(player.totalScore()).toBe(100);
-//       expect(player.hasWon()).toBe(true);
-//     });
-//
-//     it('returns true when score > 100', function() {
-//       let player = new Scrabble.Player('test player');
-//       player.play('zzzzzzz'); // Score += 120
-//       expect(player.totalScore()).toBe(120);
-//       expect(player.hasWon()).toBe(true);
-//     });
+
+  describe('hasWon', function() {
+    it('returns false when score < 100', function() {
+      let player = new Scrabble.Player('test player');
+      expect(player.totalScore()).toBe(0);
+      expect(player.hasWon()).toBe(false);
+
+      player.play('zzzzz'); // Score += 50
+      expect(player.totalScore()).toBe(50);
+      expect(player.hasWon()).toBe(false);
+
+      player.play('zzzzji'); // Score += 49
+      expect(player.totalScore()).toBe(99);
+      expect(player.hasWon()).toBe(false);
+    });
+
+    it('returns true when score == 100', function() {
+      let player = new Scrabble.Player('test player');
+      player.play('zzzzbbf'); // Score += 100
+      expect(player.totalScore()).toBe(100);
+      expect(player.hasWon()).toBe(true);
+    });
+
+    it('returns true when score > 100', function() {
+      let player = new Scrabble.Player('test player');
+      player.play('zzzzzzz'); // Score += 120
+      expect(player.totalScore()).toBe(120);
+      expect(player.hasWon()).toBe(true);
+    });
   });
 //
 //   describe('highestScoringWord', function() {
@@ -225,4 +225,4 @@ describe('Player', function() {
 //       expect(() => { player.highestWordScore() }).toThrow();
 //     });
 //   });
-// });
+});

@@ -96,6 +96,13 @@ Scrabble.Player = class {
     });
     return totalScore;
   }
+
+  hasWon() {
+    if (this.totalScore() >= 100) {
+      return true;
+    }
+    return false;
+  }
 };
 
 module.exports = Scrabble;
