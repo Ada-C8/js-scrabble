@@ -99,7 +99,7 @@ describe('highestScoreFrom', function() {
   });
 });
 
-xdescribe('Player', function() {
+describe('Player', function() {
   it ('is defined', function() {
     expect(Scrabble.Player).toBeDefined();
   });
