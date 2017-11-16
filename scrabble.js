@@ -158,6 +158,9 @@ Scrabble.TileBag = class {
   }
 
   drawTiles(number) {
+    if (isNaN(number)) {
+      throw { name: 'InvalidInputError', message: 'must enter a number' };
+    }
     this.drawnTiles = [];
     for (let i = 0; i < number; i++) {
       let index = Math.floor(Math.random() * this.tilebag.length);
@@ -173,11 +176,11 @@ Scrabble.TileBag = class {
 
 module.exports = Scrabble;
 
-let newTileBag = new Scrabble.TileBag();
-myTiles = newTileBag.drawTiles(10);
-console.log(myTiles);
-myRemaining = newTileBag.remainingTiles();
-console.log(myRemaining);
+// let newTileBag = new Scrabble.TileBag();
+// myTiles = newTileBag.drawTiles(10);
+// console.log(myTiles);
+// myRemaining = newTileBag.remainingTiles();
+// console.log(myRemaining);
 
 // let sally = new Scrabble.Player('Sally');
 // console.log(sally.name);

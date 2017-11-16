@@ -226,3 +226,32 @@ describe('Player', function() {
     });
   });
 });
+
+describe('TileBag', function() {
+  it ('is defined', function() {
+    expect(Scrabble.TileBag).toBeDefined();
+  });
+
+  describe('Constructor', function() {
+    it('Creates a new TileBag', function() {
+      let myTileBag = new Scrabble.TileBag();
+      expect(myTileBag).toBeTruthy();
+    });
+  });
+  describe('drawTiles', function() {
+    it ('is defined', function() {
+      let myTileBag = new Scrabble.TileBag();
+      expect(myTileBag.drawTiles(5)).toBeDefined();
+    });
+    it('Requires a number', function() {
+      let myTileBag = new Scrabble.TileBag();
+      expect(() => { myTileBag.drawTiles("aaa") }).toThrow();
+    });
+  });
+  describe('remainingTiles', function() {
+    it ('is defined', function() {
+      let myTileBag = new Scrabble.TileBag();
+      expect(myTileBag.remainingTiles()).toBeDefined();
+    });
+  });
+});
