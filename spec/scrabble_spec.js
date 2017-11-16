@@ -71,7 +71,7 @@ describe('highestScoreFrom', function() {
 
     // Test functionality
     expect(Scrabble.highestScoreFrom([loser, winner])).toBe(winner);
-    // expect(Scrabble.highestScoreFrom([winner, loser])).toBe(winner);
+    expect(Scrabble.highestScoreFrom([winner, loser])).toBe(winner);
   });
 
   it ('if tied and no word has 7 letters, prefers the word with fewer letters', function() {

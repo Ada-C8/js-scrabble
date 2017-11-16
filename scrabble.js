@@ -8,9 +8,6 @@ const tiles = {
 
 const Scrabble = {
   score: function(word) {
-    // TODO: implement score
-    // word.toUpperCase().split(' ').forEach(function(letter) {
-    // console.log('this is the ' + word);
 
     let regex = /^[a-zA-Z]+$/;
     let total = 0;
@@ -51,23 +48,24 @@ const Scrabble = {
 
     arrayOfWords.forEach(function(word) {
       let wordScore  = Scrabble.score(word)
-      // let wordLength = wrd.length
+      let wordLength = word.length
+
       if ( wordScore > max ) {
         max = wordScore;
         highestScoreWord = word;
-      }
-      else if ( wordScore === max ) {
+      } else if ( wordScore === max ) {
         // console.log('MAX ' + max + ' and CURRENT SCORE is ' + wordScore);
-        if (word.length === 7) {
+        if ( wordLength === 7 ) {
           // console.log('check if the current word is equal to ' + word.length);
           // console.log('HIGHEST ' + highestScoreWord + ' VALUE OF CURRENT WORD ' + word);
           highestScoreWord = word;
-        }
-        else if (word.length === highestScoreWord.length ) {
+        } else if (highestScoreWord.length === 7 ) {
           // console.log('trying hard ' + highestScoreWord);
-          //highestScoreWord;
-        }
-        else if ( word.length < highestScoreWord.length) {
+          highestScoreWord;
+        } else if (wordLength === highestScoreWord.length ) {
+          // console.log('trying hard ' + highestScoreWord);
+          highestScoreWord;
+        } else if (( wordLength < highestScoreWord.length) && ( wordLength !== 7)) {
           // console.log('run this ' + highestScoreWord)
           highestScoreWord = word;
         }
