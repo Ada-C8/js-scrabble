@@ -97,7 +97,7 @@ Scrabble.Player = class {
     if (this.hasWon()) {
       return false;
     }
-    
+
     if ((word === undefined) || (!word.match(regex))) {
       throw new Error('Invalid word');
     }
@@ -105,22 +105,6 @@ Scrabble.Player = class {
     this.plays.push(word)
     return this.plays;
   }
-
-
-
-  // +  def play(word)
-  //  +    @plays << word
-  //  +    total_score = 0
-  //  +    @plays.each do |played_word|
-  //  +      total_score += Scoring.score(played_word)
-  //  +    end
-  //  +    if total_score >= 100
-  //  +      false
-  //  +    else
-  //  +      return total_score
-  //  +  end
-  //  +end
-  //  +
 
   totalScore() {
     let total = 0;
@@ -139,10 +123,10 @@ Scrabble.Player = class {
     }
   }
 
-  // highestScoringWord() {
-  //
-  // }
-  //
+  highestScoringWord() {
+    return Scrabble.highestScoreFrom(this.plays)
+  }
+
   // highestWordScore() {
   //
   // }
