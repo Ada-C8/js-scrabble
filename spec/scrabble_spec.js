@@ -148,7 +148,7 @@ describe('Player', function() {
     });
   });
 
-  xdescribe ('totalScore', function() {
+  describe ('totalScore', function() {
     it ('Is zero if the player has not played anything', function() {
       let player = new Scrabble.Player('test player');
       expect(player.totalScore()).toBe(0);

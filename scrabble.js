@@ -116,32 +116,58 @@ Scrabble.Player = class {
     };
 
     this.name = name
-    this.totalScore = 0
+    this._totalScore = 0
     this.plays = []
   };
 
-  // plays: property which returns an Array of the words played by the player
-  plays() {
-    // let arrayOfWords = []
-    // arrayOfWords.push(word)
-    //
-    // return arrayOfWords
-  };
+
+
+  // plays() property which returns an Array of the words played by the player
 
   // play(word): method which adds the input word to the plays Array
     // Returns false if player has already won
-
   play(word) {
-    if (this.totalScore > 100) {
-      return false
+    if (typeof word !== 'string' && !word.length > 0 || word.length > 7) {
+      throw new Error('You must play a real word')
+    }
+
+    if (!this.hasWon()) {
+      this.plays.push(word);
+
+
+      return true;
     } else {
-      this.plays.push(word)
-      // this.arrayOfWords.push(word)
+      return false;
+
+
     }
   };
 
+  // totalScore(): method which sums up and returns the score of the players words
+
+  totalScore() {
+    // takes array of words and scores each word. then adds all scores together
+    for (let word of this.plays) {
+      this._totalScore += Scrabble.score(word);
+    }
+    return this._totalScore;
+  }
+
+  // hasWon(): method which returns true if the player has over 100 points, otherwise returns false
+  hasWon() {
+    // if player won (over 100) then return true. Otherwise, return false
+    if (this.totalScore() > 100) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 
 };
-
-console.log(new Scrabble.Player('angela').totalScore);
+console.log('test');
+let angela = new Scrabble.Player('angela')
+console.log(angela.hasWon());
+console.log('test');
+console.log(angela._totalScore);
 module.exports = Scrabble;
