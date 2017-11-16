@@ -92,19 +92,24 @@ Scrabble.Player = class {
 
   totalScore() {
     console.log("Im in total score");
-    let totalScore = 0;
+    let playerScore = 0;
     this.plays.forEach(function (word) {
-      totalScore += Scrabble.score(word);
+      playerScore += Scrabble.score(word);
     }); //for each
-    return totalScore;
+    return playerScore;
   } //ts method
 
   hasWon() {
     console.log("I'm in has Won.");
-    if(player.totalScore >= 100) {
-      console.log("total score is more than 100")
-      let hasWon = true;
-      return hasWon;
+    let score = player.totalScore();
+    console.log(`score is ${score} and is that more than 100?`);
+    console.log(score);
+    console.log("*****************");
+    if(score >= 100) {
+      console.log("total score is more than 100");
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -117,10 +122,18 @@ Scrabble.Player = class {
       throw new UserException("Word can only contain letters");
     } //exception tests
 
-    if((this.plays.length > 0) && (player.hasWon() === false)) {
-      return false
+    console.log(`array length is ${this.plays.length}`);
+    console.log("__________________");
+    console.log(`has won returns (true or false): `);
+    console.log(player.hasWon());
+    console.log("________________");
+// if( (this.plays.length > 0) && (player.hasWon() != true))
+    if(player.hasWon() != true) {
+      console.log("It shouldn't let you play this word");
+      return false;
     } else {
       this.plays.push(word);
+      console.log("Im adding a word now");
       return true;
     }
 
@@ -156,14 +169,15 @@ module.exports = Scrabble;
 let word = 'dog';
 let player = new Scrabble.Player("Dave");
 console.log(player.plays.length);
-player.play("zzzzzz");
+player.play("zzzzzzz");
 console.log(player.totalScore());
-player.play("zzzzzz");
+player.play("qqqqqqq");
 console.log(player.totalScore());
 player.play("shoes");
 // expect(player.play(word)).toBeTruthy();
 console.log("AFTER PLAYS");
 console.log(player.plays.length);
 console.log(player.plays);
-player.hasWon();
+console.log("THis is showing if the player won");
+console.log(player.hasWon());
 console.log(player.totalScore());
