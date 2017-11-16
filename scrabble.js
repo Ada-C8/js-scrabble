@@ -5,7 +5,6 @@ const scores = {
 const Scrabble = {
   score: function(word){
     let scoreTotal = 0;
-
     // regex below should return false for white space, non a-zA-Z characters, 1 letter or 7+ letter words
     if (/^[a-zA-Z]{1,7}$/.test(word)){
       for (let letter of word) {
@@ -28,15 +27,29 @@ const Scrabble = {
     } else if (arrWords.length === 1) {
       return arrWords[0];
     } else {
+      // let highestScore = Scrabble.score(arrWords[0]);
+      let topWord = arrWords[0];
+      // console.log(`set top word to: ${topWord}` );
       arrWords.forEach(function(word) {
-
+        // console.log(`Word:${word} Score: ${Scrabble.score(word)}`);
+        let scored = Scrabble.score(word);
+        if(scored > Scrabble.score(topWord)){
+          // console.log(`${word}'s score is greater than to ${topWord} score'`);
+          topWord = word;
+          // console.log(`reset top word to: ${topWord}`);
+        } else if (scored === Scrabble.score(topWord)){
+          if(word.length === 7){
+            // console.log(`${word} has a length of seven`);
+            topWord = word;
+          } else if (word.length < topWord.length && topWord.length !== 7) {
+            topWord = word;
+            // console.log(`reset top word to: ${topWord}`);
+          }
+        }
       });
+      return topWord;
     }
-
-
   }
-  // TODO: add the highestScoreFrom method
-
 };
 
 Scrabble.Player = class {
@@ -44,5 +57,3 @@ Scrabble.Player = class {
 };
 
 module.exports = Scrabble;
-
-Scrabble.score('dog')
