@@ -40,12 +40,12 @@ describe('highestScoreFrom', function() {
   it ('is defined', function() {
     expect(Scrabble.highestScoreFrom).toBeDefined();
   });
-//
-//   it ('throws if no words were passed', function() {
-//     expect(function() { Scrabble.highestScoreFrom([]); }).toThrow();
-//     expect(function() { Scrabble.highestScoreFrom('not array'); }).toThrow();
-//   });
-//
+
+  it ('throws if no words were passed', function() {
+    expect(function() { Scrabble.highestScoreFrom([]); }).toThrow();
+    expect(function() { Scrabble.highestScoreFrom('not array'); }).toThrow();
+  });
+
   it ('returns the only word in a length-1 array', function() {
     expect(Scrabble.highestScoreFrom(['dog'])).toBe('dog');
   });
@@ -60,19 +60,19 @@ describe('highestScoreFrom', function() {
     expect(Scrabble.highestScoreFrom(['pig', 'dog'])).toBe('pig');
   });
 
-// not passing
-  // it ('if tied, prefer a word with 7 letters', function() {
-  //   const loser = 'zzzzzz';
-  //   const winner = 'iiiiddd';
-  //
-  //   // Check score assumptions
-  //   expect(Scrabble.score(loser)).toBe(60);
-  //   expect(Scrabble.score(winner)).toBe(60);
-  //
-  //   // Test functionality
-  //   expect(Scrabble.highestScoreFrom([loser, winner])).toBe(winner);
-  //   expect(Scrabble.highestScoreFrom([winner, loser])).toBe(winner);
-  // });
+
+  it ('if tied, prefer a word with 7 letters', function() {
+    const loser = 'zzzzzz';
+    const winner = 'iiiiddd';
+
+    // Check score assumptions
+    expect(Scrabble.score(loser)).toBe(60);
+    expect(Scrabble.score(winner)).toBe(60);
+
+    // Test functionality
+    expect(Scrabble.highestScoreFrom([loser, winner])).toBe(winner);
+    // expect(Scrabble.highestScoreFrom([winner, loser])).toBe(winner);
+  });
 
   it ('if tied and no word has 7 letters, prefers the word with fewer letters', function() {
     // Check score assumptions
@@ -97,11 +97,11 @@ describe('highestScoreFrom', function() {
     expect(Scrabble.highestScoreFrom(['i', 'dog', 'cat'])).toBe('dog');
   });
 });
-//
-// describe('Player', function() {
-//   it ('is defined', function() {
-//     expect(Scrabble.Player).toBeDefined();
-//   });
+
+describe('Player', function() {
+  it ('is defined', function() {
+    expect(Scrabble.Player).toBeDefined();
+  });
 //
 //   describe('Constructor', function() {
 //     it('Creates a new player', function() {
@@ -113,7 +113,7 @@ describe('highestScoreFrom', function() {
 //     it('Requires a name', function() {
 //       expect(function() { new Scrabble.Player(); }).toThrow();
 //     });
-//   });
+  });
 //
 //   describe ('play', function() {
 //     it ('Records the played word', function() {
