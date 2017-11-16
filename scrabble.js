@@ -107,8 +107,10 @@ Scrabble.Player = class {
     this.plays = []; // store words played
   }
   play(word) {
-    if (word === undefined) {
-      throw new Error('Invalid word')
+    let regex = /^[a-zA-Z]+$/;
+
+    if ((word === undefined) || (!word.match(regex))) {
+      throw new Error('Invalid word');
     }
 
     this.plays.push(word)

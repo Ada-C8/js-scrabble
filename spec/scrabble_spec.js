@@ -131,10 +131,10 @@ describe('Player', function() {
       let player = new Scrabble.Player('test player');
       expect(player.plays.length).toBe(0);
 
-      // expect(function() { player.play(); }).toThrow();
-      // expect(player.plays.length).toBe(0);
-      //
-      // expect(function() { player.play(44); }).toThrow();
+      expect(function() { player.play(); }).toThrow();
+      expect(player.plays.length).toBe(0);
+
+      expect(function() { player.play(44); }).toThrow();
       // expect(player.plays.length).toBe(0);
     });
 
