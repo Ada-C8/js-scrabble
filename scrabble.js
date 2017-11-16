@@ -30,13 +30,30 @@ const Scrabble = {
   },
 
   highestScoreFrom: function highestScoreFrom(array) {
-
+    if ((!Array.isArray(array)) || (array.length === 0)) { throw new Error('Invalid Array'); }
+    const results = array.map(word => this.score(word));
+    const maxResult = { highScore: results[0], index: 0 };
+    results.forEach((num, i) => {
+      if (num > maxResult.highScore) {
+        maxResult.highestScore = num;
+        maxResult.index = i;
+      }
+    });
+    return array[maxResult.index];
   },
-
-};
+}; // end of class!
 
 Scrabble.Player = class {
   // TODO: implement the Player class
 };
+
+Scrabble.Word = class {
+  constructor(word) {
+  if (Scrabble.isValidWord(word)) {
+    this.word = word;
+    this.score = Scrabble.score(word);
+  }
+};
+
 
 module.exports = Scrabble;

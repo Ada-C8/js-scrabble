@@ -43,16 +43,16 @@ describe('highestScoreFrom', function() {
     expect(Scrabble.highestScoreFrom).toBeDefined();
   });
 
-  xit ('throws if no words were passed', function() {
+  it ('throws if no words were passed', function() {
     expect(function() { Scrabble.highestScoreFrom([]); }).toThrow();
     expect(function() { Scrabble.highestScoreFrom('not array'); }).toThrow();
   });
 
-  xit ('returns the only word in a length-1 array', function() {
+  it ('returns the only word in a length-1 array', function() {
     expect(Scrabble.highestScoreFrom(['dog'])).toBe('dog');
   });
 
-  xit ('returns the highest word if there are two words', function() {
+  it ('returns the highest word if there are two words', function() {
     // Check score assumptions
     expect(Scrabble.score('dog')).toBe(5);
     expect(Scrabble.score('pig')).toBe(6);
@@ -62,7 +62,7 @@ describe('highestScoreFrom', function() {
     expect(Scrabble.highestScoreFrom(['pig', 'dog'])).toBe('pig');
   });
 
-  xit ('if tied, prefer a word with 7 letters', function() {
+  it ('if tied, prefer a word with 7 letters', function() {
     const loser = 'zzzzzz';
     const winner = 'iiiiddd';
 
