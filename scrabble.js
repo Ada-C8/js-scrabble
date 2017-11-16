@@ -28,21 +28,6 @@ const Scrabble = {
     if (!playedWord.match(regex) ) {
       throw new UserException('Illegal play, sorry only words allowed')
     }
-    //   for (i=0; i < playedWord.length; i++) {
-    //     letter = playedWord[i];
-    //
-    //     if (letter === null) {
-    //       total = 0;
-    //     }
-    //
-    //     total += tiles[letter];
-    //
-    //   }
-    //   if ( word.length === 7 && total > 0 ) {
-    //     total += 50;
-    //   }
-    //   return total;
-    // },
 
     word.toUpperCase().split('').forEach(function(letter) {
       total = tiles[letter] + total;
@@ -109,6 +94,10 @@ Scrabble.Player = class {
   play(word) {
     let regex = /^[a-zA-Z]+$/;
 
+    if (this.hasWon()) {
+      return false;
+    }
+    
     if ((word === undefined) || (!word.match(regex))) {
       throw new Error('Invalid word');
     }
@@ -134,11 +123,11 @@ Scrabble.Player = class {
   //  +
 
   totalScore() {
-    let totalScore = 0;
+    let total = 0;
     this.plays.forEach(function(playedWord) {
-      totalScore += Scrabble.score(playedWord)
+      total += Scrabble.score(playedWord)
     });
-    return totalScore
+    return total
   }
 
   hasWon() {
@@ -150,7 +139,6 @@ Scrabble.Player = class {
     }
   }
 
-  //
   // highestScoringWord() {
   //
   // }
