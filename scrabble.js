@@ -72,18 +72,18 @@ const Scrabble = {
         highestScoreWord = word;
       }
       else if ( wordScore === max ) {
-        console.log('MAX ' + max + ' and CURRENT SCORE is ' + wordScore);
+        // console.log('MAX ' + max + ' and CURRENT SCORE is ' + wordScore);
         if (word.length === 7) {
-          console.log('check if the current word is equal to ' + word.length);
-          console.log('HIGHEST ' + highestScoreWord + ' VALUE OF CURRENT WORD ' + word);
+          // console.log('check if the current word is equal to ' + word.length);
+          // console.log('HIGHEST ' + highestScoreWord + ' VALUE OF CURRENT WORD ' + word);
           highestScoreWord = word;
         }
         else if (word.length === highestScoreWord.length ) {
-          console.log('trying hard ' + highestScoreWord);
+          // console.log('trying hard ' + highestScoreWord);
           //highestScoreWord;
         }
         else if ( word.length < highestScoreWord.length) {
-          console.log('run this ' + highestScoreWord)
+          // console.log('run this ' + highestScoreWord)
           highestScoreWord = word;
         }
         // else {
@@ -99,8 +99,10 @@ const Scrabble = {
 
 
 Scrabble.Player = class {
-  // TODO: implement the Player class
-  construtor(name) {
+  constructor(name) {
+    if (name === undefined) {
+      throw new Error('No argument passed');
+    }
     this.name = name;
   }
   // plays() {
@@ -133,3 +135,8 @@ Scrabble.Player = class {
 
 
 module.exports = Scrabble;
+
+//test
+let name = 'Bob';
+let player = new Scrabble.Player(name);
+console.log(player.name)

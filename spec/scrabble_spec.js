@@ -102,17 +102,17 @@ describe('Player', function() {
   it ('is defined', function() {
     expect(Scrabble.Player).toBeDefined();
   });
-//
-//   describe('Constructor', function() {
-//     it('Creates a new player', function() {
-//       let name = 'test name';
-//       let player = new Scrabble.Player(name);
-//       expect(player.name).toBe(name);
-//     });
-//
-//     it('Requires a name', function() {
-//       expect(function() { new Scrabble.Player(); }).toThrow();
-//     });
+
+  describe('Constructor', function() {
+    it('Creates a new player', function() {
+      let name = 'test name';
+      let player = new Scrabble.Player(name);
+      expect(player.name).toBe(name);
+    });
+
+    it('Requires a name', function() {
+      expect(function() { new Scrabble.Player(); }).toThrow();
+    });
   });
 //
 //   describe ('play', function() {
@@ -226,4 +226,4 @@ describe('Player', function() {
 //       expect(() => { player.highestWordScore() }).toThrow();
 //     });
 //   });
-// });
+});
