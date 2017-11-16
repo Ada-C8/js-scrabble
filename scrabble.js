@@ -117,11 +117,11 @@ Scrabble.Player = class {
   }
 };
 
-Scrabble.Tilebag = class {
+Scrabble.TileBag = class {
   constructor() {
     this.tilebag = [];
 
-    const letterFrequency = {
+    this.letterFrequency = {
       a: 9,
       b: 2,
       c: 2,
@@ -150,18 +150,35 @@ Scrabble.Tilebag = class {
       z: 1,
     };
 
-    for (let letter in letterFrequency) {
-      for (let i = 0; i < letterFrequency[letter]; i++) {
+    for (let letter in this.letterFrequency) {
+      for (let i = 0; i < this.letterFrequency[letter]; i++) {
         this.tilebag.push(letter);
       }
     }
+  }
+
+  drawTiles(number) {
+    this.drawnTiles = [];
+    for (let i = 0; i < number; i++) {
+      let index = Math.floor(Math.random() * this.tilebag.length);
+      this.drawnTiles.push(this.tilebag.splice(index, 1));
+    }
+    return this.drawnTiles;
+  }
+
+  remainingTiles() {
+    return this.tilebag;
   }
 };
 
 module.exports = Scrabble;
 
-let newTilebag = new Scrabble.Tilebag();
-console.log(newTilebag);
+let newTileBag = new Scrabble.TileBag();
+myTiles = newTileBag.drawTiles(10);
+console.log(myTiles);
+myRemaining = newTileBag.remainingTiles();
+console.log(myRemaining);
+
 // let sally = new Scrabble.Player('Sally');
 // console.log(sally.name);
 // console.log(sally.plays);
