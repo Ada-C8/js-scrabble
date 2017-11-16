@@ -154,17 +154,17 @@ describe('Player', function() {
       let player = new Scrabble.Player('test player');
       expect(player.totalScore()).toBe(0);
     });
-//
-//     it ('Is updated by play', function() {
-//       let player = new Scrabble.Player('test player');
-//       expect(player.totalScore()).toBe(0);
-//       player.play('dog');
-//       expect(player.totalScore()).toBe(5);
-//       player.play('cat');
-//       expect(player.totalScore()).toBe(10);
-//       player.play('goat');
-//       expect(player.totalScore()).toBe(15);
-//     });
+
+    it ('Is updated by play', function() {
+      let player = new Scrabble.Player('test player');
+      expect(player.totalScore()).toBe(0);
+      player.play('dog');
+      expect(player.totalScore()).toBe(5);
+      player.play('cat');
+      expect(player.totalScore()).toBe(10);
+      player.play('goat');
+      expect(player.totalScore()).toBe(15);
+    });
   });
 //
 //   describe('hasWon', function() {
