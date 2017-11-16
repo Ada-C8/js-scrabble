@@ -138,18 +138,18 @@ Scrabble.Player = class {
     this.plays.forEach(function(playedWord) {
       totalScore += Scrabble.score(playedWord)
     });
+    return totalScore
+  }
 
-    if (totalScore >= 100) {
-      return false;
+  hasWon() {
+    if (this.totalScore() < 100) {
+      return false
     }
     else {
-      return totalScore;
+      return true
     }
   }
-  //
-  // hasWon() {
-  //
-  // }
+
   //
   // highestScoringWord() {
   //
