@@ -117,19 +117,35 @@ Scrabble.Player = class {
     return this.plays;
   }
 
-  // if total_score < 100
-  //      return false
-  //    else
-  //      return true
-  //    end
-  //  end
 
 
+  // +  def play(word)
+  //  +    @plays << word
+  //  +    total_score = 0
+  //  +    @plays.each do |played_word|
+  //  +      total_score += Scoring.score(played_word)
+  //  +    end
+  //  +    if total_score >= 100
+  //  +      false
+  //  +    else
+  //  +      return total_score
+  //  +  end
+  //  +end
+  //  +
 
-  //
-  // totalScore() {
-  //
-  // }
+  totalScore() {
+    let totalScore = 0;
+    this.plays.forEach(function(playedWord) {
+      totalScore += Scrabble.score(playedWord)
+    });
+
+    if (totalScore >= 100) {
+      return false;
+    }
+    else {
+      return totalScore;
+    }
+  }
   //
   // hasWon() {
   //
@@ -151,6 +167,6 @@ Scrabble.Player = class {
 module.exports = Scrabble;
 
 //test
-let name = 'Bob';
-let player = new Scrabble.Player(name);
-console.log(player.name)
+// let name = 'Bob';
+// let player = new Scrabble.Player(name);
+// console.log(player.name)
