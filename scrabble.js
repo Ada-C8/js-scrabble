@@ -87,16 +87,43 @@ Scrabble.Player = class {
     } //exception
     this.name = name;
     this.plays = [];
-    console.log(this.plays);
-    console.log("constructor");
   } //constructor
 
   play(word) {
-    // let plays = ["fish"];
-    // console.log(this.plays);
-    // console.log(`the word i'm playing is ${word}`);
-    this.plays.push(word);
+
+    if(word.length > 7) {
+      throw new UserException("Word is Too Long");
+    } else if (word.length === 0) {
+      throw new UserException("You must enter a word to be scored");
+    } else if (word.match(/[^a-z]+/i)) {
+      throw new UserException("Word can only contain letters");
+    } //exception tests
+
+
+    if((this.plays.length > 0) && (hasWon === false)) {
+      return false
+    } else {
+      this.plays.push(word);
+      return true;
+    }
+
+
+
   }; //play function
+
+  totalScore() {
+    let totalScore = 0;
+    this.plays.forEach(function (word) {
+      total += Scrabble.score(word);
+    }); //for each
+    return totalScore;
+  } //ts method
+
+  hasWon() {
+    if(totalScore >= 100) {
+      return true;
+    }
+  }
 
 }; //player class
 
