@@ -54,30 +54,23 @@ const Scrabble = {
         max = wordScore;
         highestScoreWord = word;
       } else if ( wordScore === max ) {
-        // console.log('MAX ' + max + ' and CURRENT SCORE is ' + wordScore);
         if ( wordLength === 7 ) {
-          // console.log('check if the current word is equal to ' + word.length);
           // console.log('HIGHEST ' + highestScoreWord + ' VALUE OF CURRENT WORD ' + word);
           highestScoreWord = word;
         } else if (highestScoreWord.length === 7 ) {
-          // console.log('trying hard ' + highestScoreWord);
+          // console.log('work ' + highestScoreWord);
           highestScoreWord;
         } else if (wordLength === highestScoreWord.length ) {
-          // console.log('trying hard ' + highestScoreWord);
+          // console.log('work ' + highestScoreWord);
           highestScoreWord;
         } else if (( wordLength < highestScoreWord.length) && ( wordLength !== 7)) {
-          // console.log('run this ' + highestScoreWord)
           highestScoreWord = word;
         }
-        // else {
-        //     //highestScoreWord;
-        // }
       }
     });
 
     return highestScoreWord;
   }
-
 }; // end of Scrabble function
 
 
@@ -128,7 +121,6 @@ Scrabble.Player = class {
   highestWordScore() {
     return Scrabble.score(this.highestScoringWord())
   }
-
 }; // Scrabble.Player object
 
 
@@ -136,7 +128,7 @@ Scrabble.Player = class {
 
 module.exports = Scrabble;
 
-//test
+//tests
 // let name = 'Bob';
 // let player = new Scrabble.Player(name);
 // console.log(player.name)
