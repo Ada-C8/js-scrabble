@@ -113,18 +113,18 @@ describe('Player', function() {
       expect(function() { new Scrabble.Player(); }).toThrow();
     });
   });
-//
-//   describe ('play', function() {
-//     it ('Records the played word', function() {
-//       let word = 'dog';
-//       let player = new Scrabble.Player('test player');
-//       expect(player.plays.length).toBe(0);
-//
-//       expect(player.play(word)).toBeTruthy();
-//
-//       expect(player.plays.length).toBe(1);
-//       expect(player.plays[0]).toBe(word);
-//     });
+
+  describe ('play', function() {
+    it ('Records the played word', function() {
+      let word = 'dog';
+      let player = new Scrabble.Player('test player');
+      expect(player.plays.length).toBe(0);
+
+      expect(player.play(word)).toBeTruthy();
+
+      expect(player.plays.length).toBe(1);
+      expect(player.plays[0]).toBe(word);
+    });
 //
 //     it ('Requires a real word', function() {
 //       let player = new Scrabble.Player('test player');
@@ -146,7 +146,7 @@ describe('Player', function() {
 //       expect(player.play('dog')).toBe(false);
 //       expect(player.plays.length).toBe(1);
 //     });
-//   });
+  });
 //
 //   describe ('totalScore', function() {
 //     it ('Is zero if the player has not played anything', function() {

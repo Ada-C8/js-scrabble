@@ -78,6 +78,12 @@ Scrabble.Player = class {
       throw new ErrorMsg(name);
     }
     this.name = name;
+    this.plays = [];
+  }
+
+  play(word) {
+    this.plays.push(word);
+    return true;
   }
 };
 
