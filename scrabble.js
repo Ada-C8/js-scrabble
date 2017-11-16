@@ -82,6 +82,9 @@ Scrabble.Player = class {
   }
 
   play(word) {
+    if (this.hasWon() === true) {
+      return false;
+    }
     if (word == null || typeof word !== 'string') {
       throw new ErrorMsg(word);
     }
