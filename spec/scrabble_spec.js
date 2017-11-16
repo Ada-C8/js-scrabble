@@ -35,7 +35,7 @@ describe('score', function() {
     expect(function() { Scrabble.score(''); }).toThrow();
   });
 });
-
+//
 describe('highestScoreFrom', function() {
   it ('is defined', function() {
     expect(Scrabble.highestScoreFrom).toBeDefined();
@@ -121,7 +121,6 @@ describe('Player', function() {
       expect(player.plays.length).toBe(0);
 
       expect(player.play(word)).toBeTruthy();
-
       expect(player.plays.length).toBe(1);
       expect(player.plays[0]).toBe(word);
     });
