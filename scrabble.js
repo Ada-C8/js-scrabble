@@ -103,15 +103,27 @@ Scrabble.Player = class {
     if (name === undefined) {
       throw new Error('No argument passed');
     }
-    this.name = name;
+    this.name = name; // return player's name
+    this.plays = []; // store words played
   }
-  plays() {
-    return plays
+  play(word) {
+    if (word === undefined) {
+      throw new Error('Invalid word')
+    }
+
+    this.plays.push(word)
+    return this.plays;
   }
 
-  // play(word) {
-  //
-  // }
+  // if total_score < 100
+  //      return false
+  //    else
+  //      return true
+  //    end
+  //  end
+
+
+
   //
   // totalScore() {
   //

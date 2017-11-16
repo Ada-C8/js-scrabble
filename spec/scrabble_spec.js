@@ -121,26 +121,26 @@ describe('Player', function() {
       let player = new Scrabble.Player('test player');
       expect(player.plays.length).toBe(0);
 
-      // expect(player.play(word)).toBeTruthy();
-      //
-      // expect(player.plays.length).toBe(1);
-      // expect(player.plays[0]).toBe(word);
+      expect(player.play(word)).toBeTruthy();
+
+      expect(player.plays.length).toBe(1);
+      expect(player.plays[0]).toBe(word);
     });
-//
-//     it ('Requires a real word', function() {
-//       let player = new Scrabble.Player('test player');
-//       expect(player.plays.length).toBe(0);
-//
-//       expect(function() { player.play(); }).toThrow();
-//       expect(player.plays.length).toBe(0);
-//
-//       expect(function() { player.play(44); }).toThrow();
-//       expect(player.plays.length).toBe(0);
-//     });
-//
-//     it ('Returns false and does not update plays if the player has already won', function() {
-//       let player = new Scrabble.Player('test player');
-//       expect(player.play('zzzzzzz')).toBeTruthy(); // +120 pts
+
+    it ('Requires a real word', function() {
+      let player = new Scrabble.Player('test player');
+      expect(player.plays.length).toBe(0);
+
+      // expect(function() { player.play(); }).toThrow();
+      // expect(player.plays.length).toBe(0);
+      //
+      // expect(function() { player.play(44); }).toThrow();
+      // expect(player.plays.length).toBe(0);
+    });
+
+    // it ('Returns false and does not update plays if the player has already won', function() {
+    //   let player = new Scrabble.Player('test player');
+    //   expect(player.play('zzzzzzz')).toBeTruthy(); // +120 pts
 //       expect(player.plays.length).toBe(1);
 //       expect(player.hasWon()).toBeTruthy();
 //
