@@ -109,6 +109,13 @@ const Scrabble = {
 
 Scrabble.Player = class {
   // TODO: implement the Player class
+
+  constructor(name) {
+    this.name = name
+  }
+
+
 };
+
 
 module.exports = Scrabble;
