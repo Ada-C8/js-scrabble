@@ -19,115 +19,113 @@ const Scrabble = {
 
     if (playedWord === '') {
       throw new UserException(`Illegal play ${playedWord}
-      contains bad characters`);
-    }
-
-    if (!playedWord.match(regex) ) {
-      throw new UserException('Illegal play, sorry only words allowed');
-    }
-
-    word.toUpperCase().split('').forEach(function(letter) {
-      total = tiles[letter] + total;
-    });
-    if (word.length == 7 && total > 0) {
-      total += 50;
-    }
-    return total;
-  },
-
-  highestScoreFrom: function(arrayOfWords) {
-    let max = 0;
-    let highestScoreWord = '';
-
-    if (arrayOfWords.length === 0) {
-      throw new Error('No words to score');
-    } else if (arrayOfWords.length === 1){
-      return arrayOfWords[0];
-    }
-
-    arrayOfWords.forEach(function(word) {
-      let wordScore  = Scrabble.score(word)
-      let wordLength = word.length
-
-      if ( wordScore > max ) {
-        max = wordScore;
-        highestScoreWord = word;
-      } else if ( wordScore === max ) {
-        if ( wordLength === 7 ) {
-          // console.log('HIGHEST ' + highestScoreWord + ' VALUE OF CURRENT WORD ' + word);
-          highestScoreWord = word;
-        } else if (highestScoreWord.length === 7 ) {
-          // console.log('work ' + highestScoreWord);
-          highestScoreWord;
-        } else if (wordLength === highestScoreWord.length ) {
-          // console.log('work ' + highestScoreWord);
-          highestScoreWord;
-        } else if (( wordLength < highestScoreWord.length) && ( wordLength !== 7)) {
-          highestScoreWord = word;
-        }
+        contains bad characters`);
       }
-    });
 
-    return highestScoreWord;
-  }
-}; // end of Scrabble function
+      if (!playedWord.match(regex) ) {
+        throw new UserException('Illegal play, sorry only words allowed');
+      }
 
+      word.toUpperCase().split('').forEach(function(letter) {
+        total = tiles[letter] + total;
+      });
+      if (word.length == 7 && total > 0) {
+        total += 50;
+      }
+      return total;
+    },
 
-Scrabble.Player = class {
-  constructor(name) {
-    if (name === undefined) {
-      throw new Error('No argument passed');
+    highestScoreFrom: function(arrayOfWords) {
+      let max = 0;
+      let highestScoreWord = '';
+
+      if (arrayOfWords.length === 0) {
+        throw new Error('No words to score');
+      } else if (arrayOfWords.length === 1){
+        return arrayOfWords[0];
+      }
+
+      arrayOfWords.forEach(function(word) {
+        let wordScore  = Scrabble.score(word)
+        let wordLength = word.length
+
+        if ( wordScore > max ) {
+          max = wordScore;
+          highestScoreWord = word;
+        } else if ( wordScore === max ) {
+          if ( wordLength === 7 ) {
+            // console.log('HIGHEST ' + highestScoreWord + ' VALUE OF CURRENT WORD ' + word);
+            return highestScoreWord = word;
+          } else if (highestScoreWord.length === 7 ) {
+            // console.log('work ' + highestScoreWord);
+            return highestScoreWord;
+          } else if (wordLength === highestScoreWord.length ) {
+            // console.log('work ' + highestScoreWord);
+            return highestScoreWord;
+          } else if (( wordLength < highestScoreWord.length) && ( wordLength !== 7)) {
+            return highestScoreWord = word;
+          }
+        }
+      });
+      return highestScoreWord;
     }
-    this.name = name; // return player's name
-    this.plays = []; // store words played
-  }
+  }; // end of Scrabble function
 
-  play(word) {
-    let regex = /^[a-zA-Z]+$/;
 
-    if (this.hasWon()) {
-      return false;
+  Scrabble.Player = class {
+    constructor(name) {
+      if (name === undefined) {
+        throw new Error('No argument passed');
+      }
+      this.name = name; // return player's name
+      this.plays = []; // store words played
     }
 
-    if ((word === undefined) || (!word.match(regex))) {
-      throw new Error('Invalid word');
+    play(word) {
+      let regex = /^[a-zA-Z]+$/;
+
+      if (this.hasWon()) {
+        return false;
+      }
+
+      if ((word === undefined) || (!word.match(regex))) {
+        throw new Error('Invalid word');
+      }
+
+      this.plays.push(word)
+      return this.plays;
     }
 
-    this.plays.push(word)
-    return this.plays;
-  }
-
-  totalScore() {
-    let total = 0;
-    this.plays.forEach(function(playedWord) {
-      total += Scrabble.score(playedWord)
-    });
-    return total;
-  }
-
-  hasWon() {
-    if (this.totalScore() < 100) {
-      return false;
-    } else {
-      return true;
+    totalScore() {
+      let total = 0;
+      this.plays.forEach(function(playedWord) {
+        total += Scrabble.score(playedWord)
+      });
+      return total;
     }
-  }
 
-  highestScoringWord() {
-    return Scrabble.highestScoreFrom(this.plays);
-  }
+    hasWon() {
+      if (this.totalScore() < 100) {
+        return false;
+      } else {
+        return true;
+      }
+    }
 
-  highestWordScore() {
-    return Scrabble.score(this.highestScoringWord());
-  }
-}; // Scrabble.Player object
+    highestScoringWord() {
+      return Scrabble.highestScoreFrom(this.plays);
+    }
+
+    highestWordScore() {
+      return Scrabble.score(this.highestScoringWord());
+    }
+  }; // Scrabble.Player object
 
 
 
+  module.exports = Scrabble;
 
-module.exports = Scrabble;
-
-//tests
-// let name = 'Bob';
-// let player = new Scrabble.Player(name);
-// console.log(player.name)
+  //tests
+  // let name = 'Bob';
+  // let player = new Scrabble.Player(name);
+  // console.log(player.name)
