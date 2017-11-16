@@ -14,16 +14,16 @@ const Scrabble = {
     let playedWord = word.toUpperCase();
 
     if (playedWord.length > 7) {
-      throw new UserException(`Illegal play, ${playedWord.length} exceeds allowed tile count`)
+      throw new UserException(`Illegal play, ${playedWord.length} exceeds allowed tile count`);
     }
 
     if (playedWord === '') {
-      throw new UserException('Illegal play, ' + playedWord
-      + ' contains bad characters')
+      throw new UserException(`Illegal play ${playedWord}
+      contains bad characters`);
     }
 
     if (!playedWord.match(regex) ) {
-      throw new UserException('Illegal play, sorry only words allowed')
+      throw new UserException('Illegal play, sorry only words allowed');
     }
 
     word.toUpperCase().split('').forEach(function(letter) {
@@ -41,8 +41,7 @@ const Scrabble = {
 
     if (arrayOfWords.length === 0) {
       throw new Error('No words to score');
-    }
-    else if (arrayOfWords.length === 1){
+    } else if (arrayOfWords.length === 1){
       return arrayOfWords[0];
     }
 
@@ -82,6 +81,7 @@ Scrabble.Player = class {
     this.name = name; // return player's name
     this.plays = []; // store words played
   }
+
   play(word) {
     let regex = /^[a-zA-Z]+$/;
 
@@ -102,24 +102,23 @@ Scrabble.Player = class {
     this.plays.forEach(function(playedWord) {
       total += Scrabble.score(playedWord)
     });
-    return total
+    return total;
   }
 
   hasWon() {
     if (this.totalScore() < 100) {
-      return false
-    }
-    else {
-      return true
+      return false;
+    } else {
+      return true;
     }
   }
 
   highestScoringWord() {
-    return Scrabble.highestScoreFrom(this.plays)
+    return Scrabble.highestScoreFrom(this.plays);
   }
 
   highestWordScore() {
-    return Scrabble.score(this.highestScoringWord())
+    return Scrabble.score(this.highestScoringWord());
   }
 }; // Scrabble.Player object
 
