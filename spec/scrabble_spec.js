@@ -1,40 +1,40 @@
 const Scrabble = require('../scrabble');
 
-// describe('score', function() {
-//   it ('is defined', function() {
-//     expect(Scrabble.score).toBeDefined();
-//   });
-//
-//   it ('correctly scores simple words', function() {
-//     expect(Scrabble.score('dog')).toBe(5);
-//     expect(Scrabble.score('cat')).toBe(5);
-//     expect(Scrabble.score('pig')).toBe(6);
-//   });
-//
-//   it ('adds 50 points for a 7-letter word', function() {
-//     expect(Scrabble.score('academy')).toBe(65);
-//   });
-//
-//   it ('throws on bad characters', function() {
-//     expect(function () {
-//       Scrabble.score('char^');
-//     }).toThrow();
-//   });
-//
-//   it ('handles all upper- and lower-case letters', function() {
-//     expect(Scrabble.score('dog')).toBe(5);
-//     expect(Scrabble.score('DOG')).toBe(5);
-//     expect(Scrabble.score('DoG')).toBe(5);
-//   });
-//
-//   it ('does not allow words > 7 letters', function() {
-//     expect(function() { Scrabble.score('abcdefgh'); }).toThrow();
-//   });
-//
-//   it ('does not allow empty words', function() {
-//     expect(function() { Scrabble.score(''); }).toThrow();
-//   });
-// });
+describe('score', function() {
+  it ('is defined', function() {
+    expect(Scrabble.score).toBeDefined();
+  });
+
+  it ('correctly scores simple words', function() {
+    expect(Scrabble.score('dog')).toBe(5);
+    expect(Scrabble.score('cat')).toBe(5);
+    expect(Scrabble.score('pig')).toBe(6);
+  });
+
+  it ('adds 50 points for a 7-letter word', function() {
+    expect(Scrabble.score('academy')).toBe(65);
+  });
+
+  it ('throws on bad characters', function() {
+    expect(function () {
+      Scrabble.score('char^');
+    }).toThrow();
+  });
+
+  it ('handles all upper- and lower-case letters', function() {
+    expect(Scrabble.score('dog')).toBe(5);
+    expect(Scrabble.score('DOG')).toBe(5);
+    expect(Scrabble.score('DoG')).toBe(5);
+  });
+
+  it ('does not allow words > 7 letters', function() {
+    expect(function() { Scrabble.score('abcdefgh'); }).toThrow();
+  });
+
+  it ('does not allow empty words', function() {
+    expect(function() { Scrabble.score(''); }).toThrow();
+  });
+});
 
 describe('highestScoreFrom', function() {
   it ('is defined', function() {

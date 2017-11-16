@@ -17,13 +17,9 @@ const Scrabble = {
 
     if (!word.match(/^[a-zA-Z]+$/)) {
       throw new Error('invalid word');
-    }
-
-    if (word.length > 7 || word.length === 0) {
+    } else if (word.length > 7 || word.length === 0) {
       throw new Error('invalid word');
-    }
-
-    if (word.length === 7) {
+    } else if (word.length === 7) {
       score += 50;
     } else {
       score = 0;
