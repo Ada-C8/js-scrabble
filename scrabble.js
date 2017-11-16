@@ -65,8 +65,36 @@ const Scrabble = {
   },
 
   highestScoreFrom(arrayOfWords) {
+    if (arrayOfWords.length === 0 || arrayOfWords.constructor !== Array) {
+      throw new Error('Array of words must not be empty');
+    } else if (arrayOfWords.length === 1) {
+      return arrayOfWords[0];
+    } else {
+      const winningWord = arrayOfWords.reduce((leftWord, rightWord) => {
+        const scoreLeft = Scrabble.score(leftWord);
+        const scoreRight = Scrabble.score(rightWord);
 
-  }
+        if (scoreLeft > scoreRight) {
+          return leftWord;
+        } else if (scoreRight > scoreLeft) {
+          return rightWord;
+        }
+
+        if (rightWord.length === 7) {
+          return rightWord;
+        } else if (leftWord.length === 7) {
+          return leftWord;
+        }
+
+        if (leftWord.length < rightWord.length || leftWord.length === rightWord.length) {
+          return leftWord;
+        } else {
+          return rightWord;
+        }
+      });
+      return winningWord;
+    }
+  },
 };
 
 Scrabble.Player = class {
