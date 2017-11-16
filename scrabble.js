@@ -121,13 +121,13 @@ const Scrabble = {
 
 
 Scrabble.Player = class {
-
   constructor(name) {
     if (typeof name !== 'string') {
       throw new Error('no name');
     }
     this.name = name;
     this.plays = [];
+    // this.total = 0;
   }
 
   play(word) {
@@ -144,17 +144,62 @@ Scrabble.Player = class {
     this.plays.forEach((word) => {
       const score = Scrabble.score(word);
       sum += score;
+      // this.total += score;
     });
     return sum;
+    // return this.total;
   }
+
+
+  hasWon() {
+    if (this.totalScore() >= 100) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  highestScoringWord() {
+
+    if (this.plays.length === 0) {
+      throw new Error('no word has been played.')
+    }
+
+    let winningWord = this.plays[0];
+
+    this.plays.forEach((word) => {
+      if (Scrabble.score(word) > Scrabble.score(winningWord)) {
+        winningWord = word;
+      }
+    });
+    return winningWord;
+  }
+
+  // highestWordScore(): method which returns the highestScoringWord score
+  highWordScore() {
+
+  }
+
 };
 
 module.exports = Scrabble;
 
 
-// console.log(Scrabble.score('apple'));
-
-
-
-
 // ---------------------------------------------------------
+
+
+
+    // let numOneWord = this.plays[0];
+    // let numOneWordScore = this.score(this.plays[0]);
+    //
+    // this.plays.forEach((word) => {
+    //   const currentWord = word;
+    //   const currentWordScore = this.score(currentWord);
+    //
+    //   if (currentWordScore > numOneWordScore) {
+    //     numOneWord = currentWord;
+    //     numOneWordScore = this.score(currentWord);
+    //   }
+    //
+    // });
+    // return numOneWord;
