@@ -160,7 +160,7 @@ Scrabble.Player = class {
   // hasWon(): method which returns true if the player has over 100 points, otherwise returns false
   hasWon() {
     // if player won (over 100) then return true. Otherwise, return false
-    if (this.totalScore() > 100) {
+    if (this.totalScore() >= 100) {
       return true;
     } else {
       return false;
