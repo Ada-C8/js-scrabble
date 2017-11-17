@@ -97,6 +97,25 @@ describe('highestScoreFrom', function() {
   });
 });
 
+describe('Tilebag', function() {
+  it ('is defined', function() {
+    expect(Scrabble.TileBag).toBeDefined();
+  })// is defined
+
+  describe('Constructor', function() {
+    it('Creates a new TileBag', function() {
+      let tb = new Scrabble.TileBag();
+      expect(tb).toBeDefined();
+    }); // creates a new TileBag
+  }); // Constructor
+
+  describe('drawTiles', function(){
+    it('Draws num tiles', function() {
+      
+    }) // draws num tiles
+  })// drawTiles
+}); // Tilebag
+
 describe('Player', function() {
   it ('is defined', function() {
     expect(Scrabble.Player).toBeDefined();
