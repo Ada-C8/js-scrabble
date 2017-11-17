@@ -83,46 +83,48 @@ Scrabble.Player = class {
   constructor(name) {
     this.name = name;
     this.plays = [];
+    if (this.name == null) {
+      throw 'Error';
+    }
   }
 
-  // if (this.name == null) {
-  //   throw 'Error';
-  // }
-
   play(word) {
-    this.plays.push(word);
-    // return false if hasWon == true
+      if (this.hasWon() === true) {
+        return false;
+      }
+      if (typeof word !== 'string') {
+        throw 'Error';
+      } else {
+          return this.plays.push(word);
+      }
   }
 
   totalScore() {
-    // sums up and returns the score of the players words
     let total = 0;
-    for (let i = 0; i < this.plays.length; i++) {
-      // score each word
-      return total += score(this.plays[i]);
-      // return total score
+    for (let word of this.plays) {
+      total += Scrabble.score(word);
     }
+    return total;
   }
 
   hasWon() {
     // returns `true` if the player has over 100 points, otherwise returns `false`
-    if (totalScore() >= 100) {
+    if (this.totalScore() >= 100) {
       return true;
     } else {
-        return false;
+      return false;
     }
   }
 
   highestScoringWord() {
     // method which returns the highest scoring word the user has played
-    highestScoreFrom(plays);
+    return Scrabble.highestScoreFrom(this.plays);
   }
 
   highestWordScore() {
     // returns the `highestScoringWord` score
-    score(highestScoreFrom(plays));
+    return Scrabble.score(Scrabble.highestScoreFrom(this.plays));
   }
-
 };
 
 module.exports = Scrabble;
