@@ -110,12 +110,42 @@ Scrabble.Player = class {
     this.plays = [];
   }
 
-  play(word) {
-    if (!hasWon()){
-    this.plays.push(word);
+  hasWon() {
+    if (this.totalScore() >= 100) {
+      return true;
     } else {
-    return false
+      return false;
     }
+  }
+
+  play(word) {
+    if (typeof word != 'string' || typeof word === 'number') {
+      throw new Error ("Not a valid word.");
+    }
+    if (this.hasWon() === false) {
+    this.plays.push(word);
+    return true;
+    } else {
+    return false;
+    }
+   }
+
+   totalScore() {
+     let sumScore = 0;
+     this.plays.forEach((word) => {
+       sumScore += Scrabble.score(word);
+     });
+     return sumScore;
+   }
+
+
+
+   highestScoringWord() {
+     return Scrabble.highestScoreFrom(this.plays);
+   }
+
+   highestWordScore() {
+     return Scrabble.score(this.highestScoringWord());
    }
 
 
