@@ -212,7 +212,7 @@ describe('Player', function() {
     });
   });
 
-  xdescribe('highestWordScore', function() {
+  describe('highestWordScore', function() {
     it('returns the score of the highest scoring word played', function() {
       let player = new Scrabble.Player('test player');
       player.play('cat');

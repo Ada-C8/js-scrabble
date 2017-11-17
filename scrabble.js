@@ -163,15 +163,18 @@ Scrabble.Player = class {
   }
 
   highestScoringWord() {
-  //   // console.log(this.plays);
     return Scrabble.highestScoreFrom(this.plays);
+  }
+
+  highestWordScore() {
+    return Scrabble.score(this.highestScoringWord())
   }
 
 
 };
-console.log('test');
-let angela = new Scrabble.Player('angela')
-console.log(angela.hasWon());
-console.log('test');
+// console.log('test');
+// let angela = new Scrabble.Player('angela')
+// console.log(angela.hasWon());
+// console.log('test');
 // console.log(angela.highestScoringWord());
 module.exports = Scrabble;
