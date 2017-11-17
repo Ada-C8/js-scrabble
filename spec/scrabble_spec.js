@@ -55,7 +55,7 @@ describe('highestScoreFrom', function() {
     expect(Scrabble.score('dog')).toBe(5);
     expect(Scrabble.score('pig')).toBe(6);
 
-    // Test the functionality
+   // Test the functionality
     expect(Scrabble.highestScoreFrom(['dog', 'pig'])).toBe('pig');
     expect(Scrabble.highestScoreFrom(['pig', 'dog'])).toBe('pig');
   });
@@ -68,7 +68,7 @@ describe('highestScoreFrom', function() {
     expect(Scrabble.score(loser)).toBe(60);
     expect(Scrabble.score(winner)).toBe(60);
 
-    // Test functionality
+  //   // Test functionality
     expect(Scrabble.highestScoreFrom([loser, winner])).toBe(winner);
     expect(Scrabble.highestScoreFrom([winner, loser])).toBe(winner);
   });
