@@ -1,5 +1,5 @@
 const Scrabble = require('../scrabble');
-
+//
 describe('score', function() {
   it ('is defined', function() {
     expect(Scrabble.score).toBeDefined();
