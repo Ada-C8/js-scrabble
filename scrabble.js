@@ -85,7 +85,7 @@ const Scrabble = {
        throw new Error('Invalid word');
      }
 
-     if (! this.winning()) {
+     if (! this.hasWon()) {
        if (this.playArray.push(word)) {
          return true;
        }
@@ -104,7 +104,7 @@ const Scrabble = {
      return total;
    }
 
-   winning() {
+   hasWon() {
 
      if (this.totalScore() >= 100) {
        return true;
