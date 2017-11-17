@@ -28,13 +28,13 @@ const Scrabble = {
       W: 4,
       X: 8,
       Y: 4,
-      Z: 10
+      Z: 10,
     };
 
     const splitChars = function splitChars(str) {
       const chars = [];
-      for (let i = 0; i < str.length; i++) {
-        chars.push(str.charAt(i))
+      for (let i = 0; i < str.length; i += 1) {
+        chars.push(str.charAt(i));
       }
       return chars;
     };
@@ -88,9 +88,8 @@ const Scrabble = {
 
         if (leftWord.length < rightWord.length || leftWord.length === rightWord.length) {
           return leftWord;
-        } else {
-          return rightWord;
-        }
+        } // else
+        return rightWord;
       });
       return winningWord;
     }
@@ -134,7 +133,7 @@ Scrabble.Player = class {
   hasWon() {
     if (this.totalScore() >= 100) {
       return true;
-    }
+    } // else
     return false;
   }
 };
