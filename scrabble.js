@@ -101,6 +101,13 @@ Scrabble.Player = class {
     const highestScore = words.pop().word;
     return highestScore;
   }
+
+  highestWordScore() {
+    const words = this.plays.map(word => new Scrabble.Word(word));
+    words.sort(Scrabble._compareWordScores);
+    const highestScore = words.pop().score;
+    return highestScore;
+  }
 };
 
 
