@@ -15,9 +15,9 @@ const WordFormatException = function WordFormatException(message) {
 
 const Scrabble = {
   score: function score(word) {
-    if (word.length > 7) {
-      throw new WordFormatException('A word may not have more than 7 characters');
-    } else if (!typeof word === 'string' && /[^a-z]/i.test(word)) {
+    if (word.length > 7 || word.length < 1) {
+      throw new WordFormatException('A word must have at least 1 and not more than 7 characters');
+    } else if (!typeof word === 'string' || /[^a-z]/i.test(word)) {
       throw new WordFormatException('A word should only contain letters and no spaces.');
     } else {
       let sum = 0;
