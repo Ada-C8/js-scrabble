@@ -217,6 +217,7 @@ describe('Player', function() {
       let player = new Scrabble.Player('test player');
       player.play('cat');
       player.play('zzzz');
+      //console.log(`player.highestWordScore = ${player.highestWordScore}`)
       expect(player.highestWordScore()).toBe(40);
     });
 
