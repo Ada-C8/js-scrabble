@@ -80,7 +80,14 @@ const Scrabble = {
   } //end highestscorefrom
 }; //end const Scrabble
 
-Scrabble.Player = class {
+
+// {
+//   constructor(title, author) {
+//     this.title = title;
+//     this._author = author;
+//   }
+
+Scrabble.Player = class  {
   constructor(name) {
     if(name === undefined){
       throw new UserException("Must Include a Name");
@@ -91,7 +98,9 @@ Scrabble.Player = class {
   } //constructor
 
   totalScore() {
+    console.log("Here in total Score");
     let playerScore = 0;
+    // this.
     this.plays.forEach(function (word) {
       playerScore += Scrabble.score(word);
     }); //for each
@@ -99,8 +108,10 @@ Scrabble.Player = class {
   } //ts method
 
   hasWon() {
-    let score = player.totalScore(); //error line
-    if(score > 100) {
+    console.log("here in has won");
+    let score = this.totalScore(); //error line
+    // let score = player.totalScore(); //error line
+    if(score >= 100) {
       return true;
     } else {
       return false;
@@ -116,10 +127,11 @@ Scrabble.Player = class {
       throw new UserException("Word can only contain letters");
     } //exception tests
 
-
-    if( (this.plays.length > 0) && (player.hasWon() === true)) {
+    if( (this.plays.length > 0) && (this.hasWon() === true)) {
+    // if( (this.plays.length > 0) && (player.hasWon() === true)) {
       return false;
     } else {
+
       this.plays.push(word);
       return true;
     }
@@ -144,27 +156,48 @@ module.exports = Scrabble;
 
 
 
-
-let player = new Scrabble.Player("Dave");
-console.log("Player begins game");
-console.log(player.totalScore());
-player.play('dog');
-console.log(player.totalScore());
-player.play('cat');
-console.log(player.totalScore());
-player.play('goat');
-console.log(player.totalScore());
-console.log("has player won? ");
-console.log(player.hasWon());
-console.log("Plays zzzzzzz");
-player.play('zzzzzzz');
-console.log(player.totalScore());
-console.log("has player won? ");
-console.log(player.hasWon());
-console.log(player.highestScoringWord());
-console.log(player.highestWordScore());
-
-
+//
+// let player = new Scrabble.Player("Dave");
+// console.log("Player begins game");
+// console.log("Total score, start")
+// console.log(player.totalScore());
+// player.play('dog');
+// console.log("total score after playing one word.");
+// console.log(player.totalScore());
+// console.log("total score after playing next word");
+// player.play('cat');
+// console.log(player.totalScore());
+// player.play('goat');
+// console.log(player.totalScore());
+// // console.log("has player won? ");
+// console.log(player.hasWon());
+// console.log("Plays zzzzzzz");
+// player.play('zzzzzzz');
+// console.log(player.totalScore());
+// console.log("has player won? ");
+// console.log(player.hasWon());
+// console.log(player.highestScoringWord());
+// console.log(player.highestWordScore());
+// console.log("*****************");
+// let player2 = new Scrabble.Player("Vee");
+// console.log("Player begins game");
+// console.log(player2.totalScore());
+// player2.play('dog');
+// console.log(player2.totalScore());
+// player2.play('cat');
+// console.log(player2.totalScore());
+// player.play('goat');
+// console.log(player2.totalScore());
+// console.log("has player won? ");
+// console.log(player2.hasWon());
+// console.log("Plays zzzzzzz");
+// player2.play('zzzzzzz');
+// console.log(player2.totalScore());
+// console.log("has player won? ");
+// console.log(player2.hasWon());
+// console.log(player2.highestScoringWord());
+// console.log(player2.highestWordScore());
+//
 
 
 
