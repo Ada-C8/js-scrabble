@@ -16,26 +16,32 @@ const Scrabble = {
     };
     const keys = Object.keys(letters);
     let totalScore = 0;
-    if (this._isValidWord(word)) {
+    if (Scrabble._isValidWord(word)) {
       const chars = word.toUpperCase().match(/\S/g);
       chars.forEach((element) => {
         keys.forEach((num) => {
           const numLetters = letters[num];
-          if (numLetters.includes(element)) { totalScore += parseFloat(num); }
+          if (numLetters.includes(element)) {
+            totalScore += parseFloat(num);
+          }
         });
       });
-      if (word.length === 7) { totalScore += 50; }
+      if (word.length === 7) {
+        totalScore += 50;
+      }
     }
     return totalScore;
   },
 
   highestScoreFrom: function highestScoreFrom(array) {
-    if ((!Array.isArray(array)) || (array.length === 0)) { throw new Error('Invalid Array'); }
+    if ((!Array.isArray(array)) || (array.length === 0)) {
+      throw new Error('Invalid Array');
+    }
     const words = array.map(word => new Scrabble.Word(word));
     words.sort(Scrabble._compareWordScores);
-    const highestScore = words.pop();
-    return highestScore.word;
+    return words.slice(-1)[0].word;
   },
+
   _compareWordScores: function _compareWordScores(a, b) {
     const scoreA = a.score;
     const scoreB = b.score;
@@ -76,50 +82,44 @@ Scrabble.Player = class {
       return true;
     } throw new Error('Invalid Name');
   }
+
   play(word) {
     if (!this.hasWon()) {
       const playedWord = new Scrabble.Word(word);
       this.plays.push(playedWord.word);
       this.words.push(playedWord);
+      this.words.sort(Scrabble._compareWordScores);
       this.totalScore();
       return playedWord.word;
     } return false;
   }
+
   hasWon() {
     const currentScore = this.totalScore();
     if (currentScore >= 100) {
       return true;
     } return false;
   }
+
   totalScore() {
-    const wordScores = this.words.map(word => word.score);
-    const score = wordScores.reduce((a, b) => a + b, 0);
+    const score = this.words.reduce((a, b) => a + b.score, 0);
     return score;
   }
+
   highestScoringWord() {
-    const playerWords = this.words;
-    playerWords.sort(Scrabble._compareWordScores);
-    const highestScore = playerWords.pop().word;
-    return highestScore;
+    return this.words.slice(-1)[0].word;
   }
 
   highestWordScore() {
-    const playerWords = this.words;
-    playerWords.sort(Scrabble._compareWordScores);
-    const highestScore = playerWords.pop().score;
-    return highestScore;
+    return this.words.slice(-1)[0].score;
   }
-};
-
+}; // end of Player class
 
 Scrabble.Word = class {
   constructor(word) {
-    if (Scrabble._isValidWord(word)) {
-      this.word = word;
-      this.score = Scrabble.score(word);
-    }
+    this.word = word;
+    this.score = Scrabble.score(word);
   }
-};
-
+}; // end of Word class
 
 module.exports = Scrabble;
