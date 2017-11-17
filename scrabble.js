@@ -72,7 +72,7 @@ const Scrabble = {
     } else if (wordOneScore === wordTwoScore) {
       if (wordOne.length === 7 ) {
         return wordOne;
-      } else if (wordTwo.length == 7) {
+      } else if (wordTwo.length === 7) {
         return wordTwo;
       } else if (wordOne.length < wordTwo.length) {
         return wordOne;
