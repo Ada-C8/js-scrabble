@@ -1,4 +1,4 @@
-const values= {
+const values = {
   A: 1,
   B: 3,
   C: 3,
@@ -29,18 +29,17 @@ const values= {
 
 
 const Scrabble = {
-
-  validWord: function(word) {
+  validWord(word) {
     if (word.match(/[^a-z]/i)) {
-      throw "only letters can be played";
-    };
+      throw new Error('only letters can be played');
+    }
 
-    if (word.length > 7 || word.length < 1 ) {
-      throw "Words must be 1 to 7 letters long";
-    };
+    if (word.length > 7 || word.length < 1) {
+      throw new Error('Words must be 1 to 7 letters long');
+    }
   },
 
-  score: function(word) {
+  score(word) {
     word = word.toUpperCase();
     this.validWord(word);
     let sum = 0;
@@ -48,23 +47,21 @@ const Scrabble = {
       sum += values[letter];
     }
     if (word.length === 7) {
-      sum += 50
+      sum += 50;
     }
     return sum;
   },
 
-  resolveTie: function(tieArray){
-    winner = ""
+  resolveTie(tieArray) {
     for (let word of tieArray) {
-      if (word.length === 7){
-        winner = word;
-        return winner;
+      if (word.length === 7) {
+        return word;
       }
     }
-    minLength = 7
-    winner = []
-    for (let word of tieArray){
-      if(word.length < minLength){
+    let minLength = 7;
+    let winner = [];
+    for (let word of tieArray) {
+      if(word.length < minLength) {
         minLength = word.length;
         winner = word;
       }
@@ -72,65 +69,55 @@ const Scrabble = {
     return winner;
   },
 
-
-  highestScoreFrom: function(arrayOfWords){
-    if (arrayOfWords.length < 1 ) {
-      throw "No words were played";
-    };
-
-    //find highest scoring word or tie
+  highestScoreFrom(arrayOfWords) {
+    if (arrayOfWords.length < 1) {
+      throw new Error('No words were played');
+    }
+    // find highest scoring word or tie
     let maxScore = 0;
-    let maxWord = "";
+    let maxWord = '';
     let tie = 0;
     let tiedWords = [];
     for (let word of arrayOfWords) {
-      if (this.score(word) > maxScore){
+      if (this.score(word) > maxScore) {
         maxScore = this.score(word);
         maxWord = word;
         tie = 0;
-        tiedWords=[maxWord];
-      }else if (this.score(word) === maxScore ) {
+        tiedWords = [maxWord];
+      } else if (this.score(word) === maxScore) {
         tie = 1;
         tiedWords.push(word);
       }
     }
-
-    if (tie === 0){
+    // determine winner
+    if (tie === 0) {
       return maxWord;
-    } else {
-      let winner = this.resolveTie(tiedWords);
-      return winner;
     }
-  }
+    return this.resolveTie(tiedWords);
+  },
 };
 
 Scrabble.Player = class {
   constructor(name) {
-    if (name.length > 0){
-      this.name = name;
-    } else {
-      throw "players must have names.";
+    if (name.length === 0) {
+      throw new Error('Players must have names.');
     }
+    this.name = name;
     this.plays = [];
   }
 
   play(word) {
     Scrabble.validWord(word);
     if (this.hasWon()) {
-      return false
-    } else {
-      this.plays.push(word);
-      return this.plays;
+      return false;
     }
-  }
-
-  hasWon() {
-
+    this.plays.push(word);
+    return this.plays;
   }
 
   totalScore() {
     let sum = 0;
-    this.plays.forEach(function (word){
+    this.plays.forEach((word) => {
       sum += Scrabble.score(word);
     });
     return sum;
@@ -139,9 +126,8 @@ Scrabble.Player = class {
   hasWon() {
     if (this.totalScore() >= 100) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
 
   highestScoringWord() {
@@ -154,21 +140,3 @@ Scrabble.Player = class {
 };
 
 module.exports = Scrabble;
-
-// let player = new Scrabble.Player('test player');
-
-// player.play('cat');
-// player.play('zzzz');
-// player.play('zzzzddd');
-// console.log(player.totalScore())
-// console.log(player.hasWon())
-// console.log(Scrabble.score(player.highestScoringWord()))
-// console.log(player.highestWordScore())
-
-
-
-// // console.log(Scrabble.score)
-// // console.log(Scrabble.score('iiiiddd'))
-// // console.log(Scrabble.score('zzzzzz'))
-// console.log(Scrabble.highestScoreFrom(['iiiiddd', 'zzzzzz']))
-// console.log(Scrabble.highestScoreFrom(['zzzzzz', 'iiiiddd']))
