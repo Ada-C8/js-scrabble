@@ -28,8 +28,8 @@ const Scrabble = {
     return totalScore;
   },
 
-  // TODO: add the highestScoreFrom method //  returns the word in the array with the highest score
   highestScoreFrom: function(arrayOfWords) {
+    // returns the word in the array with the highest score
     let scores = [];
     if (arrayOfWords.length == 0) {
       throw 'Error';
@@ -51,13 +51,25 @@ const Scrabble = {
         tieIndices.push(i);
       }
     }
+
+    let shortestWord = function shortestWord(array) {
+      return array.reduce(function(shortestSoFar, current) {
+        if (current.length < shortestSoFar.length) {
+          return current;
+        } else {
+          return shortestSoFar;
+        }
+      });
+    }
+
     let tieBreaker = '';
     for (let i = 0; i < tieIndices.length; i++) {
       if (arrayOfWords[tieIndices[i]].length == 7 ) {
         return arrayOfWords[tieIndices[i]];
       }
-
     }
+
+
     // return shortest string
     // var arr = ['cats', 'giants', 'daughters', 'ice'];
     // var min = Math.min(...arr.map(({ length }) => length));
