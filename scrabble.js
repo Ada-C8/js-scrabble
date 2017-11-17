@@ -25,8 +25,8 @@ const Scrabble = {
     }
 
     // .charAt() ??
-    chars.forEach(function(char) {
-      score += Scrabble.scores[char];
+    chars.forEach((char) => {
+      score += this.scores[char];
     });
     return score;
     // console.log(score);
@@ -39,10 +39,10 @@ const Scrabble = {
 
     let highestScoringWord = arrayOfWords[0];
 
-    arrayOfWords.forEach(function (word) {
+    arrayOfWords.forEach((word) => {
       // console.log(`${this}`); // returns the .forEach function [object global]
-      const highScore = Scrabble.score(highestScoringWord);
-      const score = Scrabble.score(word);
+      const highScore = this.score(highestScoringWord);
+      const score = this.score(word);
 
       if (score > highScore) {
         highestScoringWord = word;
@@ -85,10 +85,7 @@ Scrabble.Player = class {
   }
 
   hasWon() {
-    if (this._totalScore < 100) {
-      return false;
-    }
-    return true;
+    return (this._totalScore >= 100) ? true : false
   }
 
   highestScoringWord() {
@@ -98,6 +95,39 @@ Scrabble.Player = class {
   highestWordScore() {
     return Scrabble.score(this.highestScoringWord());
   }
+};
+
+Scrabble.Tilebag = class {
+  constructor() {
+    this.allTiles = {
+      A:9, B:2, C:2, D:4, E:12, F:2, G:3, H:2, I:9, J:1, K:1, L:4, M:2, N:6, O:8, P:2, Q:1, R:6, S:4, T:6, U:4, V:2, W:2, X:1, Y:2, Z:1
+    };
+  }
+
+  tilesRemaining() {
+    let sum = Object.values(this.allTiles).reduce((a,b) => a + b, 0);
+    return sum
+  }
+
+  drawTiles(num) {
+    let arr = []
+
+    for (let i = 0; i < num; i ++) {
+      let choice = this.randomLetter();
+      while (this.allTiles.choice === 0) {
+        choice = this.randomLetter();
+      }
+      arr.push(choice)
+      this.allTiles[choice] -= 1;
+    }
+    return arr
+  }
+
+  randomLetter() {
+    let keys = Object.keys(this.allTiles);
+    return keys[ keys.length * Math.random() << 0];
+  }
+
 };
 
 module.exports = Scrabble;

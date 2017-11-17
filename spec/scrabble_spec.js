@@ -97,6 +97,8 @@ describe('highestScoreFrom', function() {
   });
 });
 
+//////////////////////////////////
+
 describe('Player', function() {
   it ('is defined', function() {
     expect(Scrabble.Player).toBeDefined();
@@ -224,5 +226,74 @@ describe('Player', function() {
       let player = new Scrabble.Player('test player');
       expect(() => { player.highestWordScore() }).toThrow();
     });
+  });
+});
+
+/////////////////////////////////////
+describe('Tilebag', function() {
+  it ('is defined', function() {
+    expect(Scrabble.Tilebag).toBeDefined();
+  });
+
+  describe('Constructor', function() {
+    it('Creates a new tilebag with all tiles', function() {
+      let tilebag = new Scrabble.Tilebag();
+      expect(tilebag.allTiles['B']).toBe(2);
+      expect(Object.keys(tilebag.allTiles).length).toBe(26);
+    });
+  });
+
+  describe('tilesRemaining', function() {
+    it('returns the number of tiles remaining', function() {
+      let tilebag = new Scrabble.Tilebag();
+      expect(tilebag.tilesRemaining()).toBe(98);
+    });
+  });
+
+  describe('drawTiles', function() {
+    it('returns an array of tiles', function() {
+      let tilebag = new Scrabble.Tilebag();
+      expect(tilebag.drawTiles(3).length).toBe(3);
+      expect(Array.isArray(tilebag.drawTiles(4))).toBeTruthy();
+    });
+
+    it('deletes those tiles from the tilesRemaining', function() {
+      let tilebag = new Scrabble.Tilebag();
+      let startTotal = tilebag.tilesRemaining();
+      expect(startTotal).toBe(98);
+      tilebag.drawTiles(3);
+      expect(tilebag.tilesRemaining()).toBe(startTotal - 3);
+    });
+
+    // throws an error if no of tiles = 0
+    // throws an error if all tiles are gone
+    // wont draw a tile with none left // how to test?
+  });
+
+  describe('randomLetter', function() {
+    it('returns a letter', function() {
+      let tilebag = new Scrabble.Tilebag();
+      let letter = tilebag.randomLetter();
+      expect(letter.length).toBe(1);
+      expect(typeof(letter)).toBe('string');
+      // tilebag.allTiles.includes?(letter) ??
+    });
+
+    it('is at least kind of random', function() {
+      let tilebag = new Scrabble.Tilebag();
+      let arr = []
+      let same = 0
+      for (let i = 0; i < 5; i++) {
+        arr.push(tilebag.randomLetter());
+      }
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === arr[i + 1]) {
+          same++;
+        }
+      }
+
+      expect(same < 2).toBe(true);
+    });
+
   });
 });
