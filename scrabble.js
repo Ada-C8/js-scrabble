@@ -136,6 +136,10 @@ Scrabble.Player = class {
     } // else
     return false;
   }
+
+  highestScoringWord() {
+    return Scrabble.highestScoreFrom(this.plays);
+  }
 };
 
 module.exports = Scrabble;
