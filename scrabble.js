@@ -48,11 +48,33 @@ const Scrabble = {
 Scrabble.Player = class {
   constructor(name) {
     if (name === undefined) {
-      throw 'Players must have names to play scrabble';
+      throw 'Players without names cannot play scrabble';
     }
     this.name = name;
     this.plays = [];
   }
+
+  plays() {
+    return this.plays;
+  }
+
+  totalScore() {
+    let playerScore = this.plays.reduce((sum, value) => sum + Scrabble.score(value), 0);
+    return playerScore;
+  }
+
+  play(word) {
+    if (!/^[a-zA-Z]{1,7}$/.test(word)) {
+      throw `Users word '${word}' was not playable. Scrabble words must be between 2-7 letters, contain no white space, and may not have non-alphabet characters.`;
+    }
+    if (this.hasWon()) {
+      return false;
+    } else {
+      this.plays.push(word);
+      return true;
+    }
+  }
+
 };
 
 module.exports = Scrabble;
