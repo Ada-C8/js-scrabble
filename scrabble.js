@@ -58,8 +58,9 @@ const Scrabble = {
 
     let highestWord = wordsArray[0];
     let highestScore = this.score(highestWord);
-    for (let i = 0; i < wordsArray.length; i += 1) {
-      const playedWord = wordsArray[i];
+    // for (let i = 0; i < wordsArray.length; i += 1) {
+    wordsArray.forEach((word) => {
+      const playedWord = word;
       const getScore = this.score(playedWord);
       const wordLength = playedWord.length;
 
@@ -67,7 +68,7 @@ const Scrabble = {
         highestWord = playedWord;
         highestScore = getScore;
       }
-    }
+    });
     return highestWord;
   },
 };
@@ -121,5 +122,6 @@ Scrabble.Player = class {
     return Scrabble.score(this.highestScoringWord());
   }
 };
+
 
 module.exports = Scrabble;
