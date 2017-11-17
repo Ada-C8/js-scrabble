@@ -58,7 +58,6 @@ const Scrabble = {
 
     let highestWord = wordsArray[0];
     let highestScore = this.score(highestWord);
-    // for (let i = 0; i < wordsArray.length; i += 1) {
     wordsArray.forEach((word) => {
       const playedWord = word;
       const getScore = this.score(playedWord);
