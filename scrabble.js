@@ -103,9 +103,23 @@ const Scrabble = {
 
 Scrabble.Player = class {
   constructor(name) {
+    if (typeof name != 'string') {
+      throw new Error ("Name can't be blank");
+    }
     this.name = name;
     this.plays = [];
   }
+
+  play(word) {
+    if (!hasWon()){
+    this.plays.push(word);
+    } else {
+    return false
+    }
+   }
+
+
+
 };
 
 module.exports = Scrabble;
