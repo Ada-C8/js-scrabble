@@ -1,3 +1,4 @@
+/*eslint-disable*/
 const Scrabble = require('../scrabble');
 
 describe('score', function() {
