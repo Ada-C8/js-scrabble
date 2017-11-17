@@ -31,27 +31,29 @@ const Scrabble = {
   highestScoreFrom: function(arrayOfWords) {
     // returns the word in the array with the highest score
     let scores = [];
+    // throw error if arrayOfWords is empty
     if (arrayOfWords.length == 0) {
       throw 'Error';
     }
-
+    // score each word and push onto scores array
     for (let word of arrayOfWords) {
       wordScore = this.score(word);
-      // scores.word = wordScore;
       scores.push(wordScore);
     }
-
+    // find index of highest score
     highestScoreIndex = scores.indexOf(Math.max(...scores));
-
+    // find highest score
     highestScore = Math.max(...scores);
 
     let tieIndices = [];
+    // loop through scores to find ties and capture indices of ties
     for (let i = 0; i < scores.length; i++) {
       if (scores[i] == highestScore) {
         tieIndices.push(i);
       }
     }
 
+    // find shortest word
     let shortestWord = function shortestWord(array) {
       return array.reduce(function(shortestSoFar, current) {
         if (current.length < shortestSoFar.length) {
@@ -63,6 +65,8 @@ const Scrabble = {
     }
 
     let tieBreaker = '';
+    // if tie word if seven, it wins
+    // if neither is seven, shortestWord wins
     for (let i = 0; i < tieIndices.length; i++) {
       if (arrayOfWords[tieIndices[i]].length == 7 ) {
         return arrayOfWords[tieIndices[i]];
