@@ -195,7 +195,7 @@ describe('Player', function() {
       expect(player.hasWon()).toBe(true);
     });
   });
-
+//
   describe('highestScoringWord', function() {
     // Tie-breaking logic is already described in the tests
     // for highestWordFrom, so we will not repeat it here.
