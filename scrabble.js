@@ -13,6 +13,10 @@ const WordFormatException = function WordFormatException(message) {
   this.name = 'WordFormatException';
 };
 
+const maximumValue = function maximumValue(array) {
+
+};
+
 const Scrabble = {
   score: function score(word) {
     if (word.length > 7 || word.length < 1) {
@@ -34,9 +38,38 @@ const Scrabble = {
       return sum;
     }
   },
-
+  highestScoreFrom: function highestScoreFrom(wordArray) {
+    const wordScores = {};
+    wordArray.map(function(word) {
+      wordScores[word] = Scrabble.score(word);
+    });
+    const highScore = Math.max(...Object.values(wordScores));
+    const winningWords = [];
+    for (const [word, score] of Object.entries(wordScores)) {
+      if (score === highScore) {
+        winningWords.push(word);
+      }
+    }
+    if (winningWords.length > 1) {
+      for (let word of winningWords) {
+        if (word.length === 7) {
+          return word;
+        }
+      }
+      let minLength = 7;
+      let shortestWord = '';
+      for (let word of winningWords) {
+        if (word.length < minLength) {
+          minLength = word.length;
+          shortestWord = word;
+        }
+      }
+      return shortestWord;
+    } else {
+      return winningWords[0];
+    }
+  },
   // TODO: add the highestScoreFrom method
-
 };
 
 Scrabble.Player = class {
