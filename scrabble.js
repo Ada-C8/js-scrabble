@@ -9,6 +9,8 @@ const Scrabble = {
 
 Scrabble.Player = class {
   // TODO: implement the Player class
+
+  // TODO: add arrow function
 };
 
 module.exports = Scrabble;
