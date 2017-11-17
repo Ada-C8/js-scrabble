@@ -198,7 +198,7 @@ describe('Player', function() {
     });
   });
 
-  xdescribe('highestScoringWord', function() {
+  describe('highestScoringWord', function() {
     // Tie-breaking logic is already described in the tests
     // for highestWordFrom, so we will not repeat it here.
     it('returns the highest scoring word played', function() {

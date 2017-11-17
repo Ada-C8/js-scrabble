@@ -95,6 +95,12 @@ Scrabble.Player = class {
     const score = words.reduce((a, b) => a + b, 0);
     return score;
   }
+  highestScoringWord() {
+    const words = this.plays.map(word => new Scrabble.Word(word));
+    words.sort(Scrabble._compareWordScores);
+    const highestScore = words.pop().word;
+    return highestScore;
+  }
 };
 
 
