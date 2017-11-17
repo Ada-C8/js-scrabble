@@ -1,9 +1,10 @@
-/* eslint-disable */
+
 const Scrabble = {
   score: function(word) {
     if (!word.match(/^([a-zA-Z]){1,7}$/)) {
-      throw new Error("Not a valid word!");
-    } else {word = word.toUpperCase();
+      throw new Error('Not a valid word!');
+    } else {
+      word = word.toUpperCase();
     }
 
     let score = 0;
@@ -29,46 +30,45 @@ const Scrabble = {
         case 'R':
         case 'S':
         case 'T':
-         score += 1;
-         break;
+          score += 1;
+          break;
 
         case 'D':
         case 'G':
-         score += 2;
-         break;
+          score += 2;
+          break;
 
         case 'B':
         case 'C':
         case 'M':
         case 'P':
-         score += 3;
-         break;
+          score += 3;
+          break;
 
         case 'F':
         case 'H':
         case 'V':
         case 'W':
         case 'Y':
-         score += 4;
-         break;
+          score += 4;
+          break;
 
         case 'k':
-         score += 5;
-         break;
+          score += 5;
+          break;
 
         case 'J':
         case 'X':
-         score += 8;
-         break;
+          score += 8;
+          break;
 
-         case 'Q':
-         case 'Z':
+        case 'Q':
+        case 'Z':
           score += 10;
           break;
 
         default:
-          throw new Error("Not a valid letter!");
-
+          throw new Error('Not a valid letter!');
       }
     });
     return score;
@@ -76,7 +76,7 @@ const Scrabble = {
 
  highestScoreFrom: function(arrayOfWords) {
     if (arrayOfWords.length === 0) {
-      throw new Error ("No words...")
+      throw new Error('No words...')
     }
 
     let currentWinningWord = arrayOfWords[0];
@@ -88,12 +88,12 @@ const Scrabble = {
         currentWinningWord = word;
         currentWinningScore = wordScore;
       } else if (currentWinningScore === wordScore) {
-          if (currentWinningWord.length > word.length) {
-            if (currentWinningWord.length != 7)
-              currentWinningWord = word;
-          }else if (word.length === 7){
-             currentWinningWord = word;
-          }
+        if (currentWinningWord.length > word.length) {
+          if (currentWinningWord.length !== 7)
+            currentWinningWord = word;
+        } else if (word.length === 7) {
+          currentWinningWord = word;
+        }
       }
     });
     return currentWinningWord
@@ -103,8 +103,8 @@ const Scrabble = {
 
 Scrabble.Player = class {
   constructor(name) {
-    if (typeof name != 'string') {
-      throw new Error ("Name can't be blank");
+    if (typeof name !== 'string') {
+      throw new Error("Name can't be blank");
     }
     this.name = name;
     this.plays = [];
@@ -113,43 +113,37 @@ Scrabble.Player = class {
   hasWon() {
     if (this.totalScore() >= 100) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
 
   play(word) {
-    if (typeof word != 'string' || typeof word === 'number') {
-      throw new Error ("Not a valid word.");
+    if (typeof word !== 'string' || typeof word === 'number') {
+      throw new Error('Not a valid word.');
     }
     if (this.hasWon() === false) {
-    this.plays.push(word);
-    return true;
-    } else {
-    return false;
+      this.plays.push(word);
+      return true;
     }
-   }
+    return false;
+  }
 
-   totalScore() {
-     let sumScore = 0;
-     this.plays.forEach((word) => {
-       sumScore += Scrabble.score(word);
-     });
-     return sumScore;
-   }
-
-
-
-   highestScoringWord() {
-     return Scrabble.highestScoreFrom(this.plays);
-   }
-
-   highestWordScore() {
-     return Scrabble.score(this.highestScoringWord());
-   }
+  totalScore() {
+    let sumScore = 0;
+    this.plays.forEach((word) => {
+      sumScore += Scrabble.score(word);
+    });
+    return sumScore;
+  }
 
 
+  highestScoringWord() {
+    return Scrabble.highestScoreFrom(this.plays);
+  }
 
+  highestWordScore() {
+    return Scrabble.score(this.highestScoringWord());
+  }
 };
 
 module.exports = Scrabble;
