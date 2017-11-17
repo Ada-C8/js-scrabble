@@ -85,9 +85,53 @@ const Scrabble = {
   }
 };
 
-// Wave 2
 Scrabble.Player = class {
-  // TODO: implement the Player class
+  constructor(name) {
+    if (!name) {
+      throw 'A name please!'
+    };
+
+    this.name = name;
+    this.plays = [];
+  }
+
+  play(word) {
+    if (this.hasWon() === true) {
+      return false;
+    };
+
+    if (!word || typeof word !== 'string') {
+      throw 'That is not a valid word, please try again.'
+    };
+
+    this.plays.push(word);
+    return true;
+  }
+
+  totalScore() {
+    let total = 0;
+    for (let word of this.plays) {
+      total += Scrabble.score(word);
+    };
+    return total;
+  }
+
+  hasWon() {
+    if(this.totalScore() >= 100) {
+      return true;
+    } else {
+      return false;
+    };
+  }
+
+  highestScoringWord() {
+    return Scrabble.highestScoreFrom(this.plays);
+  }
+
+  highestWordScore(){
+    return Scrabble.score(this.highestScoringWord());
+  }
+
 };
 
 module.exports = Scrabble;
