@@ -60,6 +60,7 @@ describe('highestScoreFrom', function() {
     expect(Scrabble.highestScoreFrom(['pig', 'dog'])).toBe('pig');
   });
 
+
   it ('if tied, prefer a word with 7 letters', function() {
     const loser = 'zzzzzz';
     const winner = 'iiiiddd';
@@ -147,7 +148,7 @@ describe('Player', function() {
       expect(player.plays.length).toBe(1);
     });
   });
-
+//
   describe ('totalScore', function() {
     it ('Is zero if the player has not played anything', function() {
       let player = new Scrabble.Player('test player');
