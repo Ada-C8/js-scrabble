@@ -13,14 +13,10 @@ const WordFormatException = function WordFormatException(message) {
   this.name = 'WordFormatException';
 };
 
-const maximumValue = function maximumValue(array) {
-
-};
-
 const Scrabble = {
   score: function score(word) {
     if (word.length > 7 || word.length < 1) {
-      throw new WordFormatException('A word must have at least 1 and not more than 7 characters');
+      throw new WordFormatException('A word must have at least 1 and not more than 7 characters.');
     } else if (!typeof word === 'string' || /[^a-z]/i.test(word)) {
       throw new WordFormatException('A word should only contain letters and no spaces.');
     } else {
@@ -39,6 +35,9 @@ const Scrabble = {
     }
   },
   highestScoreFrom: function highestScoreFrom(wordArray) {
+    if (wordArray.length === 0) {
+      throw new WordFormatException('There must be at least one word to score in the set.');
+    }
     const wordScores = {};
     wordArray.map(function(word) {
       wordScores[word] = Scrabble.score(word);
@@ -69,7 +68,6 @@ const Scrabble = {
       return winningWords[0];
     }
   },
-  // TODO: add the highestScoreFrom method
 };
 
 Scrabble.Player = class {
