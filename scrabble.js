@@ -104,6 +104,16 @@ const Scrabble = {
       return total;
     }
 
+    //Arrow function not working
+    // totalScore() {
+    //   // let total = 0;
+    //   // let total = this.plays.reduce((total, playedWord) => total + Scrabble.score(playedWord));
+    //   // console.log('hello' + playedWord);
+    //
+    //   this.plays.reduce((total, playedWord) => ( total + Scrabble.score(playedWord), 0);
+    // };
+    // //);
+
     hasWon() {
       if (this.totalScore() < 100) {
         return false;
@@ -121,6 +131,10 @@ const Scrabble = {
     }
   }; // Scrabble.Player object
 
+// Optional Enhancements
+// Scrabble.TileBag = class {
+//
+// }
 
 
   module.exports = Scrabble;
