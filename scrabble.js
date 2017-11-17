@@ -47,15 +47,15 @@ const Scrabble = {
       comparison = 1;
     } else if (scoreA < scoreB) { // lower score loses
       comparison = -1;
-    } else if ((scoreA === scoreB) && (lengthA === 7)) { // tied score, 7 letter word wins
+    } else if (lengthA === 7) { // tied score, 7 letter word wins
       comparison = 1;
-    } else if ((scoreA === scoreB) && (lengthB === 7)) { // tied lose if other word is 7 letters
+    } else if (lengthB === 7) { // tied lose if other word is 7 letters
       comparison = -1;
-    } else if ((scoreA === scoreB) && (lengthA < lengthB)) { // tied shorter word wins,
+    } else if (lengthA < lengthB) { // tied shorter word wins,
       comparison = 1;
-    } else if ((scoreA === scoreB) && (lengthA > lengthB)) { // tied longer word loses
+    } else if (lengthA > lengthB) { // tied longer word loses
       comparison = -1;
-    } else if ((scoreA === scoreB) && (lengthA === lengthB)) { // return first word
+    } else if (lengthA === lengthB) { // return first word
       comparison = 1;
     }
     return comparison;
@@ -63,8 +63,19 @@ const Scrabble = {
 }; // end of class!
 
 Scrabble.Player = class {
-  // TODO: implement the Player class
+  constructor(name) {
+    if (Scrabble.Player.isValidName(name)) {
+      this.name = name;
+    }
+  }
+
+  static isValidName(name) {
+    if (name.length > 0) {
+      return true;
+    } throw new Error('Invalid Name');  }
+
 };
+
 
 Scrabble.Word = class {
   constructor(word) {
