@@ -93,7 +93,6 @@ Scrabble.Player = class {
   }
   totalScore() {
     const wordScores = this.words.map(word => word.score);
-    // words = words.map(word => word.score);
     const score = wordScores.reduce((a, b) => a + b, 0);
     return score;
   }
