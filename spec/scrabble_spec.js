@@ -104,7 +104,7 @@ describe('Player', function() {
     expect(Scrabble.Player).toBeDefined();
   });
 
-  xdescribe('Constructor', function() {
+  describe('Constructor', function() {
     it('Creates a new player', function() {
       let name = 'test name';
       let player = new Scrabble.Player(name);
