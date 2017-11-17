@@ -31,15 +31,34 @@ const Scrabble = {
 
   highestScoreFrom: function highestScoreFrom(array) {
     if ((!Array.isArray(array)) || (array.length === 0)) { throw new Error('Invalid Array'); }
-    const results = array.map(word => this.score(word));
-    const maxResult = { highScore: results[0], index: 0 };
-    results.forEach((num, i) => {
-      if (num > maxResult.highScore) {
-        maxResult.highestScore = num;
-        maxResult.index = i;
-      }
-    });
-    return array[maxResult.index];
+    const words = array.map(word => new Scrabble.Word(word));
+    words.sort(Scrabble._compareWordScores);
+    const highestScore = words.pop();
+    return highestScore.word;
+  },
+  _compareWordScores: function _compareWordScores(a, b) {
+    const scoreA = a.score;
+    const scoreB = b.score;
+    const lengthA = a.word.length;
+    const lengthB = b.word.length;
+
+    let comparison = 0;
+    if (scoreA > scoreB) { // greater score wins
+      comparison = 1;
+    } else if (scoreA < scoreB) { // lower score loses
+      comparison = -1;
+    } else if ((scoreA === scoreB) && (lengthA === 7)) { // tied score, 7 letter word wins
+      comparison = 1;
+    } else if ((scoreA === scoreB) && (lengthB === 7)) { // tied lose if other word is 7 letters
+      comparison = -1;
+    } else if ((scoreA === scoreB) && (lengthA < lengthB)) { // tied shorter word wins,
+      comparison = 1;
+    } else if ((scoreA === scoreB) && (lengthA > lengthB)) { // tied longer word loses
+      comparison = -1;
+    } else if ((scoreA === scoreB) && (lengthA === lengthB)) { // return first word
+      comparison = 1;
+    }
+    return comparison;
   },
 }; // end of class!
 
@@ -52,6 +71,7 @@ Scrabble.Word = class {
   if (Scrabble.isValidWord(word)) {
     this.word = word;
     this.score = Scrabble.score(word);
+  }
   }
 };
 
