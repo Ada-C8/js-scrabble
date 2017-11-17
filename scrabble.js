@@ -98,9 +98,9 @@ Scrabble.Player = class {
     return score;
   }
   highestScoringWord() {
-    const words = this.plays.map(word => new Scrabble.Word(word));
-    words.sort(Scrabble._compareWordScores);
-    const highestScore = words.pop().word;
+    const playerWords = this.words;
+    playerWords.sort(Scrabble._compareWordScores);
+    const highestScore = playerWords.pop().word;
     return highestScore;
   }
 
