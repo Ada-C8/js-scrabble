@@ -1,5 +1,7 @@
 const Scrabble = require('../scrabble');
 
+// To skip test, write x infront of a describe or a it block
+
 describe('score', function() {
   it ('is defined', function() {
     expect(Scrabble.score).toBeDefined();
@@ -32,7 +34,8 @@ describe('score', function() {
   });
 
   it ('does not allow empty words', function() {
-    expect(function() { Scrabble.score(''); }).toThrow();
+    expect(function() { /* This content bellow is what we want to execute */
+      Scrabble.score(''); }).toThrow();
   });
 });
 
