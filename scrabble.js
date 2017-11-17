@@ -17,7 +17,6 @@ const Scrabble = {
       throw new UserException(`Illegal play, ${playedWord.length} exceeds allowed tile count`);
     }
 
-<<<<<<< HEAD
     if (playedWord === '') {
       throw new UserException(`Illegal play ${playedWord}
         contains bad characters`);
@@ -134,13 +133,6 @@ const Scrabble = {
 
 
   module.exports = Scrabble;
-=======
-Scrabble.Player = class {
-  // TODO: implement the Player class
-
-  // TODO: add arrow function
-};
->>>>>>> 9be034dbf78dd35ecb9338487b34fb53336e83f2
 
   //tests
   // let name = 'Bob';
