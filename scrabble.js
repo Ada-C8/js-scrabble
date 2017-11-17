@@ -117,7 +117,7 @@ Scrabble.Player = class {
 
     this.name = name
     // this._totalScore = 0
-    this._plays = []
+    this.plays = []
   };
 
 
@@ -132,8 +132,7 @@ Scrabble.Player = class {
     }
 
     if (!this.hasWon()) {
-      this._plays.push(word);
-      return true;
+      return this.plays.push(word);
     } else {
       return false;
 
@@ -146,14 +145,10 @@ Scrabble.Player = class {
   totalScore() {
     // takes array of words and scores each word. then adds all scores together
     let totalScore = 0
-    console.log(` before this._totalScore = ${totalScore}`);
-    for (let word of this._plays) {
-      console.log(`word = ${word}`);
-      console.log(`Scrabble.score(word) = ${Scrabble.score(word)}`);
+    // console.log(this.plays);
+    for (let word of this.plays) {
       totalScore += Scrabble.score(word);
     }
-    console.log(`after totalScore = ${totalScore}\n`);
-
     return totalScore;
   }
 
@@ -167,11 +162,16 @@ Scrabble.Player = class {
     }
   }
 
+  highestScoringWord() {
+  //   // console.log(this.plays);
+    return Scrabble.highestScoreFrom(this.plays);
+  }
+
 
 };
 console.log('test');
 let angela = new Scrabble.Player('angela')
 console.log(angela.hasWon());
 console.log('test');
-console.log(angela.totalScore());
+// console.log(angela.highestScoringWord());
 module.exports = Scrabble;
