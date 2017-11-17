@@ -66,23 +66,44 @@ Scrabble.Player = class {
   constructor(name) {
     if (Scrabble.Player.isValidName(name)) {
       this.name = name;
+      this.plays = [];
     }
   }
 
   static isValidName(name) {
     if (name.length > 0) {
       return true;
-    } throw new Error('Invalid Name');  }
-
+    } throw new Error('Invalid Name');
+  }
+  play(word) {
+    if (!this.hasWon()) {
+      const playedWord = new Scrabble.Word(word);
+      this.plays.push(playedWord.word);
+      this.totalScore();
+      return playedWord.word;
+    } return false;
+  }
+  hasWon() {
+    const currentScore = this.totalScore();
+    if (currentScore >= 100) {
+      return true;
+    } return false;
+  }
+  totalScore() {
+    const words = this.plays.map(word => (new Scrabble.Word(word)).score);
+    // words = words.map(word => word.score);
+    const score = words.reduce((a, b) => a + b, 0);
+    return score;
+  }
 };
 
 
 Scrabble.Word = class {
   constructor(word) {
-  if (Scrabble.isValidWord(word)) {
-    this.word = word;
-    this.score = Scrabble.score(word);
-  }
+    if (Scrabble.isValidWord(word)) {
+      this.word = word;
+      this.score = Scrabble.score(word);
+    }
   }
 };
 

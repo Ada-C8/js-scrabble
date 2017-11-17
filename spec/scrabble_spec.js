@@ -116,7 +116,7 @@ describe('Player', function() {
     });
   });
 
-  xdescribe ('play', function() {
+  describe ('play', function() {
     it ('Records the played word', function() {
       let word = 'dog';
       let player = new Scrabble.Player('test player');
@@ -150,7 +150,7 @@ describe('Player', function() {
     });
   });
 
-  xdescribe ('totalScore', function() {
+  describe ('totalScore', function() {
     it ('Is zero if the player has not played anything', function() {
       let player = new Scrabble.Player('test player');
       expect(player.totalScore()).toBe(0);
