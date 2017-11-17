@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const Scrabble = require('../scrabble');
 
 describe('score', function() {
@@ -198,7 +200,7 @@ describe('Player', function() {
 
   describe('highestScoringWord', function() {
     // Tie-breaking logic is already described in the tests
-    // for highestWordFrom, so we will not repeat it here.
+    // for highestScoreFrom, so we will not repeat it here.
     it('returns the highest scoring word played', function() {
       let player = new Scrabble.Player('test player');
       player.play('cat');
@@ -226,3 +228,42 @@ describe('Player', function() {
     });
   });
 });
+
+describe('TileBag', function() {
+  it ('is defined', function() {
+    expect(Scrabble.TileBag).toBeDefined();
+  })
+
+  describe('Constructor', function() {
+    it('Creates a new tilebag', function() {
+      let tilebag = new Scrabble.TileBag();
+      expect(tilebag.tiles.length).toBe(98);
+    });
+  });
+
+  describe('draw', function() {
+    it ('draws number of tiles given', function() {
+      let tilebag = new Scrabble.TileBag();
+      expect(tilebag.draw(10).length).toBe(10);
+      expect(Array.isArray(tilebag.draw(5))).toBe(true);
+    });
+
+    it ('decrements the tilebag by number of tiles drawn', function() {
+      let tilebag = new Scrabble.TileBag();
+      let demobag = new Scrabble.TileBag();
+      expect(tilebag.draw(98).sort().toString()).toBe(demobag.tiles.toString());
+      expect(tilebag.tiles.length).toBe(0);
+      demobag.draw(30);
+      expect(demobag.tiles.length).toBe(68);
+    });
+
+    it ('when tile bag is empty, no further tiles are drawn', function() {
+      let tilebag = new Scrabble.TileBag();
+      tilebag.draw(95);
+      expect(tilebag.draw(7).length).toBe(3);
+      expect(tilebag.tiles.length).toBe(0);
+
+    });
+  });
+
+})
