@@ -16,7 +16,7 @@ const WordFormatException = function WordFormatException(message) {
 const Scrabble = {
   score: function score(word) {
     if (word.length > 7 || word.length < 1) {
-      throw new WordFormatException('A word must have at least 1 and not more than 7 characters.');
+      throw new WordFormatException('A word must have at least 1 and not more than 7 characters');
     } else if (!typeof word === 'string' || /[^a-z]/i.test(word)) {
       throw new WordFormatException('A word should only contain letters and no spaces.');
     } else {
@@ -71,6 +71,42 @@ const Scrabble = {
 };
 
 Scrabble.Player = class {
+  constructor(name) {
+    if (name === null || name === '' || name === undefined) {
+      throw new TypeError('Missing \'name\' argument.');
+    }
+    this.name = name;
+    this.plays = [];
+  }
+  play(word) {
+    if (this.hasWon()) {
+      return false;
+    } else {
+      Scrabble.score(word);
+      this.plays.push(word);
+      return true;
+    }
+  }
+  totalScore() {
+    let total = 0;
+    if (this.plays.length < 1) {
+      return total;
+    }
+    for (let word of this.plays) {
+      total += Scrabble.score(word);
+    }
+    return total;
+  }
+  hasWon() {
+    let won = this.totalScore() >= 100 ? true : false;
+    return won;
+  }
+  highestScoringWord() {
+    return Scrabble.highestScoreFrom(this.plays);
+  }
+  highestWordScore() {
+    return Scrabble.score(this.highestScoringWord());
+  }
   // TODO: implement the Player class
 };
 
