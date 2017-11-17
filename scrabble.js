@@ -16,39 +16,35 @@ const Scrabble = {
       throw new UserException("You must enter a word to be scored");
     } else if (word.match(/[^a-z]+/i)) {
       throw new UserException("Word can only contain letters");
-    } //exception tests
+    }
 
-    let total = 0; //set initial total
+    let total = 0;
 
-    word = word.toUpperCase(); //set word to uppercase
+    word = word.toUpperCase();
 
     for(let i = 0; i < word.length; i++){
       total += letterPoints[word[i]];
-    } // end for loop
+    }
 
     if(word.length === 7){
       total += 50;
-    } //if length
+    }
 
     return total;
 
-  }, //end function word
+  },
 
   tieBreak: function(a, b) {
     if(a.length === 7){
-      let winner = a;
-      return winner;
+      return a;
     } else if(b.length === 7){
-      let winner = b;
-      return winner;
+      return b;
     } else if(a.length > b.length) {
-      let winner = b;
-      return winner;
+      return b;
     } else {
-      let winner = a;
-      return winner;
+      return a;
     }
-  }, //end tiebreak function
+  },
 
   highestScoreFrom: function(words) {
 
@@ -56,7 +52,7 @@ const Scrabble = {
       throw new UserException("Array is Empty");
     } else if (typeof words != 'object') {
       throw new UserException("You must enter an array");
-    } //exceptions
+    }
 
     if(words.length === 1) {
       return words[0];
@@ -70,47 +66,36 @@ const Scrabble = {
         if(Scrabble.score(word) > highestScore){
           highestScoringWord = word;
           highestScore = Scrabble.score(word);
-        }//if
+        }
         else if (Scrabble.score(word) === highestScore) {
           highestScoringWord = Scrabble.tieBreak(highestScoringWord, word);
-        } //else if
-      });//end foreach function
+        }
+      });
       return highestScoringWord;
-    } //else if array has 2 or more words
-  } //end highestscorefrom
-}; //end const Scrabble
+    }
+  }
+};
 
-
-// {
-//   constructor(title, author) {
-//     this.title = title;
-//     this._author = author;
-//   }
 
 Scrabble.Player = class  {
   constructor(name) {
     if(name === undefined){
       throw new UserException("Must Include a Name");
-    } //exception
+    }
     this.name = name;
     this.plays = [];
-    // this.totalScore = 0;
-  } //constructor
+  }
 
   totalScore() {
-    console.log("Here in total Score");
     let playerScore = 0;
-    // this.
     this.plays.forEach(function (word) {
       playerScore += Scrabble.score(word);
-    }); //for each
+    });
     return playerScore;
-  } //ts method
+  }
 
   hasWon() {
-    console.log("here in has won");
-    let score = this.totalScore(); //error line
-    // let score = player.totalScore(); //error line
+    let score = this.totalScore();
     if(score >= 100) {
       return true;
     } else {
@@ -122,102 +107,27 @@ Scrabble.Player = class  {
     if(word.length > 7) {
       throw new UserException("Word is Too Long");
     } else if (word.length === 0) {
-      throw new UserException("You must enter a word to be scored");
+      throw new UserException("You must enter a word");
     } else if (word.match(/[^a-z]+/i)) {
       throw new UserException("Word can only contain letters");
-    } //exception tests
+    }
 
     if( (this.plays.length > 0) && (this.hasWon() === true)) {
-    // if( (this.plays.length > 0) && (player.hasWon() === true)) {
       return false;
     } else {
-
       this.plays.push(word);
       return true;
     }
-
-  }; //play function
+  };
 
   highestScoringWord() {
     return Scrabble.highestScoreFrom(this.plays);
   }
 
   highestWordScore() {
-
     return Scrabble.score(Scrabble.highestScoreFrom(this.plays));
   }
 
-
-
-}; //player class
+};
 
 module.exports = Scrabble;
-
-
-
-
-//
-// let player = new Scrabble.Player("Dave");
-// console.log("Player begins game");
-// console.log("Total score, start")
-// console.log(player.totalScore());
-// player.play('dog');
-// console.log("total score after playing one word.");
-// console.log(player.totalScore());
-// console.log("total score after playing next word");
-// player.play('cat');
-// console.log(player.totalScore());
-// player.play('goat');
-// console.log(player.totalScore());
-// // console.log("has player won? ");
-// console.log(player.hasWon());
-// console.log("Plays zzzzzzz");
-// player.play('zzzzzzz');
-// console.log(player.totalScore());
-// console.log("has player won? ");
-// console.log(player.hasWon());
-// console.log(player.highestScoringWord());
-// console.log(player.highestWordScore());
-// console.log("*****************");
-// let player2 = new Scrabble.Player("Vee");
-// console.log("Player begins game");
-// console.log(player2.totalScore());
-// player2.play('dog');
-// console.log(player2.totalScore());
-// player2.play('cat');
-// console.log(player2.totalScore());
-// player.play('goat');
-// console.log(player2.totalScore());
-// console.log("has player won? ");
-// console.log(player2.hasWon());
-// console.log("Plays zzzzzzz");
-// player2.play('zzzzzzz');
-// console.log(player2.totalScore());
-// console.log("has player won? ");
-// console.log(player2.hasWon());
-// console.log(player2.highestScoringWord());
-// console.log(player2.highestWordScore());
-//
-
-
-
-
-
-
-
-
-
-
-// console.log(player.plays.length);
-// player.play("zzzzzzz");
-// console.log(player.totalScore());
-// player.play("qqqqqqq");
-// console.log(player.totalScore());
-// player.play("shoes");
-// // expect(player.play(word)).toBeTruthy();
-// console.log("AFTER PLAYS");
-// console.log(player.plays.length);
-// console.log(player.plays);
-// console.log("THis is showing if the player won");
-// console.log(player.hasWon());
-// console.log(player.totalScore());
