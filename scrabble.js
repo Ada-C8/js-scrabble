@@ -96,23 +96,18 @@ const Scrabble = {
       return this.plays;
     }
 
-    totalScore() {
-      let total = 0;
-      this.plays.forEach(function(playedWord) {
-        total += Scrabble.score(playedWord)
-      });
-      return total;
-    }
-
-    //Arrow function not working
     // totalScore() {
-    //   // let total = 0;
-    //   // let total = this.plays.reduce((total, playedWord) => total + Scrabble.score(playedWord));
-    //   // console.log('hello' + playedWord);
-    //
-    //   this.plays.reduce((total, playedWord) => ( total + Scrabble.score(playedWord), 0);
-    // };
-    // //);
+    //   let total = 0;
+    //   this.plays.forEach(function(playedWord) {
+    //     total += Scrabble.score(playedWord)
+    //   });
+    //   return total;
+    // }
+
+    // arrow function
+    totalScore() {
+      return this.plays.reduce((total, playedWord) => { return total + Scrabble.score(playedWord) }, 0);
+    }
 
     hasWon() {
       if (this.totalScore() < 100) {
@@ -131,10 +126,10 @@ const Scrabble = {
     }
   }; // Scrabble.Player object
 
-// Optional Enhancements
-// Scrabble.TileBag = class {
-//
-// }
+  // Optional Enhancements
+  // Scrabble.TileBag = class {
+  //
+  // }
 
 
   module.exports = Scrabble;
