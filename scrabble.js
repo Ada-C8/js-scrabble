@@ -53,44 +53,51 @@ const Scrabble = {
       }
     }
 
-    // find shortest word
-    let shortestWord = function shortestWord(array) {
-      return array.reduce(function(shortestSoFar, current) {
-        if (current.length < shortestSoFar.length) {
-          return current;
-        } else {
-          return shortestSoFar;
-        }
-      });
-    }
 
-    let tieBreaker = '';
-    // if tie word if seven, it wins
-    // if neither is seven, shortestWord wins
+    // TODO: lines 58 - 87 do not work right now. I would to use a tieBreaker function to hold the tie rules and call it when i am scoring
+    //   // find shortest word
+    //   let shortestWord = function shortestWord(array) {
+    //     return array.reduce(function(shortestSoFar, current) {
+    //       if (current.length < shortestSoFar.length) {
+    //         return current;
+    //       } else {
+    //         return shortestSoFar;
+    //       }
+    //     });
+    //   }
+    //
+    //   let tieBreaker = function tieBreaker() {
+    //     // if tie word is seven, it wins
+    //     // if neither is seven, shortestWord wins
+    //     for (let i = 0; i < tieIndices.length; i++) {
+    //       if (arrayOfWords[tieIndices[i]].length == 7 ) {
+    //         return arrayOfWords[tieIndices[i]];
+    //       }
+    //     }
+    //     return shortestWord;
+    //   }
+    //
+    //   if (arrayOfWords.length < 2) {
+    //     return arrayOfWords[0];
+    //   } else if (tieIndices >= 2) {
+    //       return tieBreaker();
+    //   } else {
+    //       return arrayOfWords[highestScoreIndex];
+    //   }
+    // }
     for (let i = 0; i < tieIndices.length; i++) {
       if (arrayOfWords[tieIndices[i]].length == 7 ) {
         return arrayOfWords[tieIndices[i]];
       }
     }
 
-
-    // return shortest string
-    // var arr = ['cats', 'giants', 'daughters', 'ice'];
-    // var min = Math.min(...arr.map(({ length }) => length));
-    // console.log(min);
-
-    // let tieIndices = scores.filter(function(score){
-    //   return score == scores[highestScoreIndex];
-    // });
-    // console.log(`ties:${tieIndices}`);
     if (arrayOfWords.length < 2) {
       return arrayOfWords[0];
-    // } else if () {
-
     } else {
-        return arrayOfWords[highestScoreIndex];
+      return arrayOfWords[highestScoreIndex];
     }
   }
+
 
 };
 
@@ -105,14 +112,14 @@ Scrabble.Player = class {
   }
 
   play(word) {
-      if (this.hasWon() === true) {
-        return false;
-      }
-      if (typeof word !== 'string') {
-        throw 'Error';
-      } else {
-          return this.plays.push(word);
-      }
+    if (this.hasWon() === true) {
+      return false;
+    }
+    if (typeof word !== 'string') {
+      throw 'Error';
+    } else {
+      return this.plays.push(word);
+    }
   }
 
   totalScore() {
