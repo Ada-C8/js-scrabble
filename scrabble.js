@@ -100,9 +100,9 @@ Scrabble.Player = class {
     if (allPlays === undefined) {
       return total;
     } else {
-    allPlays.forEach(function(word) {
-      total += Scrabble.score(word);
-    });
+      allPlays.forEach(function(word) {
+        total += Scrabble.score(word);
+      });
     }
     return total
   }
