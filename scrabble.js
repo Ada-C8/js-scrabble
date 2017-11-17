@@ -1,5 +1,5 @@
 const Scrabble = {
-  isValidWord: function isValidWord(word) {
+  _isValidWord: function _isValidWord(word) {
     if ((typeof word === 'string') && (/^[a-zA-Z]+$/.test(word)) && (word.length < 8) && (word.length > 0)) {
       return true;
     } throw new Error('Invalid Word');
@@ -16,7 +16,7 @@ const Scrabble = {
     };
     const keys = Object.keys(letters);
     let totalScore = 0;
-    if (this.isValidWord(word)) {
+    if (this._isValidWord(word)) {
       const chars = word.toUpperCase().match(/\S/g);
       chars.forEach((element) => {
         keys.forEach((num) => {
@@ -64,14 +64,14 @@ const Scrabble = {
 
 Scrabble.Player = class {
   constructor(name) {
-    if (Scrabble.Player.isValidName(name)) {
+    if (Scrabble.Player._isValidName(name)) {
       this.name = name;
       this.plays = [];
       this.words = [];
     }
   }
 
-  static isValidName(name) {
+  static _isValidName(name) {
     if (name.length > 0) {
       return true;
     } throw new Error('Invalid Name');
@@ -105,9 +105,9 @@ Scrabble.Player = class {
   }
 
   highestWordScore() {
-    const words = this.plays.map(word => new Scrabble.Word(word));
-    words.sort(Scrabble._compareWordScores);
-    const highestScore = words.pop().score;
+    const playerWords = this.words;
+    playerWords.sort(Scrabble._compareWordScores);
+    const highestScore = playerWords.pop().score;
     return highestScore;
   }
 };
@@ -115,7 +115,7 @@ Scrabble.Player = class {
 
 Scrabble.Word = class {
   constructor(word) {
-    if (Scrabble.isValidWord(word)) {
+    if (Scrabble._isValidWord(word)) {
       this.word = word;
       this.score = Scrabble.score(word);
     }
