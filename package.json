@@ -8,7 +8,8 @@
   "dependencies": {
     "eslint-plugin-jasmine": "^2.9.1",
     "jasmine": "^2.8.0",
-    "jasmine-expect": "^3.8.1"
+    "jasmine-expect": "^3.8.1",
+    "prompt": "^1.0.0"
   },
   "scripts": {
     "test": "jasmine"
