@@ -1,6 +1,5 @@
 const Scrabble = {
   score: function(word) {
-    // TODO: implement score
     const scores = {
       A:1, B:3, C:3, D:2, E:1, F:4, G:2, H:4, I:1, J:8, K:5, L:1, M:3, N:1, O:1, P:3, Q:10, R:1, S:1, T:1, U:1, V:4, W:4, X:8, Y:4, Z:10
     };
@@ -27,7 +26,6 @@ const Scrabble = {
     }
   },
 
-  // TODO: add the highestScoreFrom method
   highestScoreFrom: function(words) {
     if (words.constructor === Array && words.length > 0) {
       let highest_score = 0;
@@ -65,9 +63,33 @@ const Scrabble = {
 Scrabble.Player = class {
   // TODO: implement the Player class
   constructor(name) {
-    this.name = name;
-    const plays = [];
+    if (name) {
+      this.name = name;
+      this.plays = [];
+      this._totalScore = 0;
+    } else {
+      throw 'No name!';
+    }
   }
+  play(word) {
+    if (this.hasWon() === true) { return false; }
+    if (word) {
+      let score = Scrabble.score(word);
+      this._totalScore += score;
+      this.plays.push(word);
+      return true;
+    } else {
+      throw 'Not a real word!';
+    }
+  }
+
+  totalScore() { return this._totalScore; }
+
+  hasWon() { return this._totalScore >= 100; }
+
+  highestScoringWord(){ return Scrabble.highestScoreFrom(this.plays); }
+  
+  highestWordScore(){ return Scrabble.score(this.highestScoringWord()); }
 };
 
 module.exports = Scrabble;
